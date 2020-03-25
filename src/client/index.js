@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { rootReducer } from './reducers/index';
+import { rootReducer } from './reducers';
 import App from './components/App';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,13 +26,13 @@ render(App);
 // Hot reloading setup for render/reducer/saga
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
-    module.hot.accept('components/App', () => {
+    module.hot.accept('client/components/App', () => {
       render(App);
     });
 
-    module.hot.accept('reducers', () => {
+    module.hot.accept('client/reducers', () => {
       // eslint-disable-next-line global-require
-      const { rootReducer: newReducer } = require('reducers');
+      const { rootReducer: newReducer } = require('client/reducers');
       store.replaceReducer(newReducer);
     });
   }

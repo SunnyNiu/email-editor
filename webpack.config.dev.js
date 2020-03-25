@@ -11,7 +11,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '';
 module.exports = () => ({
   mode: 'development',
   context: path.resolve(ROOT_PATH, 'src'),
-  entry: ['./index.js'],
+  entry: ['./client/index.js'],
   output: {
     publicPath: ASSET_PATH,
     path: path.resolve(ROOT_PATH, 'build'),
@@ -23,6 +23,7 @@ module.exports = () => ({
     publicPath: '/',
     port: 3000,
     host: 'localhost',
+    contentBase: './src/client',
     noInfo: false,
     open: true,
   },
@@ -52,8 +53,8 @@ module.exports = () => ({
       minimize: true,
     }),
     new HtmlWebPackPlugin({
-      template: './index.html',
-      filename: './index.html',
+      template: './client/index.html',
+      filename: './client/index.html',
       inject: false,
       showErrors: true,
     }),
