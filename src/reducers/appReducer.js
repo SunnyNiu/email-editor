@@ -1,9 +1,4 @@
 /* eslint-disable no-case-declarations */
-import PlaceCommand from '../functions/placeCommand';
-import MoveCommand from '../functions/moveCommand';
-import TurnCommand from '../functions/turnCommand';
-import ReportCommand from '../functions/reportCommand';
-
 const initialState = {
  
 };
