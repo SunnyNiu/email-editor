@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Section = styled.div`
   height: 83px;
-  /* width: 200px; */
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
@@ -16,12 +15,16 @@ const Section = styled.div`
   }
 `;
 
-const Sidebar = () => (
-  <div>
-    <Section />
-    <Section />
-    <Section />
-  </div>
-);
+const Sidebar = () => {
+  const jsonDataFromXml = '';
+  console.log('jsonDataFromXml', jsonDataFromXml);
+  return (
+    <div>
+      <Section />
+      <Section />
+      <Section />
+    </div>
+  );
+};
 
 export default Sidebar;
