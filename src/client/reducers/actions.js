@@ -6,7 +6,7 @@ export const updateCarLocationCreator = commands => {
 };
 
 export const fetchMovieCreator = () => ({
-  type: 'FILE_PATH_FETCH_FAILED_REQUESTED',
+  type: 'FILE_PATH_FETCH_REQUESTED',
 });
 
 export const fetchMovieFailure = error => ({
@@ -14,6 +14,7 @@ export const fetchMovieFailure = error => ({
   error,
 });
 
-export const fetchPathSuccess = () => ({
+export const fetchPathSuccess = paths => ({
   type: 'FILE_PATH_FETCH_SUCCEEDED',
+  paths,
 });

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { fetchPath } from '../reducers/actions';
+import PropTypes from 'prop-types';
+import { fetchMovieCreator } from '../reducers/actions';
 
 const Section = styled.div`
   height: 83px;
@@ -20,6 +21,7 @@ const Section = styled.div`
 const Sidebar = ({ fetchPath }) => {
   useEffect(() => {
     const fetchFunc = async () => {
+      console.log('useEffect here!');
       fetchPath();
     };
 
@@ -35,7 +37,11 @@ const Sidebar = ({ fetchPath }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchPath: () => dispatch(fetchPath()),
+  fetchPath: () => dispatch(fetchMovieCreator()),
 });
+
+Sidebar.propTypes = {
+  fetchPath: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Sidebar);
