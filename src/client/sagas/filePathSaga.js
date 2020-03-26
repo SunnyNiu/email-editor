@@ -3,8 +3,8 @@ import { getXmlPath } from '../api/xmlFile';
 
 function* fetchFilePath() {
   try {
-    console.log('fetch request saga file path');
-    const paths = yield call(getXmlPath);
+    const object = yield call(getXmlPath);
+    const paths = object.path;
     yield put({ type: 'FILE_PATH_FETCH_SUCCEEDED', paths });
   } catch (e) {
     yield put({ type: 'FILE_PATH_FETCH_FAILED', message: e.message });

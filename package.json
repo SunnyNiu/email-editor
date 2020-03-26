@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack .",
     "start": "webpack-dev-server --progress --profile --colors --config webpack.config.dev.js",
+    "server":"babel-node src/server/index.js",
     "test": "jest --config=jest.config.json",
     "run-util": "yarn babel-node src/functions/utility.js",
     "lint": "eslint src",

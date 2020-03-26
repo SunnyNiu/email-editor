@@ -40,7 +40,7 @@ const SaveButton = styled.button`
 
 const Nav = () => (
   <HeaderContainer>
-    <Icon src="src/assets/movie-icon.png" alt="Movie Recommendation" />
+    <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
     <SaveButton> save </SaveButton>
   </HeaderContainer>
 );

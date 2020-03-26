@@ -20,12 +20,15 @@ module.exports = () => ({
   devServer: {
     stats: 'minimal',
     hot: true,
-    publicPath: '/',
-    port: 3000,
-    host: 'localhost',
     contentBase: './src/client',
     noInfo: false,
     open: true,
+    proxy: {
+      '/files/paths/*': {
+        target: 'http://localhost:3000',
+        secure: false
+      },
+    }
   },
   devtool: 'eval-source-map',
   module: {

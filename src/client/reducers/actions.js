@@ -5,11 +5,11 @@ export const updateCarLocationCreator = commands => {
   };
 };
 
-export const fetchMovieCreator = () => ({
+export const fetchPathCreator = () => ({
   type: 'FILE_PATH_FETCH_REQUESTED',
 });
 
-export const fetchMovieFailure = error => ({
+export const fetchPathFailure = error => ({
   type: 'FILE_PATH_FETCH_FAILED',
   error,
 });
