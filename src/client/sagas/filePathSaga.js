@@ -5,8 +5,8 @@ function* fetchFilePath() {
   try {
     const { paths } = yield call(getXmlPath);
     yield put({ type: 'FILE_SECTION_PATH_FETCH_SUCCEEDED', paths });
-  } catch (e) {
-    yield put({ type: 'FILE_SECTION_PATH_FETCH_FAILED', error: e.error });
+  } catch (error) {
+    yield put({ type: 'FILE_SECTION_PATH_FETCH_FAILED', error });
   }
 }
 
