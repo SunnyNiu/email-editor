@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchPathCreator } from '../reducers/actions';
+import { fetchSectionPathCreator } from '../reducers/actions';
 
 const Section = styled.div`
   height: 83px;
@@ -18,13 +18,9 @@ const Section = styled.div`
   }
 `;
 
-const Sidebar = ({ fetchPath, paths }) => {
+const Sidebar = ({ fetchSectionPaths, paths }) => {
   useEffect(() => {
-    const fetchFunc = async () => {
-      fetchPath();
-    };
-
-    fetchFunc();
+    fetchSectionPaths();
   }, []);
 
   return (
@@ -41,11 +37,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPath: () => dispatch(fetchPathCreator()),
+  fetchSectionPaths: () => dispatch(fetchSectionPathCreator()),
 });
 
 Sidebar.propTypes = {
-  fetchPath: PropTypes.func.isRequired,
+  fetchSectionPaths: PropTypes.func.isRequired,
   paths: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

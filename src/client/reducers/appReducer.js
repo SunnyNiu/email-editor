@@ -5,7 +5,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'FILE_PATH_FETCH_SUCCEEDED':
+    case 'FILE_SECTION_PATH_FETCH_SUCCEEDED':
       return {
         ...state,
         paths: action.paths,

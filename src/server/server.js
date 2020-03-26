@@ -9,15 +9,16 @@ server.use(express.static(path.join(__dirname, '../assets')));
 server.use(express.json());
 server.use(cors());
 
-server.get('/api/files/paths', (req, res) => {
-  fs.readdir('./src/xml', function(err, items) {
-    if (err) throw err;
-    const filesTotal = items.length;
-    const array = [];
+const route = express.Router();
 
-    items.map(item => array.push(`./src/xml/${item}`));
-    res.json({ paths: array, total: filesTotal });
+route.get('/files/paths', (req, res) => {
+  fs.readdir('./src/xml', (err, items) => {
+    if (err) throw err;
+    const paths = items.map(item => `./src/xml/${item}`);
+    res.json({ paths });
   });
 });
 
-module.exports = server;
+server.use('/api', route);
+
+export default server;
