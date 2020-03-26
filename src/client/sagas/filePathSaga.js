@@ -6,6 +6,7 @@ function* fetchFilePath() {
     const { paths } = yield call(getXmlPath);
     yield put({ type: 'FILE_SECTION_PATH_FETCH_SUCCEEDED', paths });
   } catch (error) {
+    console.log('error in saga', error);
     yield put({ type: 'FILE_SECTION_PATH_FETCH_FAILED', error });
   }
 }
