@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
         paths: action.paths,
       };
     case 'FILE_SECTION_PATH_FETCH_FAILED':
-      console.error();
+      console.error(action.error);
       return state;
     default:
       return state;
