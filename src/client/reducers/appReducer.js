@@ -12,10 +12,8 @@ export default (state = initialState, action) => {
         paths: action.paths,
       };
     case 'FILE_SECTION_PATH_FETCH_FAILED':
-      return {
-        ...state,
-        error: action.error,
-      };
+      console.error();
+      return state;
     default:
       return state;
   }
