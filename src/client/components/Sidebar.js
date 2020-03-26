@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { fetchPath } from '../reducers/actions';
 
 const Section = styled.div`
   height: 83px;
@@ -15,9 +17,14 @@ const Section = styled.div`
   }
 `;
 
-const Sidebar = () => {
-  const jsonDataFromXml = '';
-  console.log('jsonDataFromXml', jsonDataFromXml);
+const Sidebar = ({ fetchPath }) => {
+  useEffect(() => {
+    const fetchFunc = async () => {
+      fetchPath();
+    };
+
+    fetchFunc();
+  }, []);
   return (
     <div>
       <Section />
@@ -27,4 +34,8 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+const mapDispatchToProps = dispatch => ({
+  fetchPath: () => dispatch(fetchPath()),
+});
+
+export default connect(null, mapDispatchToProps)(Sidebar);
