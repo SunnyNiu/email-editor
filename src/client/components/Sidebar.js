@@ -29,9 +29,9 @@ const Sidebar = ({ fetchPath, paths }) => {
 
   return (
     <div>
-      {paths.length > 0
-        ? paths.map((item, index) => <Section key={index} />)
-        : null}
+      {paths.map(path => (
+        <Section key={path} />
+      ))}
     </div>
   );
 };

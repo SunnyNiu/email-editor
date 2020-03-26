@@ -4,7 +4,7 @@ import { getXmlPath } from '../api/xmlFile';
 function* fetchFilePath() {
   try {
     const object = yield call(getXmlPath);
-    const paths = object.path;
+    const { paths } = object;
     yield put({ type: 'FILE_PATH_FETCH_SUCCEEDED', paths });
   } catch (e) {
     yield put({ type: 'FILE_PATH_FETCH_FAILED', message: e.message });

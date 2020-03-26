@@ -24,7 +24,7 @@ module.exports = () => ({
     noInfo: false,
     open: true,
     proxy: {
-      '/files/paths/*': {
+      '/api/*': {
         target: 'http://localhost:3000',
         secure: false
       },
