@@ -1,7 +1,6 @@
 /* eslint-disable no-case-declarations */
 const initialState = {
   paths: [],
-  error: '',
 };
 
 export default (state = initialState, action) => {

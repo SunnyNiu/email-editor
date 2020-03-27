@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "This application is a simulation of a robot operated bus moving in a carpark",
   "main": "src/index.js",
-  "repository": "https://github.com/ouchxp/carpark-simulator",
-  "author": "Nan Wu",
+  "repository": "https://github.com/sunnyniu/email-editor",
+  "author": "Sunny Niu",
   "license": "MIT",
   "scripts": {
     "build": "webpack .",
@@ -14,6 +14,17 @@
     "run-util": "yarn babel-node src/functions/utility.js",
     "lint": "eslint src",
     "prettify": "prettier --config ./.prettierrc --write 'src/**/*.js'"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "reporters": [
+      "default",
+      ["./node_modules/jest-html-reporter", {
+          "pageTitle": "Test Report"
+      }]
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
@@ -56,7 +67,9 @@
     "express": "^4.17.1",
     "html-webpack-plugin": "^3.2.0",
     "isomorphic-fetch": "^2.2.1",
+    "jest-fetch-mock": "^3.0.3",
     "lodash": "^4.17.15",
+    "nock": "^12.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
