@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 
-import Container from '../../src/client/components/Container';
+import Container from './Container';
 
 jest.mock('react-dom');
 const mockStore = configureStore([]);

@@ -2,7 +2,7 @@ import {
   fetchSectionPathCreator,
   fetchSectionPathFailure,
   fetchSectionPathSuccess,
-} from '../src/client/reducers/actions';
+} from './actions';
 
 describe('action tests', () => {
   it('send fetch section request', () => {

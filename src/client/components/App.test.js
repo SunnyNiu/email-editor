@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../../src/client/components/App';
+import App from './App';
 
 describe('<App /> component tests', () => {
   it('<App /> should contains <Container />', () => {

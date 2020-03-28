@@ -1,4 +1,4 @@
-import appReducer from '../src/client/reducers/appReducer';
+import appReducer from './appReducer';
 
 describe('appReducer tests', () => {
   it('fetch paths shows new paths', () => {
