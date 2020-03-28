@@ -1,7 +1,7 @@
 import {
   fetchSectionPathCreator,
-  fetchSectionPathFailure,
-  fetchSectionPathSuccess,
+  fetchSectionPathFailureCreator,
+  fetchSectionPathSuccessCreator,
 } from './actions';
 
 import { fetchFile } from './types';
@@ -24,7 +24,7 @@ describe('action tests', () => {
       paths,
     };
 
-    const actual = fetchSectionPathSuccess(paths);
+    const actual = fetchSectionPathSuccessCreator(paths);
     expect(actual).toEqual(expected);
   });
 
@@ -36,7 +36,7 @@ describe('action tests', () => {
       error,
     };
 
-    const actual = fetchSectionPathFailure(error);
+    const actual = fetchSectionPathFailureCreator(error);
     expect(actual).toEqual(expected);
   });
 });

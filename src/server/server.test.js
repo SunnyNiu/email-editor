@@ -13,7 +13,6 @@ describe('get files paths', () => {
     return request(server)
       .get('/api/files/paths')
       .then(res => {
-        // console.log(res);
         expect(res.text).toEqual(expected);
       });
   });
