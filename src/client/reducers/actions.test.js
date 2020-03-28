@@ -4,10 +4,12 @@ import {
   fetchSectionPathSuccess,
 } from './actions';
 
+import { fetchFile } from './types';
+
 describe('action tests', () => {
   it('send fetch section request', () => {
     const expected = {
-      type: 'FILE_SECTION_PATH_FETCH_REQUESTED',
+      type: fetchFile.FILE_SECTION_PATH_FETCH_REQUESTED,
     };
 
     const actual = fetchSectionPathCreator();
@@ -18,7 +20,7 @@ describe('action tests', () => {
     const paths = ['xml/breakfast.xml', 'xml/lunch.xml'];
 
     const expected = {
-      type: 'FILE_SECTION_PATH_FETCH_SUCCEEDED',
+      type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED,
       paths,
     };
 
@@ -30,7 +32,7 @@ describe('action tests', () => {
     const error = 'fetch section failed';
 
     const expected = {
-      type: 'FILE_SECTION_PATH_FETCH_FAILED',
+      type: fetchFile.FILE_SECTION_PATH_FETCH_FAILED,
       error,
     };
 
