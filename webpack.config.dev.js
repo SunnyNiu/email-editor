@@ -11,7 +11,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '';
 module.exports = () => ({
   mode: 'development',
   context: path.resolve(ROOT_PATH, 'src'),
-  entry: ['./index.js'],
+  entry: ['./client/index.js'],
   output: {
     publicPath: ASSET_PATH,
     path: path.resolve(ROOT_PATH, 'build'),
@@ -20,11 +20,15 @@ module.exports = () => ({
   devServer: {
     stats: 'minimal',
     hot: true,
-    publicPath: '/',
-    port: 3000,
-    host: 'localhost',
+    contentBase: './src/client',
     noInfo: false,
     open: true,
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:3000',
+        secure: false
+      },
+    }
   },
   devtool: 'eval-source-map',
   module: {
@@ -41,7 +45,7 @@ module.exports = () => ({
           },
         ],
       },
-    ],
+    ]
   },
   resolve: {
     modules: [path.resolve('src'), path.resolve('node_modules')],
@@ -52,8 +56,8 @@ module.exports = () => ({
       minimize: true,
     }),
     new HtmlWebPackPlugin({
-      template: './index.html',
-      filename: './index.html',
+      template: './client/index.html',
+      filename: './client/index.html',
       inject: false,
       showErrors: true,
     }),

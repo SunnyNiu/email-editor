@@ -10,7 +10,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '';
 module.exports = () => ({
   mode: 'production',
   context: path.resolve(ROOT_PATH, 'src'),
-  entry: ['./index.js'],
+  entry: ['./client/index.js'],
   output: {
     publicPath: ASSET_PATH,
     path: path.resolve(ROOT_PATH, 'build'),
