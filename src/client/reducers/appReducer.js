@@ -11,6 +11,7 @@ export default (state = initialState, action) => {
         paths: action.paths,
       };
     case 'FILE_SECTION_PATH_FETCH_FAILED':
+      // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
     default:

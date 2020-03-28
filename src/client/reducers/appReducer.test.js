@@ -31,8 +31,7 @@ describe('appReducer tests', () => {
     };
 
     const expected = { paths: [] };
-    const consoleSpy = jest.spyOn(console, 'log');
-    console.log(error);
+    const consoleSpy = jest.spyOn(console, 'error');
     const actual = appReducer(currentState, action);
     expect(consoleSpy).toHaveBeenCalledWith(error);
     expect(actual).toEqual(expected);
