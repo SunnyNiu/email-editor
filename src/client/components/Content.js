@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addTextCreator } from '../reducers/contents.actions';
+import { addTextCreator, fetchTextCreator } from '../reducers/contents.actions';
 
 const Section = styled.div`
   height: 300px;
@@ -31,7 +31,12 @@ const SectionContent = styled.input`
 `;
 
 const Content = props => {
-  useEffect(() => {});
+  const { userId, fetchText, text } = props;
+  console.log(userId, 'Content userId');
+
+  useEffect(() => {
+    fetchText(userId);
+  });
 
   const onChange = value => {
     const { addText } = props;
@@ -40,18 +45,31 @@ const Content = props => {
   return (
     <div>
       <Section>
-        <SectionContent onChange={e => onChange(e.target.value)} />
+        <SectionContent onChange={e => onChange(e.target.value)} value={text} />
       </Section>
     </div>
   );
 };
 
+const mapStateToProps = state => ({
+  text: state.content.text,
+});
+
 const mapDispatchToProps = dispatch => ({
   addText: input => dispatch(addTextCreator(input)),
+  fetchText: userId => dispatch(fetchTextCreator(userId)),
 });
 
 Content.propTypes = {
   addText: PropTypes.func.isRequired,
+  fetchText: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  userId: PropTypes.string,
 };
 
-export default connect(null, mapDispatchToProps)(Content);
+Content.defaultProps = {
+  text: 'Please input text',
+  userId: '100',
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);
