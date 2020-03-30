@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addTextCreator } from '../reducers/contents.actions';
 
 const Section = styled.div`
   height: 300px;
@@ -27,14 +30,26 @@ const SectionContent = styled.input`
   }
 `;
 
-const Content = () => {
+const Content = props => {
+  const onChange = value => {
+    const { addText } = props;
+    addText(value);
+  };
   return (
     <div>
       <Section>
-        <SectionContent />
+        <SectionContent onChange={e => onChange(e.target.value)} />
       </Section>
     </div>
   );
 };
 
-export default Content;
+const mapDispatchToProps = dispatch => ({
+  addText: input => dispatch(addTextCreator(input)),
+});
+
+Content.propTypes = {
+  addText: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Content);
