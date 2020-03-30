@@ -10,12 +10,12 @@ export const fetchTextCreator = userId => ({
   userId,
 });
 
-export const fetchTextSuccess = text => ({
+export const fetchTextSuccessCreator = text => ({
   type: fetchText.FETCH_TEXT_SUCCEEDED,
   text,
 });
 
-export const fetchTextFailure = error => ({
-  type: fetchText.fetchTextFailure,
+export const fetchTextFailureCreator = error => ({
+  type: fetchText.FETCH_TEXT_FAILED,
   error,
 });
