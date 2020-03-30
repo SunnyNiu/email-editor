@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Switch, Route } from 'react-router-dom';
 import Nav from './Nav';
 import Container from './Container';
 
@@ -18,7 +19,9 @@ const AppContainer = styled.div`
 const App = () => (
   <AppContainer>
     <Nav />
-    <Container />
+    <Switch>
+      <Route exact path="/:userId" component={Container} />
+    </Switch>
   </AppContainer>
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -31,6 +31,8 @@ const SectionContent = styled.input`
 `;
 
 const Content = props => {
+  useEffect(() => {});
+
   const onChange = value => {
     const { addText } = props;
     addText(value);

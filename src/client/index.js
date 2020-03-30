@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { HashRouter } from 'react-router-dom';
 import { rootReducer } from './reducers';
 import App from './components/App';
 import rootSaga from './sagas/rootSaga';
@@ -18,7 +19,9 @@ sagaMiddleware.run(rootSaga);
 function render(Component) {
   ReactDOM.render(
     <Provider store={store}>
-      <Component />
+      <HashRouter>
+        <Component />
+      </HashRouter>
     </Provider>,
     document.getElementById('root')
   );

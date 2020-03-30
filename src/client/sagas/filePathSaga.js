@@ -12,5 +12,5 @@ export function* fetchFilePath() {
 }
 
 export default function* filePathSaga() {
-  yield takeEvery('FILE_SECTION_PATH_FETCH_REQUESTED', fetchFilePath);
+  yield takeEvery(fetchFile.FILE_SECTION_PATH_FETCH_REQUESTED, fetchFilePath);
 }
