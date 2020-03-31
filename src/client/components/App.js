@@ -20,7 +20,15 @@ const App = () => (
   <AppContainer>
     <Nav />
     <Switch>
-      <Route exact path="/:userId" component={Container} />
+      <Route
+        exact
+        path="/:userId"
+        render={({
+          match: {
+            params: { userId },
+          },
+        }) => <Container userId={userId} />}
+      />
     </Switch>
   </AppContainer>
 );

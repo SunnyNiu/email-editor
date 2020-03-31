@@ -32,11 +32,10 @@ const SectionContent = styled.input`
 
 const Content = props => {
   const { userId, fetchText, text } = props;
-  console.log(userId, 'Content userId');
 
   useEffect(() => {
     fetchText(userId);
-  });
+  }, []);
 
   const onChange = value => {
     const { addText } = props;

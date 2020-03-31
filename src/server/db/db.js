@@ -2,16 +2,19 @@ const environment = process.env.NODE_ENV || 'development';
 const config = require('../../../knexfile')[environment];
 const connection = require('knex')(config);
 
-function saveContentText(text, db = connection) {
-  return db('contents').insert({ text });
-}
-
-function getContentText(id, db = connection) {
+function getContentText(userId, db = connection) {
   return db('contents')
-    .where('id', id)
-    .select();
+    .where('userId', userId)
+    .select()
+    .first();
 }
 
+function saveContentText(userId, text, db = connection) {
+  return db('contents')
+    .where('userId', userId)
+    .update({ text })
+    .then(() => getContentText(userId, db));
+}
 module.exports = {
   saveContentText,
   getContentText,

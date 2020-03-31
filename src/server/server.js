@@ -20,19 +20,22 @@ route.get('/files/paths', (req, res) => {
   });
 });
 
-route.post('/contentText/:userId', (req, res) => {
+route.put('/email/:userId', (req, res) => {
   const userId = Number(req.param.userId);
   const { text } = req.body;
-  return db
-    .saveContentText(userId, text)
-    .then(contentText => res.json(contentText));
+  return db.saveContentText(userId, text).then(contentText => {
+    console.log(contentText, 'ContentText in row 28 server.js');
+    return res.json(contentText);
+  });
 });
 
-route.get('/contentText/:userId', (req, res) => {
-  const userId = Number(req.param.userId);
+route.get('/email/:userId', (req, res) => {
+  const userId = Number(req.params.userId);
   return db
     .getContentText(userId)
-    .then(text => res.json(text))
+    .then(text => {
+      return res.json(text);
+    })
     .catch(error => res.status(500).send(`${error.message}`));
 });
 

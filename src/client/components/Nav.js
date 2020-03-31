@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addTextCreator } from '../reducers/contents.actions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -38,11 +41,23 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = () => (
+const Nav = ({ text, addText }) => (
   <HeaderContainer>
     <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
-    <SaveButton> save </SaveButton>
+    <SaveButton onClick={() => addText(text)}> save </SaveButton>
   </HeaderContainer>
 );
 
-export default Nav;
+const mapStateToProps = state => ({
+  text: state.content.text,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addText: text => dispatch(addTextCreator(text)),
+});
+
+Nav.propTypes = {
+  text: PropTypes.string.isRequired,
+  addText: PropTypes.func.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

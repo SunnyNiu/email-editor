@@ -1,17 +1,21 @@
 import axios from 'axios';
 
 export function saveText(text, userId) {
-  axios
-    .post(`/contentText/${userId}`, {
+  return axios
+    .put(`/api/email/${userId}`, {
       text,
     })
-    .then(response => response.body)
+    .then(response => {
+      return response.body;
+    })
     .catch(error => console.log(error));
 }
 
 export function getText(userId) {
-  axios
-    .get(`/contentText/${userId}`)
-    .then(response => response.body)
+  return axios
+    .get(`/api/email/${userId}`)
+    .then(response => {
+      return response.data;
+    })
     .catch(error => console.log(error));
 }

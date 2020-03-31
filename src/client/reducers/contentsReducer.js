@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case fetchText.ADD_TEXT:
       return {
         ...state,
-        input: action.input,
+        text: action.input,
       };
     case fetchText.FETCH_TEXT_SUCCEEDED:
       return {

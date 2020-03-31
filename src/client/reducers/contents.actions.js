@@ -19,3 +19,18 @@ export const fetchTextFailureCreator = error => ({
   type: fetchText.FETCH_TEXT_FAILED,
   error,
 });
+
+export const saveTextCreator = text => ({
+  type: fetchText.SAVE_TEXT_REQUESTED,
+  text,
+});
+
+export const saveTextSuccessCreator = text => ({
+  type: fetchText.SAVE_TEXT_SUCCEEDED,
+  text,
+});
+
+export const saveTextFailureCreator = error => ({
+  type: fetchText.SAVE_TEXT_FAILED,
+  error,
+});
