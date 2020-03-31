@@ -21,10 +21,10 @@ route.get('/files/paths', (req, res) => {
 });
 
 route.put('/email/:userId', (req, res) => {
-  const userId = Number(req.param.userId);
+  const userId = Number(req.params.userId);
   const { text } = req.body;
+
   return db.saveContentText(userId, text).then(contentText => {
-    console.log(contentText, 'ContentText in row 28 server.js');
     return res.json(contentText);
   });
 });

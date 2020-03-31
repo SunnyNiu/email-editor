@@ -20,14 +20,14 @@ export const fetchTextFailureCreator = error => ({
   error,
 });
 
-export const saveTextCreator = text => ({
+export const saveTextCreator = (userId, text) => ({
   type: fetchText.SAVE_TEXT_REQUESTED,
+  userId,
   text,
 });
 
-export const saveTextSuccessCreator = text => ({
+export const saveTextSuccessCreator = () => ({
   type: fetchText.SAVE_TEXT_SUCCEEDED,
-  text,
 });
 
 export const saveTextFailureCreator = error => ({

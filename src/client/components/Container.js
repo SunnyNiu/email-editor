@@ -5,13 +5,27 @@ import Sidebar from './Sidebar';
 import Content from './Content';
 import ContentEditor from './ContentEditor';
 
-const Container = ({ userId }) => (
+// const Container = ({ userId }) => (
+//   <Grid columns="1fr 2fr 2fr" gap="4px">
+//     <Cell minWidth="200px">
+//       <Sidebar />
+//     </Cell>
+//     <Cell>
+//       <Content userId={userId} />
+//     </Cell>
+//     <Cell>
+//       <ContentEditor />
+//     </Cell>
+//   </Grid>
+// );
+
+const Container = () => (
   <Grid columns="1fr 2fr 2fr" gap="4px">
     <Cell minWidth="200px">
       <Sidebar />
     </Cell>
     <Cell>
-      <Content userId={userId} />
+      <Content />
     </Cell>
     <Cell>
       <ContentEditor />
@@ -19,8 +33,8 @@ const Container = ({ userId }) => (
   </Grid>
 );
 
-Container.propTypes = {
-  userId: PropTypes.string.isRequired,
-};
+// Container.propTypes = {
+//   userId: PropTypes.string.isRequired,
+// };
 
 export default Container;

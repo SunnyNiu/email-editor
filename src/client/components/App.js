@@ -18,7 +18,7 @@ const AppContainer = styled.div`
 
 const App = () => (
   <AppContainer>
-    <Nav />
+    {/* <Nav />
     <Switch>
       <Route
         exact
@@ -29,7 +29,9 @@ const App = () => (
           },
         }) => <Container userId={userId} />}
       />
-    </Switch>
+    </Switch> */}
+    <Nav />
+    <Container />
   </AppContainer>
 );
 

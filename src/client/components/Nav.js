@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addTextCreator } from '../reducers/contents.actions';
+import { saveTextCreator } from '../reducers/contents.actions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -41,23 +41,28 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ text, addText }) => (
-  <HeaderContainer>
-    <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
-    <SaveButton onClick={() => addText(text)}> save </SaveButton>
-  </HeaderContainer>
-);
+const Nav = ({ text, saveText }) => {
+  const url = window.location.href;
+  const index = url.indexOf('email=');
+  const userId = url.substr(index + 6, url.length);
+  return (
+    <HeaderContainer>
+      <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
+      <SaveButton onClick={() => saveText(userId, text)}> save </SaveButton>
+    </HeaderContainer>
+  );
+};
 
 const mapStateToProps = state => ({
   text: state.content.text,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addText: text => dispatch(addTextCreator(text)),
+  saveText: (userId, text) => dispatch(saveTextCreator(userId, text)),
 });
 
 Nav.propTypes = {
   text: PropTypes.string.isRequired,
-  addText: PropTypes.func.isRequired,
+  saveText: PropTypes.func.isRequired,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

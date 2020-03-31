@@ -30,10 +30,34 @@ const SectionContent = styled.input`
   }
 `;
 
+// const Content = props => {
+//   const { userId, fetchText, text } = props;
+
+//   useEffect(() => {
+//     fetchText(userId);
+//   }, []);
+
+//   const onChange = value => {
+//     const { addText } = props;
+//     addText(value);
+//   };
+//   return (
+//     <div>
+//       <Section>
+//         <SectionContent onChange={e => onChange(e.target.value)} value={text} />
+//       </Section>
+//     </div>
+//   );
+// };
+
 const Content = props => {
-  const { userId, fetchText, text } = props;
+  const { fetchText, text } = props;
 
   useEffect(() => {
+    const url = window.location.href;
+    const index = url.indexOf('email=');
+    const userId = url.substr(index + 6, url.length);
+
     fetchText(userId);
   }, []);
 
