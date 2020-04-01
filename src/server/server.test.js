@@ -1,19 +1,10 @@
 import request from 'supertest';
 import server from './server';
 import { readdir } from './util';
+import { getContentText, saveContentText } from './db/db';
 
 jest.mock('./util');
-
-jest.mock('./db/db', () => ({
-  getContentText: () =>
-    Promise.resolve({ id: 1, userId: '100', text: 'verify get text' }),
-  saveContentText: () =>
-    Promise.resolve({
-      id: 1,
-      userId: '100',
-      text: 'verify save, and then get text',
-    }),
-}));
+jest.mock('./db/db');
 
 describe('get files paths', () => {
   it('GET /files/paths', () => {
@@ -29,6 +20,9 @@ describe('get files paths', () => {
   });
 
   it('GET /email/:userId', () => {
+    getContentText.mockReturnValueOnce(
+      Promise.resolve({ id: 1, userId: '100', text: 'verify get text' })
+    );
     const expected = { id: 1, userId: '100', text: 'verify get text' };
     return request(server)
       .get('/api/email/100')
@@ -38,6 +32,16 @@ describe('get files paths', () => {
   });
 
   it('put /email/:userId', () => {
+    saveContentText.mockReturnValueOnce(
+      Promise.resolve({
+        id: 1,
+        userId: '100',
+        text: 'verify save, and then get text',
+      })
+    );
+    getContentText.mockReturnValueOnce(
+      Promise.resolve({ id: 1, userId: '100', text: 'verify get text' })
+    );
     const expected = {
       id: 1,
       userId: '100',

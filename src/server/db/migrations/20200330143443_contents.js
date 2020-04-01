@@ -1,10 +1,10 @@
-exports.up = function(knex) {
+exports.up = knex => {
   return knex.schema.createTable('contents', t => {
     t.increments('id');
     t.string('text').notNull();
   });
 };
 
-exports.down = function(knex) {
+exports.down = knex => {
   return knex.schema.dropTable('contents');
 };

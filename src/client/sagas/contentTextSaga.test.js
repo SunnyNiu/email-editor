@@ -8,7 +8,7 @@ jest.mock('../api/contentText');
 describe('contentTextSaga', () => {
   it('put a SAVE_TEXT_SUCCEEDED action when succeeded', () => {
     saveText.mockReturnValueOnce(Promise.resolve());
-    return expectSaga(saveContentText, { userId: '100' }, { text: 'save text' })
+    return expectSaga(saveContentText, { userId: '100', text: 'save text' })
       .put({ type: fetchText.SAVE_TEXT_SUCCEEDED })
       .run();
   });
@@ -17,14 +17,14 @@ describe('contentTextSaga', () => {
     const error = 'save text failed';
     saveText.mockReturnValueOnce(Promise.reject(error));
 
-    return expectSaga(saveContentText, { userId: '100' }, { text: 'save text' })
+    return expectSaga(saveContentText, { userId: '100', text: 'save text' })
       .put({ type: fetchText.SAVE_TEXT_FAILED, error })
       .run();
   });
 
   it('put a GET_TEXT_SUCCEEDED action when succeeded', () => {
     const text = { id: 1, userId: '100', text: 'text 100' };
-    getText.mockImplementationOnce(() => Promise.resolve({ text }));
+    getText.mockReturnValueOnce(Promise.resolve({ text }));
 
     return expectSaga(fetchContentText, { userId: '100' })
       .put({ type: fetchText.FETCH_TEXT_SUCCEEDED, text })

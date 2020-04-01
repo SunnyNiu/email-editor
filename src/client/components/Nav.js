@@ -46,20 +46,17 @@ const Nav = ({ text, saveText, userId, disable }) => {
     <HeaderContainer>
       <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
       <SaveButton onClick={() => saveText(userId, text)} disabled={disable}>
-        {' '}
-        save{' '}
+        save
       </SaveButton>
     </HeaderContainer>
   );
 };
 
 const mapStateToProps = state => {
-  const url = window.location.href;
-  const index = url.indexOf('email=');
-  const userId = url.substr(index + 6, url.length);
+  const userId = window.location.href.split('email=')[1];
   return {
     text: state.content.text,
-    disable: state.ui.buttonDisable,
+    disable: state.ui.isEmailSaving,
     userId,
   };
 };

@@ -4,7 +4,7 @@ import { fetchText } from './types';
 describe('appReducer tests', () => {
   it('the button should be disable when sending save request', () => {
     const currentState = {
-      buttonDisable: false,
+      isEmailSaving: false,
     };
 
     const action = {
@@ -13,7 +13,7 @@ describe('appReducer tests', () => {
       userId: '100',
     };
     const expected = {
-      buttonDisable: true,
+      isEmailSaving: true,
     };
     const actual = uiReducer(currentState, action);
     expect(actual).toEqual(expected);
@@ -21,14 +21,14 @@ describe('appReducer tests', () => {
 
   it('the button should be enable when save text successfully', () => {
     const currentState = {
-      buttonDisable: false,
+      isEmailSaving: false,
     };
 
     const action = {
       type: fetchText.SAVE_TEXT_SUCCEEDED,
     };
     const expected = {
-      buttonDisable: false,
+      isEmailSaving: false,
     };
     const actual = uiReducer(currentState, action);
     expect(actual).toEqual(expected);
@@ -36,7 +36,7 @@ describe('appReducer tests', () => {
 
   it('save failed that should enable button', () => {
     const currentState = {
-      buttonDisable: false,
+      isEmailSaving: false,
     };
 
     const error = 'save text failed';
@@ -46,7 +46,7 @@ describe('appReducer tests', () => {
       error,
     };
 
-    const expected = { buttonDisable: false };
+    const expected = { isEmailSaving: false };
     const consoleSpy = jest.spyOn(console, 'error');
     const actual = uiReducer(currentState, action);
     expect(consoleSpy).toHaveBeenCalledWith(error);

@@ -47,9 +47,7 @@ const Content = props => {
 };
 
 const mapStateToProps = state => {
-  const url = window.location.href;
-  const index = url.indexOf('email=');
-  const userId = url.substr(index + 6, url.length);
+  const userId = window.location.href.split('email=')[1];
   return {
     text: state.content.text,
     userId,

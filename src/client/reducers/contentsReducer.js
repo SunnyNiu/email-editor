@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
         text: action.text,
       };
     case fetchText.FETCH_TEXT_FAILED:
+      // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
     case fetchText.SAVE_TEXT_REQUESTED:
@@ -27,6 +28,7 @@ export default (state = initialState, action) => {
     case fetchText.SAVE_TEXT_SUCCEEDED:
       return state;
     case fetchText.SAVE_TEXT_FAILED:
+      // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
     default:

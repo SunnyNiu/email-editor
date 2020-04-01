@@ -23,7 +23,11 @@ module.exports = {
   test: {
     client: 'pg',
     connection: {
-      connection: 'postgres://localhost:5432/movies',
+      host: 'localhost',
+      user: 'dev_user',
+      password: 'password',
+      database: 'postgres',
+      port: 5432,
     },
     useNullAsDefault: true,
     migrations: {
