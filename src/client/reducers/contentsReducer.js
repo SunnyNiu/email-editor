@@ -24,6 +24,9 @@ export default (state = initialState, action) => {
         ...state,
         text: action.text,
       };
+    case fetchText.SAVE_TEXT_FAILED:
+      console.error(action.error);
+      return state;
     default:
       return state;
   }

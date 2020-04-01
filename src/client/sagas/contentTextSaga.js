@@ -2,7 +2,7 @@ import { call, all, put, takeEvery } from 'redux-saga/effects';
 import { getText, saveText } from '../api/contentText';
 import { fetchText } from '../reducers/types';
 
-export function* fetchTextPath(action) {
+export function* fetchContentText(action) {
   try {
     const { text } = yield call(getText, action.userId);
     yield put({ type: fetchText.FETCH_TEXT_SUCCEEDED, text });
@@ -12,7 +12,7 @@ export function* fetchTextPath(action) {
 }
 
 export function* contentTextSaga() {
-  yield takeEvery(fetchText.FETCH_TEXT_REQUESTED, fetchTextPath);
+  yield takeEvery(fetchText.FETCH_TEXT_REQUESTED, fetchContentText);
 }
 
 export function* saveContentText(action) {
@@ -20,7 +20,7 @@ export function* saveContentText(action) {
     yield call(saveText, action.userId, action.text);
     yield put({ type: fetchText.SAVE_TEXT_SUCCEEDED });
   } catch (error) {
-    yield put({ type: fetchText.FETCH_TEXT_FAILED, error });
+    yield put({ type: fetchText.SAVE_TEXT_FAILED, error });
   }
 }
 
