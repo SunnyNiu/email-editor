@@ -41,10 +41,7 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ text, saveText, disable }) => {
-  const url = window.location.href;
-  const index = url.indexOf('email=');
-  const userId = url.substr(index + 6, url.length);
+const Nav = ({ text, saveText, userId, disable }) => {
   return (
     <HeaderContainer>
       <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
@@ -56,10 +53,16 @@ const Nav = ({ text, saveText, disable }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  text: state.content.text,
-  disable: state.ui.buttonDisable,
-});
+const mapStateToProps = state => {
+  const url = window.location.href;
+  const index = url.indexOf('email=');
+  const userId = url.substr(index + 6, url.length);
+  return {
+    text: state.content.text,
+    disable: state.ui.buttonDisable,
+    userId,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   saveText: (userId, text) => dispatch(saveTextCreator(userId, text)),
@@ -69,5 +72,6 @@ Nav.propTypes = {
   text: PropTypes.string.isRequired,
   saveText: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
