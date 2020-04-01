@@ -4,41 +4,35 @@ const path = require('path');
 
 module.exports = {
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './dev.sqlite3',
-    },
-    useNullAsDefault: true,
-  },
-  test: {
-    client: 'sqlite3',
-    connection: {
-      filename: ':memory:',
+      host: 'localhost',
+      user: 'dev_user',
+      password: 'password',
+      database: 'postgres',
+      port: 5432,
     },
     useNullAsDefault: true,
     migrations: {
-      directory: path.join(__dirname, 'migrations'),
+      directory: path.join(__dirname, 'src/server/db/migrations'),
     },
     seeds: {
       directory: path.join(__dirname, 'src/server/db/seeds'),
     },
   },
-  staging: {
-    client: 'postgresql',
+  test: {
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
+      connection: 'postgres://localhost:5432/movies',
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations',
+      directory: path.join(__dirname, 'src/server/db/migrations'),
+    },
+    seeds: {
+      directory: path.join(__dirname, 'src/server/db/seeds'),
     },
   },
-
   production: {
     client: 'postgresql',
     connection: {

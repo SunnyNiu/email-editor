@@ -3,7 +3,7 @@ import {
   fetchTextCreator,
   fetchTextSuccessCreator,
   fetchTextFailureCreator,
-} from './contents.actions';
+} from './contentsActions';
 
 import { fetchText } from './types';
 

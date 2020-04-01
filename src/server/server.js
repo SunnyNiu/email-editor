@@ -23,18 +23,18 @@ route.get('/files/paths', (req, res) => {
 route.put('/email/:userId', (req, res) => {
   const userId = Number(req.params.userId);
   const { text } = req.body;
-
-  return db.saveContentText(userId, text).then(contentText => {
-    return res.json(contentText);
-  });
+  db.saveContentText(userId, text)
+    .then(body => {
+      return res.json(body);
+    })
+    .catch(error => res.status(500).send(`${error.message}`));
 });
 
 route.get('/email/:userId', (req, res) => {
   const userId = Number(req.params.userId);
-  return db
-    .getContentText(userId)
-    .then(text => {
-      return res.json(text);
+  db.getContentText(userId)
+    .then(body => {
+      return res.json(body);
     })
     .catch(error => res.status(500).send(`${error.message}`));
 });

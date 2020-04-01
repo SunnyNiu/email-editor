@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addTextCreator, fetchTextCreator } from '../reducers/contents.actions';
+import { addTextCreator, fetchTextCreator } from '../reducers/contentsActions';
 
 const Section = styled.div`
   height: 300px;
@@ -31,32 +31,30 @@ const SectionContent = styled.input`
 `;
 
 const Content = props => {
-  const { fetchText, text } = props;
+  const { fetchText, text, addText, userId } = props;
 
   useEffect(() => {
-    const url = window.location.href;
-    const index = url.indexOf('email=');
-    const userId = url.substr(index + 6, url.length);
-
     fetchText(userId);
   }, []);
 
-  const onChange = value => {
-    const { addText } = props;
-    addText(value);
-  };
   return (
     <div>
       <Section>
-        <SectionContent onChange={e => onChange(e.target.value)} value={text} />
+        <SectionContent onChange={e => addText(e.target.value)} value={text} />
       </Section>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  text: state.content.text,
-});
+const mapStateToProps = state => {
+  const url = window.location.href;
+  const index = url.indexOf('email=');
+  const userId = url.substr(index + 6, url.length);
+  return {
+    text: state.content.text,
+    userId,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   addText: input => dispatch(addTextCreator(input)),
@@ -67,6 +65,7 @@ Content.propTypes = {
   addText: PropTypes.func.isRequired,
   fetchText: PropTypes.func.isRequired,
   text: PropTypes.string,
+  userId: PropTypes.string.isRequired,
 };
 
 Content.defaultProps = {
