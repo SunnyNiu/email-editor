@@ -10,14 +10,14 @@ describe('get text', () => {
       userId: '100',
       text: 'verify contentText',
     };
-    axios.get.mockImplementationOnce(() => Promise.resolve(data));
+    axios.get.mockReturnValueOnce(Promise.resolve(data));
 
     expect(getText('100')).resolves.toEqual(data);
   });
 
   it('GET /email/:userId fail', () => {
     const errorMessage = 'fetch userId error';
-    axios.get.mockImplementationOnce(() => Promise.resolve(errorMessage));
+    axios.get.mockReturnValueOnce(Promise.resolve(errorMessage));
 
     expect(getText('100')).resolves.toEqual(errorMessage);
   });
@@ -28,14 +28,14 @@ describe('get text', () => {
       userId: '100',
       text: 'verify contentText',
     };
-    axios.put.mockImplementationOnce(() => Promise.resolve(data));
+    axios.put.mockReturnValueOnce(Promise.resolve(data));
 
     expect(saveText('100')).resolves.toEqual(data);
   });
 
   it('PUT /email/:userId fail', () => {
     const errorMessage = 'save text error';
-    axios.put.mockImplementationOnce(() => Promise.resolve(errorMessage));
+    axios.put.mockReturnValueOnce(Promise.resolve(errorMessage));
 
     expect(saveText('100')).resolves.toEqual(errorMessage);
   });
