@@ -30,26 +30,6 @@ const SectionContent = styled.input`
   }
 `;
 
-// const Content = props => {
-//   const { userId, fetchText, text } = props;
-
-//   useEffect(() => {
-//     fetchText(userId);
-//   }, []);
-
-//   const onChange = value => {
-//     const { addText } = props;
-//     addText(value);
-//   };
-//   return (
-//     <div>
-//       <Section>
-//         <SectionContent onChange={e => onChange(e.target.value)} value={text} />
-//       </Section>
-//     </div>
-//   );
-// };
-
 const Content = props => {
   const { fetchText, text } = props;
 
@@ -87,12 +67,10 @@ Content.propTypes = {
   addText: PropTypes.func.isRequired,
   fetchText: PropTypes.func.isRequired,
   text: PropTypes.string,
-  userId: PropTypes.string,
 };
 
 Content.defaultProps = {
   text: 'Please input text',
-  userId: '100',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

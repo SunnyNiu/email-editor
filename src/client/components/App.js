@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
 import Nav from './Nav';
 import Container from './Container';
 
@@ -18,18 +17,6 @@ const AppContainer = styled.div`
 
 const App = () => (
   <AppContainer>
-    {/* <Nav />
-    <Switch>
-      <Route
-        exact
-        path="/:userId"
-        render={({
-          match: {
-            params: { userId },
-          },
-        }) => <Container userId={userId} />}
-      />
-    </Switch> */}
     <Nav />
     <Container />
   </AppContainer>

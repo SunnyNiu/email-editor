@@ -14,17 +14,29 @@ describe('get text', () => {
 
     expect(getText('100')).resolves.toEqual(data);
   });
-  // it('POST /email/:userId fail', () => {
-  //   axios.mockReturnValueOnce(
-  //     Promise.resolve({
-  //       ok: false,
-  //       status: 504,
-  //       text: () => Promise.resolve('error'),
-  //     })
-  //   );
-  //   const expected = new Error(`Code: 504 Body: error`);
-  //   return saveText().catch(e => {
-  //     expect(e).toEqual(expected);
-  //   });
-  // });
+
+  it('GET /email/:userId fail', () => {
+    const errorMessage = 'fetch userId error';
+    axios.get.mockImplementationOnce(() => Promise.resolve(errorMessage));
+
+    expect(getText('100')).resolves.toEqual(errorMessage);
+  });
+
+  it('PUT /email/:userId', () => {
+    const data = {
+      id: 1,
+      userId: '100',
+      text: 'verify contentText',
+    };
+    axios.put.mockImplementationOnce(() => Promise.resolve(data));
+
+    expect(saveText('100')).resolves.toEqual(data);
+  });
+
+  it('PUT /email/:userId fail', () => {
+    const errorMessage = 'save text error';
+    axios.put.mockImplementationOnce(() => Promise.resolve(errorMessage));
+
+    expect(saveText('100')).resolves.toEqual(errorMessage);
+  });
 });

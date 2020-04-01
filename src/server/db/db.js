@@ -1,6 +1,8 @@
 const environment = process.env.NODE_ENV || 'development';
+const knex = require('knex');
 const config = require('../../../knexfile')[environment];
-const connection = require('knex')(config);
+
+const connection = knex(config);
 
 function getContentText(userId, db = connection) {
   return db('contents')

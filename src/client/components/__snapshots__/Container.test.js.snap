@@ -11,9 +11,7 @@ exports[`Container component tests Create snapshot 1`] = `
     <Connect(Sidebar) />
   </Cell__Cell>
   <Cell__Cell>
-    <Connect(Content)
-      userId="100"
-    />
+    <Connect(Content) />
   </Cell__Cell>
   <Cell__Cell>
     <ContentEditor />
