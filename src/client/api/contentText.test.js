@@ -17,9 +17,9 @@ describe('get text', () => {
 
   it('GET /email/:userId fail', () => {
     const errorMessage = 'fetch userId error';
-    axios.get.mockReturnValueOnce(Promise.resolve(errorMessage));
+    axios.get.mockReturnValueOnce(Promise.reject(errorMessage));
 
-    expect(getText('100')).resolves.toEqual(errorMessage);
+    expect(getText('100')).rejects.toEqual(errorMessage);
   });
 
   it('PUT /email/:userId', () => {
@@ -35,8 +35,8 @@ describe('get text', () => {
 
   it('PUT /email/:userId fail', () => {
     const errorMessage = 'save text error';
-    axios.put.mockReturnValueOnce(Promise.resolve(errorMessage));
+    axios.put.mockReturnValueOnce(Promise.reject(errorMessage));
 
-    expect(saveText('100')).resolves.toEqual(errorMessage);
+    expect(saveText('100')).rejects.toEqual(errorMessage);
   });
 });

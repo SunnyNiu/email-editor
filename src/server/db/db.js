@@ -14,8 +14,7 @@ function getContentText(userId, db = connection) {
 function saveContentText(userId, text, db = connection) {
   return db('contents')
     .where('userId', userId)
-    .update({ text })
-    .then(() => getContentText(userId, db));
+    .update({ text });
 }
 module.exports = {
   saveContentText,

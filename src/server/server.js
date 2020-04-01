@@ -24,18 +24,14 @@ route.put('/email/:userId', (req, res) => {
   const userId = Number(req.params.userId);
   const { text } = req.body;
   db.saveContentText(userId, text)
-    .then(body => {
-      return res.json(body);
-    })
+    .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });
 
 route.get('/email/:userId', (req, res) => {
   const userId = Number(req.params.userId);
   db.getContentText(userId)
-    .then(body => {
-      return res.json(body);
-    })
+    .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });
 

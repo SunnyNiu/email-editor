@@ -20,10 +20,9 @@ describe('get files paths', () => {
   });
 
   it('GET /email/:userId', () => {
-    getContentText.mockReturnValueOnce(
-      Promise.resolve({ id: 1, userId: '100', text: 'verify get text' })
-    );
-    const expected = { id: 1, userId: '100', text: 'verify get text' };
+    const data = { id: 1, userId: '100', text: 'verify get text' };
+    getContentText.mockReturnValueOnce(Promise.resolve(data));
+    const expected = data;
     return request(server)
       .get('/api/email/100')
       .then(res => {
@@ -32,21 +31,14 @@ describe('get files paths', () => {
   });
 
   it('put /email/:userId', () => {
-    saveContentText.mockReturnValueOnce(
-      Promise.resolve({
-        id: 1,
-        userId: '100',
-        text: 'verify save, and then get text',
-      })
-    );
-    getContentText.mockReturnValueOnce(
-      Promise.resolve({ id: 1, userId: '100', text: 'verify get text' })
-    );
-    const expected = {
+    const data = {
       id: 1,
       userId: '100',
       text: 'verify save, and then get text',
     };
+    saveContentText.mockReturnValueOnce(Promise.resolve(data));
+
+    const expected = data;
     return request(server)
       .put('/api/email/100')
       .then(res => {
