@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { saveTextCreator } from '../reducers/contentsActions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -38,11 +41,34 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = () => (
-  <HeaderContainer>
-    <Icon src="/assets/movie-icon.png" alt="Movie Recommendation" />
-    <SaveButton> save </SaveButton>
-  </HeaderContainer>
-);
+const Nav = ({ text, saveText, userId, disable }) => {
+  return (
+    <HeaderContainer>
+      <Icon src="/assets/movie-icon.png" alt="logo" />
+      <SaveButton onClick={() => saveText(userId, text)} disabled={disable}>
+        save
+      </SaveButton>
+    </HeaderContainer>
+  );
+};
 
-export default Nav;
+const mapStateToProps = state => {
+  const userId = window.location.href.split('email=')[1];
+  return {
+    text: state.content.text,
+    disable: state.ui.isEmailSaving,
+    userId,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  saveText: (userId, text) => dispatch(saveTextCreator(userId, text)),
+});
+
+Nav.propTypes = {
+  text: PropTypes.string.isRequired,
+  saveText: PropTypes.func.isRequired,
+  disable: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

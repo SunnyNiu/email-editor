@@ -11,13 +11,4 @@ describe('<App /> component tests', () => {
     // Assert
     expect(actual).toMatch(expected);
   });
-
-  it('<App /> should contains <Container />', () => {
-    const expected = '<Nav />';
-    const wrapper = shallow(<App />);
-    const actual = wrapper.text();
-
-    // Assert
-    expect(actual).toMatch(expected);
-  });
 });
