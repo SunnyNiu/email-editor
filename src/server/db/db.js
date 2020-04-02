@@ -16,7 +16,3 @@ export function saveContentText(userId, text, db = connection) {
     .where('userId', userId)
     .update({ text });
 }
-// module.exports = {
-//   saveContentText,
-//   getContentText,
-// };
