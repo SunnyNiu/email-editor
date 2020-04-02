@@ -21,7 +21,7 @@ route.get('/files/paths', (req, res) => {
 });
 
 route.put('/email/:userId', (req, res) => {
-  const userId = Number(req.params.userId);
+  const { userId } = req.params;
   const { text } = req.body;
   db.saveContentText(userId, text)
     .then(body => res.json(body))
@@ -29,7 +29,7 @@ route.put('/email/:userId', (req, res) => {
 });
 
 route.get('/email/:userId', (req, res) => {
-  const userId = Number(req.params.userId);
+  const { userId } = req.params;
   db.getContentText(userId)
     .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));

@@ -26,7 +26,7 @@ describe('get files paths', () => {
     return request(server)
       .get('/api/email/100')
       .then(res => {
-        expect(JSON.parse(res.text)).toEqual(expected);
+        expect(res.body).toEqual(expected);
       });
   });
 
@@ -42,7 +42,7 @@ describe('get files paths', () => {
     return request(server)
       .put('/api/email/100')
       .then(res => {
-        expect(JSON.parse(res.text)).toEqual(expected);
+        expect(res.body).toEqual(expected);
       });
   });
 });
