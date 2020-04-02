@@ -1,10 +1,8 @@
 import request from 'supertest';
 import server from './server';
 import { readdir } from './util';
-import { getContentText, saveContentText } from './db/db';
 
 jest.mock('./util');
-jest.mock('./db/db');
 
 describe('get files paths', () => {
   it('GET /files/paths', () => {
@@ -16,33 +14,6 @@ describe('get files paths', () => {
       .get('/api/files/paths')
       .then(res => {
         expect(res.text).toEqual(expected);
-      });
-  });
-
-  it('GET /email/:userId', () => {
-    const data = { id: 1, userId: '100', text: 'verify get text' };
-    getContentText.mockReturnValueOnce(Promise.resolve(data));
-    const expected = data;
-    return request(server)
-      .get('/api/email/100')
-      .then(res => {
-        expect(res.body).toEqual(expected);
-      });
-  });
-
-  it('put /email/:userId', () => {
-    const data = {
-      id: 1,
-      userId: '100',
-      text: 'verify save, and then get text',
-    };
-    saveContentText.mockReturnValueOnce(Promise.resolve(data));
-
-    const expected = data;
-    return request(server)
-      .put('/api/email/100')
-      .then(res => {
-        expect(res.body).toEqual(expected);
       });
   });
 });

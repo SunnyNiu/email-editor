@@ -1,15 +1,13 @@
-import { fetchFile } from './types';
-
 export const fetchSectionPathCreator = () => ({
-  type: fetchFile.FILE_SECTION_PATH_FETCH_REQUESTED,
+  type: 'FILE_SECTION_PATH_FETCH_REQUESTED',
 });
 
 export const fetchSectionPathFailureCreator = error => ({
-  type: fetchFile.FILE_SECTION_PATH_FETCH_FAILED,
+  type: 'FILE_SECTION_PATH_FETCH_FAILED',
   error,
 });
 
 export const fetchSectionPathSuccessCreator = paths => ({
-  type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED,
+  type: 'FILE_SECTION_PATH_FETCH_SUCCEEDED',
   paths,
 });

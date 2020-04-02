@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 import appReducer from './appReducer';
-import contentReducer from './contentsReducer';
-import uiReducer from './uiReducer';
 
 const catchReducerErrors = reducer => (state, action) => {
   try {
@@ -17,7 +15,5 @@ const catchReducerErrors = reducer => (state, action) => {
 export const rootReducer = catchReducerErrors(
   combineReducers({
     app: appReducer,
-    content: contentReducer,
-    ui: uiReducer,
   })
 );
