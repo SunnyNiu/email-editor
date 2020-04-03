@@ -22,6 +22,7 @@ const Section = ({ key, path }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.XML,
+      path,
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
