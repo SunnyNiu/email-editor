@@ -20,7 +20,7 @@ const Section = styled.div`
   }
 `;
 
-const SectionContent = styled.input`
+const SectionContent = styled.textarea`
   height: 60px;
   width: 200px;
   display: flex;
