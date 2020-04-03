@@ -1,5 +1,5 @@
 import {
-  addTextCreator,
+  setTextCreator,
   fetchTextCreator,
   fetchTextSuccessCreator,
   fetchTextFailureCreator,
@@ -15,7 +15,7 @@ describe('contents action tests', () => {
       input,
     };
 
-    const actual = addTextCreator(input);
+    const actual = setTextCreator(input);
     expect(actual).toEqual(expected);
   });
 

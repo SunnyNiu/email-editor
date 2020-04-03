@@ -1,6 +1,6 @@
 import { fetchText } from './types';
 
-export const addTextCreator = input => ({
+export const setTextCreator = input => ({
   type: fetchText.ADD_TEXT,
   input,
 });

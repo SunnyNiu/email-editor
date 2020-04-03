@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
-import { addTextCreator, fetchTextCreator } from '../reducers/contentsActions';
+import { setTextCreator, fetchTextCreator } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
 
 const Section = styled.div`
@@ -33,20 +33,20 @@ const SectionContent = styled.input`
 `;
 
 const Content = props => {
-  const { fetchText, text, addText, userId } = props;
+  const { fetchText, text, setText, userId } = props;
   useEffect(() => {
     fetchText(userId);
   }, []);
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: dropItem => addText(dropItem.path),
+    drop: dropItem => setText(dropItem.path),
   });
 
   return (
     <div>
       <Section ref={drop}>
-        <SectionContent onChange={e => addText(e.target.value)} value={text} />
+        <SectionContent onChange={e => setText(e.target.value)} value={text} />
       </Section>
     </div>
   );
@@ -61,12 +61,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addText: input => dispatch(addTextCreator(input)),
+  setText: input => dispatch(setTextCreator(input)),
   fetchText: userId => dispatch(fetchTextCreator(userId)),
 });
 
 Content.propTypes = {
-  addText: PropTypes.func.isRequired,
+  setText: PropTypes.func.isRequired,
   fetchText: PropTypes.func.isRequired,
   text: PropTypes.string,
   userId: PropTypes.string.isRequired,
