@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -34,29 +34,19 @@ const SectionContent = styled.input`
 
 const Content = props => {
   const { fetchText, text, addText, userId } = props;
-
-  const [item, setItem] = useState(text);
   useEffect(() => {
     fetchText(userId);
   }, []);
 
-  const [{ isOver }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: dropItem => setItem(dropItem.path),
-    collect: monitor => ({
-      isOver: !!monitor.isOver(),
-    }),
+    drop: dropItem => addText(dropItem.path),
   });
 
-  console.log(item, 'item');
   return (
     <div>
-      <Section>
-        <SectionContent
-          ref={drop}
-          onChange={e => addText(e.target.value)}
-          value={item}
-        />
+      <Section ref={drop}>
+        <SectionContent onChange={e => addText(e.target.value)} value={text} />
       </Section>
     </div>
   );

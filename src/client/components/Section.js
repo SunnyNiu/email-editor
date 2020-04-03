@@ -18,7 +18,7 @@ const Sec = styled.div`
   }
 `;
 
-const Section = ({ key, path }) => {
+const Section = ({ path }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.XML,
@@ -28,13 +28,10 @@ const Section = ({ key, path }) => {
       isDragging: !!monitor.isDragging(),
     }),
   });
-  return (
-    <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} key={key} path={path} />
-  );
+  return <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} path={path} />;
 };
 
 Section.propTypes = {
-  key: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 };
 
