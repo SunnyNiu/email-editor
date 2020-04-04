@@ -1,14 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<breakfast_menu>
-   <food>
-       <name>Belgian Waffles</name>
-       <price>$5.95</price>
-       <description>Two of our famous Belgian Waffles with plenty of real maple syrup</description>
-       <calories>650</calories> </food>
-   <food>
-       <name>Strawberry Belgian Waffles</name>
-       <price>$7.95</price>
-       <description>Light Belgian waffles covered with strawberries and whipped cream</description>
-       <calories>900</calories> 
-   </food>
-</breakfast_menu>
+<Section id="section_1" icon="section_1_image.jpg">
+   <Row width="6">
+      <Column width = "3">
+       <Text text="section_1_text"/>
+       <Image src="section_1_image"/>
+       <Text text="section_2_text"/>
+      </Column> 
+      <Column width = "3">
+       <Text text="section_1_c_text"/>
+       <Image src="section_1__c_image"/>
+      </Column>  
+   </Row>
+   <Row width="6">
+      <Column width = "6">
+       <Text text="section_2_text"/>
+       <Image src="section_2_image"/>
+      </Column>  
+   </Row>
+</Section>
