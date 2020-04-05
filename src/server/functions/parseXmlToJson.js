@@ -1,16 +1,10 @@
 import convert from 'xml-js';
-import { readFile } from './util';
 
 function translateColumnElements(elements) {
-  return elements.map(({ attributes, name }) => {
-    const obj = {};
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(attributes)) {
-      obj.type = name.toLowerCase();
-      obj[key] = value;
-    }
-    return obj;
-  });
+  return elements.map(({ attributes, name }) => ({
+    ...attributes,
+    type: name.toLowerCase(),
+  }));
 }
 
 function translateColumn(columns) {
@@ -38,9 +32,3 @@ export function translateSection(xml) {
     rows: translateRow(elements),
   };
 }
-
-// readFile('src/xml/breakfast.xml', (err, data) => {
-//   if (err) throw err;
-//   const json = translateSection(data);
-//   console.log('section', JSON.stringify(json, null, 2));
-// });
