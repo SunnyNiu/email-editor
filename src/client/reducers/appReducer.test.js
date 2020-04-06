@@ -9,7 +9,7 @@ describe('appReducer tests', () => {
 
     const paths = ['xml/section1.xml', 'xml/section2.xml'];
     const action = {
-      type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED,
+      type: fetchFile.FILE_SECTIONS_FETCH_SUCCEEDED,
       paths,
     };
     const expected = {
@@ -27,7 +27,7 @@ describe('appReducer tests', () => {
     const error = 'Fetch section path failed';
 
     const action = {
-      type: fetchFile.FILE_SECTION_PATH_FETCH_FAILED,
+      type: fetchFile.FILE_SECTIONS_FETCH_FAILED,
       error,
     };
 

@@ -40,7 +40,8 @@ const Content = props => {
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: dropItem => setText(JSON.stringify(Object.values(dropItem.path)[0])),
+    drop: dropItem =>
+      setText(JSON.stringify(Object.values(dropItem.section)[0])),
   });
 
   return (

@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-export function getXmlPath() {
-  return fetch('/api/files/paths').then(response => {
+export function getSections() {
+  return fetch('/api/sections').then(response => {
     if (!response.ok) {
       return response
         .text()
@@ -9,6 +9,7 @@ export function getXmlPath() {
           Promise.reject(new Error(`Code: ${response.status} Body: ${text}`))
         );
     }
+
     return response.json();
   });
 }

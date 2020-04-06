@@ -1,39 +1,39 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSectionPathCreator } from '../reducers/actions';
+import { fetchSectionCreator } from '../reducers/actions';
 import Section from './Section';
 
-const Sidebar = ({ fetchSectionPaths, paths }) => {
-  const pathsArray = [];
-  for (const [key, value] of Object.entries(paths)) {
-    pathsArray.push({ [key]: value });
+const Sidebar = ({ fetchSections, sections }) => {
+  const sectionsArray = [];
+  for (const [key, value] of Object.entries(sections)) {
+    sectionsArray.push({ [key]: value });
   }
 
   useEffect(() => {
-    fetchSectionPaths();
+    fetchSections();
   }, []);
 
   return (
     <div>
-      {pathsArray.map(path => (
-        <Section key={path} path={path} />
+      {sectionsArray.map(section => (
+        <Section key={Object.keys(section)[0]} section={section} />
       ))}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  paths: state.app.paths,
+  sections: state.app.sections,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSectionPaths: () => dispatch(fetchSectionPathCreator()),
+  fetchSections: () => dispatch(fetchSectionCreator()),
 });
 
 Sidebar.propTypes = {
-  fetchSectionPaths: PropTypes.func.isRequired,
-  // paths: PropTypes.objectOf(PropTypes.string).isRequired,
+  fetchSections: PropTypes.func.isRequired,
+  // sections: PropTypes.shape(PropTypes.objectOf(string)).isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

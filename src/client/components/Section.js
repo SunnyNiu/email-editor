@@ -18,21 +18,23 @@ const Sec = styled.div`
   }
 `;
 
-const Section = ({ path }) => {
+const Section = ({ section }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.XML,
-      path,
+      section,
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
-  return <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} path={path} />;
+  return (
+    <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} section={section} />
+  );
 };
 
 Section.propTypes = {
-  // path: PropTypes.shape(string).isRequired,
+  section: PropTypes.shape(PropTypes.objectOf(string)).isRequired,
 };
 
 export default Section;
