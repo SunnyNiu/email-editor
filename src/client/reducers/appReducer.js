@@ -2,7 +2,7 @@ import { fetchFile } from './types';
 
 /* eslint-disable no-case-declarations */
 const initialState = {
-  paths: [],
+  paths: {},
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED:
       return {
         ...state,
-        paths: action.paths,
+        paths: action.obj,
       };
     case fetchFile.FILE_SECTION_PATH_FETCH_FAILED:
       // eslint-disable-next-line no-console

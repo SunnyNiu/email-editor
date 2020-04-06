@@ -9,7 +9,7 @@ export const fetchSectionPathFailureCreator = error => ({
   error,
 });
 
-export const fetchSectionPathSuccessCreator = paths => ({
+export const fetchSectionPathSuccessCreator = obj => ({
   type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED,
-  paths,
+  obj,
 });

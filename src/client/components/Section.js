@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../util';
 
@@ -32,7 +32,7 @@ const Section = ({ path }) => {
 };
 
 Section.propTypes = {
-  path: PropTypes.string.isRequired,
+  // path: PropTypes.shape(string).isRequired,
 };
 
 export default Section;

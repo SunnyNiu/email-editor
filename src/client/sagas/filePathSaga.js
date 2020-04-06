@@ -4,8 +4,8 @@ import { fetchFile } from '../reducers/types';
 
 export function* fetchFilePath() {
   try {
-    const { paths } = yield call(getXmlPath);
-    yield put({ type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED, paths });
+    const { obj } = yield call(getXmlPath);
+    yield put({ type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED, obj });
   } catch (error) {
     yield put({ type: fetchFile.FILE_SECTION_PATH_FETCH_FAILED, error });
   }

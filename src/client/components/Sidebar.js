@@ -5,13 +5,18 @@ import { fetchSectionPathCreator } from '../reducers/actions';
 import Section from './Section';
 
 const Sidebar = ({ fetchSectionPaths, paths }) => {
+  const pathsArray = [];
+  for (const [key, value] of Object.entries(paths)) {
+    pathsArray.push({ [key]: value });
+  }
+
   useEffect(() => {
     fetchSectionPaths();
   }, []);
 
   return (
     <div>
-      {paths.map(path => (
+      {pathsArray.map(path => (
         <Section key={path} path={path} />
       ))}
     </div>
@@ -28,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 
 Sidebar.propTypes = {
   fetchSectionPaths: PropTypes.func.isRequired,
-  paths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // paths: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

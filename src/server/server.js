@@ -1,8 +1,10 @@
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
+import fs from 'fs';
 import { readdir } from './util';
 import { saveContentText, getContentText } from './db/db';
+import { translateSection } from './functions/parseXmlToJson';
 
 const server = express();
 
@@ -12,11 +14,27 @@ server.use(cors());
 
 const route = express.Router();
 
+function readFile(filePath) {
+  return new Promise(resolve => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) throw err;
+      const section = translateSection(data);
+      resolve({ [filePath]: section });
+    });
+  });
+}
+
 route.get('/files/paths', (req, res) => {
   readdir('./src/xml', (err, items) => {
     if (err) throw err;
-    const paths = items.map(item => `./src/xml/${item}`);
-    res.json({ paths });
+    const promises = items.map(item => readFile(`./src/xml/${item}`));
+    Promise.all(promises).then(sections => {
+      const obj = {};
+      sections.map(section => {
+        obj[Object.keys(section)[0]] = section[Object.keys(section)[0]];
+      });
+      res.json({ obj });
+    });
   });
 });
 
