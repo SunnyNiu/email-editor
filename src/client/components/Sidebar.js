@@ -5,19 +5,14 @@ import { fetchSectionCreator } from '../reducers/actions';
 import Section from './Section';
 
 const Sidebar = ({ fetchSections, sections }) => {
-  const sectionsArray = [];
-  for (const [key, value] of Object.entries(sections)) {
-    sectionsArray.push({ [key]: value });
-  }
-
   useEffect(() => {
     fetchSections();
   }, []);
 
   return (
     <div>
-      {sectionsArray.map(section => (
-        <Section key={Object.keys(section)[0]} section={section} />
+      {Object.entries(sections).map(([key, section]) => (
+        <Section key={key} section={section} />
       ))}
     </div>
   );
@@ -33,7 +28,8 @@ const mapDispatchToProps = dispatch => ({
 
 Sidebar.propTypes = {
   fetchSections: PropTypes.func.isRequired,
-  // sections: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  sections: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

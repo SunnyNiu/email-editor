@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../util';
 
-const Sec = styled.div`
+const StyledSection = styled.div`
   height: 83px;
   display: flex;
   justify-content: space-between;
@@ -28,13 +28,12 @@ const Section = ({ section }) => {
       isDragging: !!monitor.isDragging(),
     }),
   });
-  return (
-    <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} section={section} />
-  );
+  return <StyledSection opacity={isDragging ? '0.5' : '1'} ref={drag} />;
 };
 
 Section.propTypes = {
-  section: PropTypes.shape(PropTypes.objectOf(string)).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  section: PropTypes.object.isRequired,
 };
 
 export default Section;
