@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 
 Sidebar.propTypes = {
   fetchSections: PropTypes.func.isRequired,
-  // sections: PropTypes.shape(PropTypes.objectOf(string)).isRequired
+  // sections: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
