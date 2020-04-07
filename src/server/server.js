@@ -1,10 +1,8 @@
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
-import { readdir } from './util';
+import { readdir, readFile } from './util';
 import { saveContentText, getContentText } from './db/db';
-import { translateSection } from './functions/parseXmlToJson';
 
 const server = express();
 
@@ -13,16 +11,6 @@ server.use(express.json());
 server.use(cors());
 
 const route = express.Router();
-
-function readFile(filePath) {
-  return new Promise(resolve => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) throw err;
-      const section = translateSection(data);
-      resolve({ [filePath]: section });
-    });
-  });
-}
 
 route.get('/sections', (req, res) => {
   readdir('./src/xml', (err, items) => {

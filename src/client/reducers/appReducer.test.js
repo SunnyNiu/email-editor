@@ -4,24 +4,30 @@ import { fetchFile } from './types';
 describe('appReducer tests', () => {
   it('fetch paths shows new paths', () => {
     const currentState = {
-      paths: [],
+      sections: {},
     };
 
-    const paths = ['xml/section1.xml', 'xml/section2.xml'];
+    const sections = {
+      'xml/breakfast.xml': '<Section />',
+      'xml/lunch.xml': '<Section test=text/>',
+    };
     const action = {
       type: fetchFile.FILE_SECTIONS_FETCH_SUCCEEDED,
-      paths,
+      sections,
     };
     const expected = {
-      paths: ['xml/section1.xml', 'xml/section2.xml'],
+      sections: {
+        'xml/breakfast.xml': '<Section />',
+        'xml/lunch.xml': '<Section test=text/>',
+      },
     };
     const actual = appReducer(currentState, action);
     expect(actual).toEqual(expected);
   });
 
-  it('fetch paths failed that should show error message', () => {
+  it('fetch sections failed that should show error message', () => {
     const currentState = {
-      paths: [],
+      sections: {},
     };
 
     const error = 'Fetch section path failed';
@@ -31,7 +37,7 @@ describe('appReducer tests', () => {
       error,
     };
 
-    const expected = { paths: [] };
+    const expected = { sections: {} };
     const consoleSpy = jest.spyOn(console, 'error');
     const actual = appReducer(currentState, action);
     expect(consoleSpy).toHaveBeenCalledWith(error);

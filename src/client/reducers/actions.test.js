@@ -1,5 +1,5 @@
 import {
-  fetchSectionsCreator,
+  fetchSectionCreator,
   fetchSectionsFailureCreator,
   fetchSectionsSuccessCreator,
 } from './actions';
@@ -12,19 +12,19 @@ describe('action tests', () => {
       type: fetchFile.FILE_SECTIONS_FETCH_REQUESTED,
     };
 
-    const actual = fetchSectionsCreator();
+    const actual = fetchSectionCreator();
     expect(actual).toEqual(expected);
   });
 
   it('fetch section and return paths', () => {
-    const paths = ['xml/breakfast.xml', 'xml/lunch.xml'];
+    const sections = { 'xml/breakfast.xml': '<Section />' };
 
     const expected = {
       type: fetchFile.FILE_SECTIONS_FETCH_SUCCEEDED,
-      paths,
+      sections,
     };
 
-    const actual = fetchSectionsSuccessCreator(paths);
+    const actual = fetchSectionsSuccessCreator(sections);
     expect(actual).toEqual(expected);
   });
 
