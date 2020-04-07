@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import { readdir } from './util';
+import { readdir, readFile } from './util';
 import { saveContentText, getContentText } from './db/db';
 
 const server = express();
@@ -12,11 +12,17 @@ server.use(cors());
 
 const route = express.Router();
 
-route.get('/files/paths', (req, res) => {
+route.get('/sections', (req, res) => {
   readdir('./src/xml', (err, items) => {
     if (err) throw err;
-    const paths = items.map(item => `./src/xml/${item}`);
-    res.json({ paths });
+    const promises = items.map(item => readFile(`./src/xml/${item}`));
+    Promise.all(promises).then(sections => {
+      const obj = sections.reduce(
+        (accumulator, currentValue) => ({ ...accumulator, ...currentValue }),
+        {}
+      );
+      res.json(obj);
+    });
   });
 });
 

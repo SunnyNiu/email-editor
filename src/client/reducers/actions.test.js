@@ -1,7 +1,7 @@
 import {
-  fetchSectionPathCreator,
-  fetchSectionPathFailureCreator,
-  fetchSectionPathSuccessCreator,
+  fetchSectionCreator,
+  fetchSectionsFailureCreator,
+  fetchSectionsSuccessCreator,
 } from './actions';
 
 import { fetchFile } from './types';
@@ -9,22 +9,22 @@ import { fetchFile } from './types';
 describe('action tests', () => {
   it('send fetch section request', () => {
     const expected = {
-      type: fetchFile.FILE_SECTION_PATH_FETCH_REQUESTED,
+      type: fetchFile.FILE_SECTIONS_FETCH_REQUESTED,
     };
 
-    const actual = fetchSectionPathCreator();
+    const actual = fetchSectionCreator();
     expect(actual).toEqual(expected);
   });
 
   it('fetch section and return paths', () => {
-    const paths = ['xml/breakfast.xml', 'xml/lunch.xml'];
+    const sections = { 'xml/breakfast.xml': '<Section />' };
 
     const expected = {
-      type: fetchFile.FILE_SECTION_PATH_FETCH_SUCCEEDED,
-      paths,
+      type: fetchFile.FILE_SECTIONS_FETCH_SUCCEEDED,
+      sections,
     };
 
-    const actual = fetchSectionPathSuccessCreator(paths);
+    const actual = fetchSectionsSuccessCreator(sections);
     expect(actual).toEqual(expected);
   });
 
@@ -32,11 +32,11 @@ describe('action tests', () => {
     const error = 'fetch section failed';
 
     const expected = {
-      type: fetchFile.FILE_SECTION_PATH_FETCH_FAILED,
+      type: fetchFile.FILE_SECTIONS_FETCH_FAILED,
       error,
     };
 
-    const actual = fetchSectionPathFailureCreator(error);
+    const actual = fetchSectionsFailureCreator(error);
     expect(actual).toEqual(expected);
   });
 });

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../util';
 
-const Sec = styled.div`
+const StyledSection = styled.div`
   height: 83px;
   display: flex;
   justify-content: space-between;
@@ -18,21 +18,22 @@ const Sec = styled.div`
   }
 `;
 
-const Section = ({ path }) => {
+const Section = ({ section }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.XML,
-      path,
+      section,
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
-  return <Sec opacity={isDragging ? '0.5' : '1'} ref={drag} path={path} />;
+  return <StyledSection opacity={isDragging ? '0.5' : '1'} ref={drag} />;
 };
 
 Section.propTypes = {
-  path: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  section: PropTypes.object.isRequired,
 };
 
 export default Section;

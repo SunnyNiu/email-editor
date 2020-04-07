@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { getXmlPath } from './xmlFile';
+import { getSections } from './xmlFile';
 
 jest.mock('isomorphic-fetch');
 
@@ -13,7 +13,7 @@ describe('get files paths', () => {
       })
     );
     const expected = { paths: ['xml1', 'xml2'] };
-    return getXmlPath().then(json => {
+    return getSections().then(json => {
       expect(json).toEqual(expected);
     });
   });
@@ -27,7 +27,7 @@ describe('get files paths', () => {
       })
     );
     const expected = new Error(`Code: 504 Body: error`);
-    return getXmlPath().catch(e => {
+    return getSections().catch(e => {
       expect(e).toEqual(expected);
     });
   });

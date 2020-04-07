@@ -1,34 +1,35 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSectionPathCreator } from '../reducers/actions';
+import { fetchSectionCreator } from '../reducers/actions';
 import Section from './Section';
 
-const Sidebar = ({ fetchSectionPaths, paths }) => {
+const Sidebar = ({ fetchSections, sections }) => {
   useEffect(() => {
-    fetchSectionPaths();
+    fetchSections();
   }, []);
 
   return (
     <div>
-      {paths.map(path => (
-        <Section key={path} path={path} />
+      {Object.entries(sections).map(([key, section]) => (
+        <Section key={key} section={section} />
       ))}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  paths: state.app.paths,
+  sections: state.app.sections,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSectionPaths: () => dispatch(fetchSectionPathCreator()),
+  fetchSections: () => dispatch(fetchSectionCreator()),
 });
 
 Sidebar.propTypes = {
-  fetchSectionPaths: PropTypes.func.isRequired,
-  paths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  fetchSections: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  sections: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
