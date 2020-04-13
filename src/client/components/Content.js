@@ -3,35 +3,22 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
+import { Grid, Cell } from 'styled-css-grid';
 import { setTextCreator, fetchTextCreator } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
 
-const Section = styled.div`
-  height: 300px;
-  width: 300px;
-  display: flex;
+const Section = styled(Cell)`
   justify-content: center;
-  margin-bottom: 25px;
+  background-color: red;
+  align-items: center;
+`;
+
+const Container = styled(Grid)`
+  height: 300px;
+  justify-content: center;
   background-color: #4285f4;
   align-items: center;
-  @media screen and (max-width: 800px) {
-    height: 60px;
-    padding: 10px;
-  }
 `;
-
-const SectionContent = styled.textarea`
-  height: 60px;
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-
-  @media screen and (max-width: 800px) {
-    height: 30px;
-    padding: 2px;
-  }
-`;
-
 const Content = props => {
   const { fetchText, text, setText, userId } = props;
   useEffect(() => {
@@ -40,15 +27,31 @@ const Content = props => {
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: section => setText(JSON.stringify(section)),
+    drop: ({ section }) => setText(JSON.stringify(section)),
   });
 
   return (
-    <div>
-      <Section ref={drop}>
-        <SectionContent onChange={e => setText(e.target.value)} value={text} />
-      </Section>
-    </div>
+    <Container columns={1} ref={drop}>
+      {text.map(section => (
+        <Section>
+          {JSON.parse(section).rows.map(row => (
+            <Grid columns={row.width}>
+              {row.columns.map(column => (
+                <Cell width={column.width}>
+                  {column.widgets.map(widget =>
+                    widget.type === 'text' ? (
+                      <input value={widget.text} />
+                    ) : (
+                      <img src={widget.src} alt="img" />
+                    )
+                  )}
+                </Cell>
+              ))}
+            </Grid>
+          ))}
+        </Section>
+      ))}
+    </Container>
   );
 };
 

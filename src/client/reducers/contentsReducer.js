@@ -1,7 +1,7 @@
 import { fetchText } from './types';
 /* eslint-disable no-case-declarations */
 const initialState = {
-  text: 'default',
+  text: [],
 };
 
 export default (state = initialState, action) => {
@@ -9,12 +9,12 @@ export default (state = initialState, action) => {
     case fetchText.ADD_TEXT:
       return {
         ...state,
-        text: action.input,
+        text: [...state.text, action.input],
       };
     case fetchText.FETCH_TEXT_SUCCEEDED:
       return {
         ...state,
-        text: action.text,
+        text: action.text ? [action.text] : [],
       };
     case fetchText.FETCH_TEXT_FAILED:
       // eslint-disable-next-line no-console
