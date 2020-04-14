@@ -12,7 +12,15 @@ export function getContentText(userId, db = connection) {
 }
 
 export function saveContentText(userId, text, db = connection) {
-  return db('contents')
-    .where('userId', userId)
-    .update({ text });
+  return getContentText(userId).then(exist => {
+    // eslint-disable-next-line no-unused-expressions
+    exist === undefined
+      ? db('contents')
+          .insert({ userId, text })
+          .catch(e => console.log(e))
+      : db('contents')
+          .where('userId', userId)
+          .update({ text })
+          .catch(e => console.log('update db', e));
+  });
 }

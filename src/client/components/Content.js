@@ -3,15 +3,10 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
-import { Grid, Cell } from 'styled-css-grid';
+import { Grid } from 'styled-css-grid';
 import { setTextCreator, fetchTextCreator } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
-
-const Section = styled(Cell)`
-  justify-content: center;
-  background-color: red;
-  align-items: center;
-`;
+import DroppedSection from './DroppedSection';
 
 const Container = styled(Grid)`
   height: 300px;
@@ -33,23 +28,8 @@ const Content = props => {
   return (
     <Container columns={1} ref={drop}>
       {text.map(section => (
-        <Section>
-          {JSON.parse(section).rows.map(row => (
-            <Grid columns={row.width}>
-              {row.columns.map(column => (
-                <Cell width={column.width}>
-                  {column.widgets.map(widget =>
-                    widget.type === 'text' ? (
-                      <input value={widget.text} />
-                    ) : (
-                      <img src={widget.src} alt="img" />
-                    )
-                  )}
-                </Cell>
-              ))}
-            </Grid>
-          ))}
-        </Section>
+        // eslint-disable-next-line react/no-array-index-key
+        <DroppedSection section={section} />
       ))}
     </Container>
   );
@@ -71,12 +51,13 @@ const mapDispatchToProps = dispatch => ({
 Content.propTypes = {
   setText: PropTypes.func.isRequired,
   fetchText: PropTypes.func.isRequired,
-  text: PropTypes.string,
-  userId: PropTypes.string.isRequired,
+  text: PropTypes.arrayOf(PropTypes.string),
+  userId: PropTypes.string,
 };
 
 Content.defaultProps = {
-  text: 'Please input text',
+  text: undefined,
+  userId: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -1,7 +1,7 @@
 exports.up = knex => {
   return knex.schema.createTable('contents', t => {
     t.increments('id');
-    t.string('text').notNull();
+    t.text('text').notNull();
   });
 };
 

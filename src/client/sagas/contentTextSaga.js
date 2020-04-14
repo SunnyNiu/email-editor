@@ -17,7 +17,7 @@ export function* contentTextSaga() {
 
 export function* saveContentText({ userId, text }) {
   try {
-    yield call(saveText, userId, text);
+    yield call(saveText, userId, JSON.stringify(text));
     yield put({ type: fetchText.SAVE_TEXT_SUCCEEDED });
   } catch (error) {
     yield put({ type: fetchText.SAVE_TEXT_FAILED, error });
