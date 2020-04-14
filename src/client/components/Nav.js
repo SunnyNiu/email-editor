@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { saveTextCreator } from '../reducers/contentsActions';
+import { saveSectionsCreator } from '../reducers/contentsActions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -41,11 +41,14 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ text, saveText, userId, disable }) => {
+const Nav = ({ email, saveSections, userId, disable }) => {
   return (
     <HeaderContainer>
       <Icon src="/assets/movie-icon.png" alt="logo" />
-      <SaveButton onClick={() => saveText(userId, text)} disabled={disable}>
+      <SaveButton
+        onClick={() => saveSections(userId, email)}
+        disabled={disable}
+      >
         save
       </SaveButton>
     </HeaderContainer>
@@ -55,24 +58,24 @@ const Nav = ({ text, saveText, userId, disable }) => {
 const mapStateToProps = state => {
   const userId = window.location.href.split('email=')[1];
   return {
-    text: state.content.text,
+    email: state.content.email,
     disable: state.ui.isEmailSaving,
     userId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  saveText: (userId, text) => dispatch(saveTextCreator(userId, text)),
+  saveSections: (userId, email) => dispatch(saveSectionsCreator(userId, email)),
 });
 
 Nav.propTypes = {
-  text: PropTypes.arrayOf(PropTypes.string),
-  saveText: PropTypes.func.isRequired,
+  email: PropTypes.arrayOf(PropTypes.string),
+  saveSections: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
 Nav.defaultProps = {
-  text: undefined,
+  email: undefined,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

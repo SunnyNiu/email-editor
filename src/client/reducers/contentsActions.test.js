@@ -1,28 +1,28 @@
 import {
-  setTextCreator,
+  addSectionCreator,
   fetchTextCreator,
   fetchTextSuccessCreator,
   fetchTextFailureCreator,
 } from './contentsActions';
 
-import { fetchText } from './types';
+import { fetchSections } from './types';
 
 describe('contents action tests', () => {
   it('add Text', () => {
     const input = 'type input';
     const expected = {
-      type: fetchText.ADD_TEXT,
+      type: fetchSections.ADD_TEXT,
       input,
     };
 
-    const actual = setTextCreator(input);
+    const actual = addSectionCreator(input);
     expect(actual).toEqual(expected);
   });
 
   it('send fetch text request', () => {
     const userId = '100';
     const expected = {
-      type: fetchText.FETCH_TEXT_REQUESTED,
+      type: fetchSections.FETCH_TEXT_REQUESTED,
       userId,
     };
 
@@ -34,7 +34,7 @@ describe('contents action tests', () => {
     const text = 'verify fetch text succeeded';
 
     const expected = {
-      type: fetchText.FETCH_TEXT_SUCCEEDED,
+      type: fetchSections.FETCH_TEXT_SUCCEEDED,
       text,
     };
 
@@ -46,7 +46,7 @@ describe('contents action tests', () => {
     const error = 'fetch text failed';
 
     const expected = {
-      type: fetchText.FETCH_TEXT_FAILED,
+      type: fetchSections.FETCH_TEXT_FAILED,
       error,
     };
 

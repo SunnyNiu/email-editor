@@ -1,5 +1,5 @@
 import contentsReducer from './contentsReducer';
-import { fetchText } from './types';
+import { fetchSections } from './types';
 
 describe('contentsReducer tests', () => {
   it('fetch text shows text', () => {
@@ -13,7 +13,7 @@ describe('contentsReducer tests', () => {
       { id: 'section_2', icon: 'section_2_image.jpg' },
     ];
     const action = {
-      type: fetchText.FETCH_TEXT_SUCCEEDED,
+      type: fetchSections.FETCH_TEXT_SUCCEEDED,
       text,
     };
     const expected = {
@@ -31,7 +31,7 @@ describe('contentsReducer tests', () => {
     const error = 'Fetch text failed';
 
     const action = {
-      type: fetchText.FETCH_TEXT_FAILED,
+      type: fetchSections.FETCH_TEXT_FAILED,
       error,
     };
 

@@ -7,7 +7,7 @@ exports.seed = knex => {
       return knex('contents').insert([
         {
           id: 1,
-          text: JSON.stringify([]),
+          email: JSON.stringify([]),
           userId: '1',
         },
       ]);

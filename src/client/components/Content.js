@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import { Grid } from 'styled-css-grid';
-import { setTextCreator, fetchTextCreator } from '../reducers/contentsActions';
+import {
+  addSectionCreator,
+  fetchSectionsCreator,
+} from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
 import DroppedSection from './DroppedSection';
 
@@ -15,19 +18,19 @@ const Container = styled(Grid)`
   align-items: center;
 `;
 const Content = props => {
-  const { fetchText, text, setText, userId } = props;
+  const { fetchSections, email, addSection, userId } = props;
   useEffect(() => {
-    fetchText(userId);
+    fetchSections(userId);
   }, []);
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: ({ section }) => setText(JSON.stringify(section)),
+    drop: ({ section }) => addSection(JSON.stringify(section)),
   });
 
   return (
     <Container columns={1} ref={drop}>
-      {text.map((section, index) => (
+      {email.map((section, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <DroppedSection key={index} section={section} />
       ))}
@@ -38,25 +41,25 @@ const Content = props => {
 const mapStateToProps = state => {
   const userId = window.location.href.split('email=')[1];
   return {
-    text: state.content.text,
+    email: state.content.email,
     userId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  setText: input => dispatch(setTextCreator(input)),
-  fetchText: userId => dispatch(fetchTextCreator(userId)),
+  addSection: section => dispatch(addSectionCreator(section)),
+  fetchSections: userId => dispatch(fetchSectionsCreator(userId)),
 });
 
 Content.propTypes = {
-  setText: PropTypes.func.isRequired,
-  fetchText: PropTypes.func.isRequired,
-  text: PropTypes.arrayOf(PropTypes.string),
+  addSection: PropTypes.func.isRequired,
+  fetchSections: PropTypes.func.isRequired,
+  email: PropTypes.arrayOf(PropTypes.string),
   userId: PropTypes.string,
 };
 
 Content.defaultProps = {
-  text: [],
+  email: [],
   userId: undefined,
 };
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { saveText, getText } from './contentText';
+import { saveSections, getSections } from './contentSection';
 
 jest.mock('axios');
 
@@ -12,14 +12,14 @@ describe('get text', () => {
     };
     axios.get.mockReturnValueOnce(Promise.resolve(data));
 
-    expect(getText('100')).resolves.toEqual(data);
+    expect(getSections('100')).resolves.toEqual(data);
   });
 
   it('GET /email/:userId fail', () => {
     const errorMessage = 'fetch userId error';
     axios.get.mockReturnValueOnce(Promise.reject(errorMessage));
 
-    expect(getText('100')).rejects.toEqual(errorMessage);
+    expect(getSections('100')).rejects.toEqual(errorMessage);
   });
 
   it('PUT /email/:userId', () => {
@@ -30,13 +30,13 @@ describe('get text', () => {
     };
     axios.put.mockReturnValueOnce(Promise.resolve(data));
 
-    expect(saveText('100')).resolves.toEqual(data);
+    expect(saveSections('100')).resolves.toEqual(data);
   });
 
   it('PUT /email/:userId fail', () => {
     const errorMessage = 'save text error';
     axios.put.mockReturnValueOnce(Promise.reject(errorMessage));
 
-    expect(saveText('100')).rejects.toEqual(errorMessage);
+    expect(saveSections('100')).rejects.toEqual(errorMessage);
   });
 });

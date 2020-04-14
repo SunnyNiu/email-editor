@@ -1,36 +1,36 @@
-import { fetchText } from './types';
+import { fetchSections } from './types';
 
-export const setTextCreator = input => ({
-  type: fetchText.ADD_TEXT,
-  input,
+export const addSectionCreator = section => ({
+  type: fetchSections.ADD_DROP_SECTION,
+  section,
 });
 
-export const fetchTextCreator = userId => ({
-  type: fetchText.FETCH_TEXT_REQUESTED,
+export const fetchSectionsCreator = userId => ({
+  type: fetchSections.FETCH_SECTIONS_REQUESTED,
   userId,
 });
 
-export const fetchTextSuccessCreator = text => ({
-  type: fetchText.FETCH_TEXT_SUCCEEDED,
-  text,
+export const fetchSectionsSuccessCreator = email => ({
+  type: fetchSections.FETCH_SECTIONS_SUCCEEDED,
+  email,
 });
 
-export const fetchTextFailureCreator = error => ({
-  type: fetchText.FETCH_TEXT_FAILED,
+export const fetchSectionsFailureCreator = error => ({
+  type: fetchSections.FETCH_SECTIONS_FAILED,
   error,
 });
 
-export const saveTextCreator = (userId, text) => ({
-  type: fetchText.SAVE_TEXT_REQUESTED,
+export const saveSectionsCreator = (userId, dropSections) => ({
+  type: fetchSections.SAVE_SECTIONS_REQUESTED,
   userId,
-  text,
+  dropSections,
 });
 
-export const saveTextSuccessCreator = () => ({
-  type: fetchText.SAVE_TEXT_SUCCEEDED,
+export const saveSectionsSuccessCreator = () => ({
+  type: fetchSections.SAVE_SECTIONS_SUCCEEDED,
 });
 
-export const saveTextFailureCreator = error => ({
-  type: fetchText.SAVE_TEXT_FAILED,
+export const saveSectionsFailureCreator = error => ({
+  type: fetchSections.SAVE_SECTIONS_FAILED,
   error,
 });

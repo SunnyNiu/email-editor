@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-export function saveText(userId, text) {
+export function saveSections(userId, dropSections) {
   return (
     axios
       .put(`/api/email/${userId}`, {
-        text,
+        email: dropSections,
       })
       .then(response => {
         return response.data;
@@ -14,7 +14,7 @@ export function saveText(userId, text) {
   );
 }
 
-export function getText(userId) {
+export function getSections(userId) {
   return (
     axios
       .get(`/api/email/${userId}`)

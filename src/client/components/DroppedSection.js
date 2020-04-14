@@ -39,7 +39,7 @@ DroppedSection.propTypes = {
 };
 
 DroppedSection.defaultProps = {
-  section: {},
+  section: '',
 };
 
 export default DroppedSection;
