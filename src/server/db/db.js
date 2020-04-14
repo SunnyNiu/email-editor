@@ -17,10 +17,12 @@ export function saveContentText(userId, text, db = connection) {
     exist === undefined
       ? db('contents')
           .insert({ userId, text })
+          // eslint-disable-next-line no-console
           .catch(e => console.log(e))
       : db('contents')
           .where('userId', userId)
           .update({ text })
+          // eslint-disable-next-line no-console
           .catch(e => console.log('update db', e));
   });
 }

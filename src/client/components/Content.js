@@ -27,9 +27,9 @@ const Content = props => {
 
   return (
     <Container columns={1} ref={drop}>
-      {text.map(section => (
+      {text.map((section, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <DroppedSection section={section} />
+        <DroppedSection key={index} section={section} />
       ))}
     </Container>
   );

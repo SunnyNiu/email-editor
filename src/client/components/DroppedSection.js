@@ -11,15 +11,19 @@ const Section = styled(Cell)`
 
 const DroppedSection = ({ section }) => (
   <Section>
-    {JSON.parse(section).rows.map(row => (
-      <Grid columns={row.width}>
-        {row.columns.map(column => (
-          <Cell width={column.width}>
-            {column.widgets.map(widget =>
+    {JSON.parse(section).rows.map((row, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <Grid columns={row.width} key={index}>
+        {row.columns.map((column, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Cell width={Number(column.width)} key={i}>
+            {column.widgets.map((widget, j) =>
               widget.type === 'text' ? (
-                <input value={widget.text} />
+                // eslint-disable-next-line react/no-array-index-key
+                <input value={widget.text} key={j} />
               ) : (
-                <img src={widget.src} alt="img" />
+                // eslint-disable-next-line react/no-array-index-key
+                <img src={widget.src} alt="img" key={j} />
               )
             )}
           </Cell>
