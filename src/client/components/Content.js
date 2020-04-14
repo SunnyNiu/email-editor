@@ -56,7 +56,7 @@ Content.propTypes = {
 };
 
 Content.defaultProps = {
-  text: undefined,
+  text: [],
   userId: undefined,
 };
 

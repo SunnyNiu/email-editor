@@ -6,7 +6,6 @@ import { ItemTypes } from '../util';
 
 const StyledSection = styled.div`
   height: 83px;
-  display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   background-color: #4285f4;

@@ -5,10 +5,14 @@ const config = require('../../../knexfile')[environment];
 const connection = knex(config);
 
 export function getContentText(userId, db = connection) {
-  return db('contents')
-    .where('userId', userId)
-    .select()
-    .first();
+  return (
+    db('contents')
+      .where('userId', userId)
+      .select()
+      .first()
+      // eslint-disable-next-line no-console
+      .catch(e => console.log(e))
+  );
 }
 
 export function saveContentText(userId, text, db = connection) {
