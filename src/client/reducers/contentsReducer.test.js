@@ -4,16 +4,21 @@ import { fetchText } from './types';
 describe('contentsReducer tests', () => {
   it('fetch text shows text', () => {
     const currentState = {
-      text: '',
+      text: [],
     };
 
-    const text = 'fetch text';
+    const text =
+      '[' +
+      '{"id":"section_1","icon":"section_1_image.jpg"}' +
+      ',' +
+      '{"id":"section_2","icon":"section_2_image.jpg"}' +
+      ']';
     const action = {
       type: fetchText.FETCH_TEXT_SUCCEEDED,
       text,
     };
     const expected = {
-      text,
+      text: JSON.parse(text),
     };
     const actual = contentsReducer(currentState, action);
     expect(actual).toEqual(expected);
