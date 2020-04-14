@@ -9,20 +9,20 @@ import { fetchSections } from './types';
 
 describe('contents action tests', () => {
   it('add Text', () => {
-    const input = 'type input';
+    const section = 'type input';
     const expected = {
-      type: fetchSections.ADD_TEXT,
-      input,
+      type: fetchSections.ADD_DROP_SECTION,
+      section,
     };
 
-    const actual = addSectionCreator(input);
+    const actual = addSectionCreator(section);
     expect(actual).toEqual(expected);
   });
 
   it('send fetch text request', () => {
     const emailId = '100';
     const expected = {
-      type: fetchSections.FETCH_TEXT_REQUESTED,
+      type: fetchSections.FETCH_EMAIL_SUCCEEDED,
       emailId,
     };
 
@@ -34,7 +34,7 @@ describe('contents action tests', () => {
     const text = 'verify fetch text succeeded';
 
     const expected = {
-      type: fetchSections.FETCH_TEXT_SUCCEEDED,
+      type: fetchSections.FETCH_EMAIL_SUCCEEDED,
       text,
     };
 
@@ -46,7 +46,7 @@ describe('contents action tests', () => {
     const error = 'fetch text failed';
 
     const expected = {
-      type: fetchSections.FETCH_TEXT_FAILED,
+      type: fetchSections.FETCH_EMAIL_FAILED,
       error,
     };
 

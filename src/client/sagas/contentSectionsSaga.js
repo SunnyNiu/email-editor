@@ -5,27 +5,27 @@ import { fetchSections } from '../reducers/types';
 export function* fetchContentSections({ emailId }) {
   try {
     const { email } = yield call(getSections, emailId);
-    yield put({ type: fetchSections.FETCH_SECTIONS_SUCCEEDED, email });
+    yield put({ type: fetchSections.FETCH_EMAIL_SUCCEEDED, email });
   } catch (error) {
-    yield put({ type: fetchSections.FETCH_SECTIONS_FAILED, error });
+    yield put({ type: fetchSections.FETCH_EMAIL_FAILED, error });
   }
 }
 
 export function* contentSectionsSaga() {
-  yield takeEvery(fetchSections.FETCH_SECTIONS_REQUESTED, fetchContentSections);
+  yield takeEvery(fetchSections.FETCH_EMAIL_REQUESTED, fetchContentSections);
 }
 
 export function* saveContentSections({ emailId, dropSections }) {
   try {
     yield call(saveSections, emailId, dropSections);
-    yield put({ type: fetchSections.SAVE_SECTIONS_SUCCEEDED });
+    yield put({ type: fetchSections.SAVE_EMAIL_SUCCEEDED });
   } catch (error) {
-    yield put({ type: fetchSections.SAVE_SECTIONS_FAILED, error });
+    yield put({ type: fetchSections.SAVE_EMAIL_FAILED, error });
   }
 }
 
 export function* saveSectionsSaga() {
-  yield takeEvery(fetchSections.SAVE_SECTIONS_REQUESTED, saveContentSections);
+  yield takeEvery(fetchSections.SAVE_EMAIL_REQUESTED, saveContentSections);
 }
 
 export default function* textSaga() {

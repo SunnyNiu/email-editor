@@ -9,7 +9,7 @@ const Section = styled(Cell)`
   align-items: center;
 `;
 
-const DroppedSection = ({ section }) => (
+const Sections = ({ section }) => (
   <Section>
     {JSON.parse(section).rows.map((row, index) => (
       // eslint-disable-next-line react/no-array-index-key
@@ -33,13 +33,13 @@ const DroppedSection = ({ section }) => (
   </Section>
 );
 
-DroppedSection.propTypes = {
+Sections.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   section: PropTypes.string,
 };
 
-DroppedSection.defaultProps = {
+Sections.defaultProps = {
   section: '',
 };
 
-export default DroppedSection;
+export default Sections;

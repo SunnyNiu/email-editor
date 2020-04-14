@@ -9,7 +9,7 @@ import {
   fetchSectionsCreator,
 } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
-import DroppedSection from './DroppedSection';
+import Sections from './Sections';
 
 const Container = styled(Grid)`
   height: 300px;
@@ -32,7 +32,7 @@ const Content = props => {
     <Container columns={1} ref={drop}>
       {email.map((section, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <DroppedSection key={index} section={section} />
+        <Sections key={index} section={section} />
       ))}
     </Container>
   );

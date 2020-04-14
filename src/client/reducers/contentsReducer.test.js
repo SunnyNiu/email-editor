@@ -4,20 +4,20 @@ import { fetchSections } from './types';
 describe('contentsReducer tests', () => {
   it('fetch text shows text', () => {
     const currentState = {
-      text: [],
+      email: [],
     };
 
-    const text = [
+    const email = [
       { id: 'section_1', icon: 'section_1_image.jpg' },
 
       { id: 'section_2', icon: 'section_2_image.jpg' },
     ];
     const action = {
-      type: fetchSections.FETCH_TEXT_SUCCEEDED,
-      text,
+      type: fetchSections.FETCH_EMAIL_SUCCEEDED,
+      email,
     };
     const expected = {
-      text,
+      email,
     };
     const actual = contentsReducer(currentState, action);
     expect(actual).toEqual(expected);
@@ -25,13 +25,13 @@ describe('contentsReducer tests', () => {
 
   it('fetch text failed that should show error message', () => {
     const currentState = {
-      text: '',
+      email: '',
     };
 
     const error = 'Fetch text failed';
 
     const action = {
-      type: fetchSections.FETCH_TEXT_FAILED,
+      type: fetchSections.FETCH_EMAIL_FAILED,
       error,
     };
 

@@ -6,31 +6,31 @@ export const addSectionCreator = section => ({
 });
 
 export const fetchSectionsCreator = emailId => ({
-  type: fetchSections.FETCH_SECTIONS_REQUESTED,
+  type: fetchSections.FETCH_EMAIL_REQUESTED,
   emailId,
 });
 
 export const fetchSectionsSuccessCreator = email => ({
-  type: fetchSections.FETCH_SECTIONS_SUCCEEDED,
+  type: fetchSections.FETCH_EMAIL_SUCCEEDED,
   email,
 });
 
 export const fetchSectionsFailureCreator = error => ({
-  type: fetchSections.FETCH_SECTIONS_FAILED,
+  type: fetchSections.FETCH_EMAIL_FAILED,
   error,
 });
 
-export const saveSectionsCreator = (emailId, dropSections) => ({
-  type: fetchSections.SAVE_SECTIONS_REQUESTED,
+export const saveEmailCreator = (emailId, dropSections) => ({
+  type: fetchSections.SAVE_EMAIL_REQUESTED,
   emailId,
   dropSections,
 });
 
-export const saveSectionsSuccessCreator = () => ({
-  type: fetchSections.SAVE_SECTIONS_SUCCEEDED,
+export const saveEmailSuccessCreator = () => ({
+  type: fetchSections.SAVE_EMAIL_SUCCEEDED,
 });
 
-export const saveSectionsFailureCreator = error => ({
-  type: fetchSections.SAVE_SECTIONS_FAILED,
+export const saveEmailFailureCreator = error => ({
+  type: fetchSections.SAVE_EMAIL_FAILED,
   error,
 });

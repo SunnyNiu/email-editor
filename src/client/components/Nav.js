@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { saveSectionsCreator } from '../reducers/contentsActions';
+import { saveEmailCreator } from '../reducers/contentsActions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -41,14 +41,11 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ email, saveSections, emailId, disable }) => {
+const Nav = ({ email, saveEmail, emailId, disable }) => {
   return (
     <HeaderContainer>
       <Icon src="/assets/movie-icon.png" alt="logo" />
-      <SaveButton
-        onClick={() => saveSections(emailId, email)}
-        disabled={disable}
-      >
+      <SaveButton onClick={() => saveEmail(emailId, email)} disabled={disable}>
         save
       </SaveButton>
     </HeaderContainer>
@@ -65,13 +62,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  saveSections: (emailId, email) =>
-    dispatch(saveSectionsCreator(emailId, email)),
+  saveEmail: (emailId, email) => dispatch(saveEmailCreator(emailId, email)),
 });
 
 Nav.propTypes = {
   email: PropTypes.arrayOf(PropTypes.string),
-  saveSections: PropTypes.func.isRequired,
+  saveEmail: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
   emailId: PropTypes.string.isRequired,
 };

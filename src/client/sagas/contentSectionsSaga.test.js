@@ -15,7 +15,7 @@ describe('contentTextSaga', () => {
       emailId: '100',
       text: 'save text',
     })
-      .put({ type: fetchSections.SAVE_SECTIONS_SUCCEEDED })
+      .put({ type: fetchSections.SAVE_EMAIL_SUCCEEDED })
       .run();
   });
 
@@ -36,7 +36,7 @@ describe('contentTextSaga', () => {
     getSections.mockReturnValueOnce(Promise.resolve({ text }));
 
     return expectSaga(fetchContentSections, { emailId: '100' })
-      .put({ type: fetchSections.FETCH_SECTIONS_SUCCEEDED, text })
+      .put({ type: fetchSections.FETCH_EMAIL_SUCCEEDED, text })
       .run();
   });
 
@@ -45,7 +45,7 @@ describe('contentTextSaga', () => {
     getSections.mockReturnValueOnce(Promise.reject(error));
 
     return expectSaga(fetchContentSections, { emailId: '100' })
-      .put({ type: fetchSections.FETCH_SECTIONS_FAILED, error })
+      .put({ type: fetchSections.FETCH_EMAIL_FAILED, error })
       .run();
   });
 });
