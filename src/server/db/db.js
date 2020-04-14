@@ -27,6 +27,6 @@ export function saveContentText(userId, text, db = connection) {
           .where('userId', userId)
           .update({ text })
           // eslint-disable-next-line no-console
-          .catch(e => console.log('update db', e));
+          .catch(e => console.log(e));
   });
 }

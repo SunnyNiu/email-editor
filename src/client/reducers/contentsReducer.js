@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     case fetchText.FETCH_TEXT_SUCCEEDED:
       return {
         ...state,
-        text: action.text !== undefined ? JSON.parse(action.text) : [],
+        text: action.text !== undefined ? action.text : [],
       };
     case fetchText.FETCH_TEXT_FAILED:
       // eslint-disable-next-line no-console

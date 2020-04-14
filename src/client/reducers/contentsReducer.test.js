@@ -7,18 +7,17 @@ describe('contentsReducer tests', () => {
       text: [],
     };
 
-    const text =
-      '[' +
-      '{"id":"section_1","icon":"section_1_image.jpg"}' +
-      ',' +
-      '{"id":"section_2","icon":"section_2_image.jpg"}' +
-      ']';
+    const text = [
+      { id: 'section_1', icon: 'section_1_image.jpg' },
+
+      { id: 'section_2', icon: 'section_2_image.jpg' },
+    ];
     const action = {
       type: fetchText.FETCH_TEXT_SUCCEEDED,
       text,
     };
     const expected = {
-      text: JSON.parse(text),
+      text,
     };
     const actual = contentsReducer(currentState, action);
     expect(actual).toEqual(expected);
