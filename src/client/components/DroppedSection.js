@@ -20,7 +20,7 @@ const DroppedSection = ({ section }) => (
             {column.widgets.map((widget, j) =>
               widget.type === 'text' ? (
                 // eslint-disable-next-line react/no-array-index-key
-                <input value={widget.text} key={j} />
+                <input value={widget.text} key={j} readOnly />
               ) : (
                 // eslint-disable-next-line react/no-array-index-key
                 <img src={widget.src} alt="img" key={j} />
@@ -39,7 +39,7 @@ DroppedSection.propTypes = {
 };
 
 DroppedSection.defaultProps = {
-  section: undefined,
+  section: {},
 };
 
 export default DroppedSection;
