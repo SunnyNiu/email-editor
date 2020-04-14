@@ -41,12 +41,12 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ email, saveSections, userId, disable }) => {
+const Nav = ({ email, saveSections, emailId, disable }) => {
   return (
     <HeaderContainer>
       <Icon src="/assets/movie-icon.png" alt="logo" />
       <SaveButton
-        onClick={() => saveSections(userId, email)}
+        onClick={() => saveSections(emailId, email)}
         disabled={disable}
       >
         save
@@ -56,23 +56,24 @@ const Nav = ({ email, saveSections, userId, disable }) => {
 };
 
 const mapStateToProps = state => {
-  const userId = window.location.href.split('email=')[1];
+  const emailId = window.location.href.split('email=')[1];
   return {
     email: state.content.email,
     disable: state.ui.isEmailSaving,
-    userId,
+    emailId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  saveSections: (userId, email) => dispatch(saveSectionsCreator(userId, email)),
+  saveSections: (emailId, email) =>
+    dispatch(saveSectionsCreator(emailId, email)),
 });
 
 Nav.propTypes = {
   email: PropTypes.arrayOf(PropTypes.string),
   saveSections: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
-  userId: PropTypes.string.isRequired,
+  emailId: PropTypes.string.isRequired,
 };
 
 Nav.defaultProps = {

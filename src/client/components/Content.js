@@ -18,9 +18,9 @@ const Container = styled(Grid)`
   align-items: center;
 `;
 const Content = props => {
-  const { fetchSections, email, addSection, userId } = props;
+  const { fetchSections, email, addSection, emailId } = props;
   useEffect(() => {
-    fetchSections(userId);
+    fetchSections(emailId);
   }, []);
 
   const [, drop] = useDrop({
@@ -39,28 +39,28 @@ const Content = props => {
 };
 
 const mapStateToProps = state => {
-  const userId = window.location.href.split('email=')[1];
+  const emailId = window.location.href.split('email=')[1];
   return {
     email: state.content.email,
-    userId,
+    emailId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   addSection: section => dispatch(addSectionCreator(section)),
-  fetchSections: userId => dispatch(fetchSectionsCreator(userId)),
+  fetchSections: emailId => dispatch(fetchSectionsCreator(emailId)),
 });
 
 Content.propTypes = {
   addSection: PropTypes.func.isRequired,
   fetchSections: PropTypes.func.isRequired,
   email: PropTypes.arrayOf(PropTypes.string),
-  userId: PropTypes.string,
+  emailId: PropTypes.string,
 };
 
 Content.defaultProps = {
   email: [],
-  userId: undefined,
+  emailId: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

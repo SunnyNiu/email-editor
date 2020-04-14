@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export function saveSections(userId, dropSections) {
+export function saveSections(emailId, dropSections) {
   return (
     axios
-      .put(`/api/email/${userId}`, {
+      .put(`/api/email/${emailId}`, {
         email: dropSections,
       })
       .then(response => {
@@ -14,10 +14,10 @@ export function saveSections(userId, dropSections) {
   );
 }
 
-export function getSections(userId) {
+export function getSections(emailId) {
   return (
     axios
-      .get(`/api/email/${userId}`)
+      .get(`/api/email/${emailId}`)
       .then(response => {
         return response.data;
       })

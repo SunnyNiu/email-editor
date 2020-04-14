@@ -11,7 +11,10 @@ jest.mock('../api/contentText');
 describe('contentTextSaga', () => {
   it('put a SAVE_SECTIONS_SUCCEEDED action when succeeded', () => {
     saveSections.mockReturnValueOnce(Promise.resolve());
-    return expectSaga(saveContentSections, { userId: '100', text: 'save text' })
+    return expectSaga(saveContentSections, {
+      emailId: '100',
+      text: 'save text',
+    })
       .put({ type: fetchSections.SAVE_SECTIONS_SUCCEEDED })
       .run();
   });
@@ -20,16 +23,19 @@ describe('contentTextSaga', () => {
     const error = 'save text failed';
     saveSections.mockReturnValueOnce(Promise.reject(error));
 
-    return expectSaga(saveContentSections, { userId: '100', text: 'save text' })
+    return expectSaga(saveContentSections, {
+      emailId: '100',
+      text: 'save text',
+    })
       .put({ type: fetchSections.SAVE_SECTIONS_FAILED, error })
       .run();
   });
 
   it('put a GET_SECTIONS_SUCCEEDED action when succeeded', () => {
-    const text = { id: 1, userId: '100', text: 'text 100' };
+    const text = { id: 1, emailId: '100', text: 'text 100' };
     getSections.mockReturnValueOnce(Promise.resolve({ text }));
 
-    return expectSaga(fetchContentSections, { userId: '100' })
+    return expectSaga(fetchContentSections, { emailId: '100' })
       .put({ type: fetchSections.FETCH_SECTIONS_SUCCEEDED, text })
       .run();
   });
@@ -38,7 +44,7 @@ describe('contentTextSaga', () => {
     const error = 'get text failed';
     getSections.mockReturnValueOnce(Promise.reject(error));
 
-    return expectSaga(fetchContentSections, { userId: '100' })
+    return expectSaga(fetchContentSections, { emailId: '100' })
       .put({ type: fetchSections.FETCH_SECTIONS_FAILED, error })
       .run();
   });

@@ -26,18 +26,18 @@ route.get('/sections', (req, res) => {
   });
 });
 
-route.put('/email/:userId', (req, res) => {
-  const { userId } = req.params;
+route.put('/email/:emailId', (req, res) => {
+  const { emailId } = req.params;
   const { email } = req.body;
-  saveContentSections(userId, JSON.stringify(email))
+  saveContentSections(emailId, JSON.stringify(email))
     .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });
 
-route.get('/email/:userId', (req, res) => {
-  const { userId } = req.params;
+route.get('/email/:emailId', (req, res) => {
+  const { emailId } = req.params;
 
-  getContentSections(userId)
+  getContentSections(emailId)
     .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });

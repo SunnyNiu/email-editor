@@ -8,7 +8,7 @@ exports.seed = knex => {
         {
           id: 1,
           email: JSON.stringify([]),
-          userId: '1',
+          emailId: '1',
         },
       ]);
     });

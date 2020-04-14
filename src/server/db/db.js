@@ -4,10 +4,10 @@ const config = require('../../../knexfile')[environment];
 
 const connection = knex(config);
 
-export function getContentSections(userId, db = connection) {
+export function getContentSections(emailId, db = connection) {
   return (
     db('contents')
-      .where('userId', userId)
+      .where('emailId', emailId)
       .select()
       .first()
       // eslint-disable-next-line no-console
@@ -15,16 +15,16 @@ export function getContentSections(userId, db = connection) {
   );
 }
 
-export function saveContentSections(userId, email, db = connection) {
-  return getContentSections(userId).then(exist => {
+export function saveContentSections(emailId, email, db = connection) {
+  return getContentSections(emailId).then(exist => {
     // eslint-disable-next-line no-unused-expressions
     exist === undefined
       ? db('contents')
-          .insert({ userId, email })
+          .insert({ emailId, email })
           // eslint-disable-next-line no-console
           .catch(e => console.log(e))
       : db('contents')
-          .where('userId', userId)
+          .where('emailId', emailId)
           .update({ email })
           // eslint-disable-next-line no-console
           .catch(e => console.log(e));

@@ -10,7 +10,7 @@ describe('appReducer tests', () => {
     const action = {
       type: fetchSections.SAVE_TEXT_REQUESTED,
       text: 'text',
-      userId: '100',
+      emailId: '100',
     };
     const expected = {
       isEmailSaving: true,

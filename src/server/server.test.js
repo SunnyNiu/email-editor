@@ -1,7 +1,7 @@
 import request from 'supertest';
 import server from './server';
 import { readdir, readFile } from './util';
-import { getContentText, saveContentText } from './db/db';
+import { getContentSections, saveContentSections } from './db/db';
 
 jest.mock('./util');
 jest.mock('./db/db');
@@ -27,9 +27,9 @@ describe('get sections', () => {
       });
   });
 
-  it('GET /email/:userId', () => {
-    const data = { id: 1, userId: '100', text: 'verify get text' };
-    getContentText.mockReturnValueOnce(Promise.resolve(data));
+  it('GET /email/:emailId', () => {
+    const data = { id: 1, emailId: '100', text: 'verify get text' };
+    getContentSections.mockReturnValueOnce(Promise.resolve(data));
     const expected = data;
     return request(server)
       .get('/api/email/100')
@@ -38,13 +38,13 @@ describe('get sections', () => {
       });
   });
 
-  it('put /email/:userId', () => {
+  it('put /email/:emailId', () => {
     const data = {
       id: 1,
-      userId: '100',
+      emailId: '100',
       text: 'verify save, and then get text',
     };
-    saveContentText.mockReturnValueOnce(Promise.resolve(data));
+    saveContentSections.mockReturnValueOnce(Promise.resolve(data));
 
     const expected = data;
     return request(server)

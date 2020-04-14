@@ -5,9 +5,9 @@ export const addSectionCreator = section => ({
   section,
 });
 
-export const fetchSectionsCreator = userId => ({
+export const fetchSectionsCreator = emailId => ({
   type: fetchSections.FETCH_SECTIONS_REQUESTED,
-  userId,
+  emailId,
 });
 
 export const fetchSectionsSuccessCreator = email => ({
@@ -20,9 +20,9 @@ export const fetchSectionsFailureCreator = error => ({
   error,
 });
 
-export const saveSectionsCreator = (userId, dropSections) => ({
+export const saveSectionsCreator = (emailId, dropSections) => ({
   type: fetchSections.SAVE_SECTIONS_REQUESTED,
-  userId,
+  emailId,
   dropSections,
 });
 

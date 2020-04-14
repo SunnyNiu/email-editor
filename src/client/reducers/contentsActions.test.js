@@ -1,8 +1,8 @@
 import {
   addSectionCreator,
-  fetchTextCreator,
-  fetchTextSuccessCreator,
-  fetchTextFailureCreator,
+  fetchSectionsCreator,
+  fetchSectionsSuccessCreator,
+  fetchSectionsFailureCreator,
 } from './contentsActions';
 
 import { fetchSections } from './types';
@@ -20,13 +20,13 @@ describe('contents action tests', () => {
   });
 
   it('send fetch text request', () => {
-    const userId = '100';
+    const emailId = '100';
     const expected = {
       type: fetchSections.FETCH_TEXT_REQUESTED,
-      userId,
+      emailId,
     };
 
-    const actual = fetchTextCreator(userId);
+    const actual = fetchSectionsCreator(emailId);
     expect(actual).toEqual(expected);
   });
 
@@ -38,7 +38,7 @@ describe('contents action tests', () => {
       text,
     };
 
-    const actual = fetchTextSuccessCreator(text);
+    const actual = fetchSectionsSuccessCreator(text);
     expect(actual).toEqual(expected);
   });
 
@@ -50,7 +50,7 @@ describe('contents action tests', () => {
       error,
     };
 
-    const actual = fetchTextFailureCreator(error);
+    const actual = fetchSectionsFailureCreator(error);
     expect(actual).toEqual(expected);
   });
 });
