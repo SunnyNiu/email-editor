@@ -16,27 +16,12 @@ const Sections = ({ section }) => (
       // eslint-disable-next-line react/no-array-index-key
       <Grid columns={row.width} key={index}>
         <Row row={row} />
-        {/* {row.columns.map((column, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Cell width={Number(column.width)} key={i}>
-            {column.widgets.map((widget, j) =>
-              widget.type === 'text' ? (
-                // eslint-disable-next-line react/no-array-index-key
-                <input value={widget.text} key={j} readOnly />
-              ) : (
-                // eslint-disable-next-line react/no-array-index-key
-                <img src={widget.src} alt="img" key={j} />
-              )
-            )}
-          </Cell>
-        ))} */}
       </Grid>
     ))}
   </Section>
 );
 
 Sections.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   section: PropTypes.string,
 };
 
