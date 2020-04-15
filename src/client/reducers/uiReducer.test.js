@@ -8,8 +8,8 @@ describe('appReducer tests', () => {
     };
 
     const action = {
-      type: fetchSections.SAVE_TEXT_REQUESTED,
-      text: 'text',
+      type: fetchSections.SAVE_EMAIL_REQUESTED,
+      email: [{ id: 1, image: 'x.jpg' }],
       emailId: '100',
     };
     const expected = {
@@ -19,13 +19,13 @@ describe('appReducer tests', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('the button should be enable when save text successfully', () => {
+  it('the button should be enable when save email successfully', () => {
     const currentState = {
       isEmailSaving: false,
     };
 
     const action = {
-      type: fetchSections.SAVE_TEXT_SUCCEEDED,
+      type: fetchSections.SAVE_EMAIL_SUCCEEDED,
     };
     const expected = {
       isEmailSaving: false,
@@ -39,10 +39,10 @@ describe('appReducer tests', () => {
       isEmailSaving: false,
     };
 
-    const error = 'save text failed';
+    const error = 'save email failed';
 
     const action = {
-      type: fetchSections.SAVE_TEXT_FAILED,
+      type: fetchSections.SAVE_EMAIL_FAILED,
       error,
     };
 

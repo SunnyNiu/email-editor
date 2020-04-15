@@ -28,7 +28,11 @@ describe('get sections', () => {
   });
 
   it('GET /email/:emailId', () => {
-    const data = { id: 1, emailId: '100', text: 'verify get text' };
+    const data = {
+      id: 1,
+      emailId: '100',
+      email: [{ id: 1, image: 'hello.jpg' }],
+    };
     getContentSections.mockReturnValueOnce(Promise.resolve(data));
     const expected = data;
     return request(server)
@@ -42,7 +46,7 @@ describe('get sections', () => {
     const data = {
       id: 1,
       emailId: '100',
-      text: 'verify save, and then get text',
+      email: [{ id: 1, image: 'hello.jpg' }],
     };
     saveContentSections.mockReturnValueOnce(Promise.resolve(data));
 

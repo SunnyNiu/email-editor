@@ -3,12 +3,12 @@ import { saveSections, getSections } from './contentSection';
 
 jest.mock('axios');
 
-describe('get text', () => {
+describe('get email', () => {
   it('GET /email/:emailId', () => {
     const data = {
       id: 1,
       emailId: '100',
-      text: 'verify contentText',
+      email: 'verify content sections',
     };
     axios.get.mockReturnValueOnce(Promise.resolve(data));
 
@@ -26,7 +26,7 @@ describe('get text', () => {
     const data = {
       id: 1,
       emailId: '100',
-      text: 'verify contentText',
+      email: 'verify content sections',
     };
     axios.put.mockReturnValueOnce(Promise.resolve(data));
 
@@ -34,7 +34,7 @@ describe('get text', () => {
   });
 
   it('PUT /email/:emailId fail', () => {
-    const errorMessage = 'save text error';
+    const errorMessage = 'save email error';
     axios.put.mockReturnValueOnce(Promise.reject(errorMessage));
 
     expect(saveSections('100')).rejects.toEqual(errorMessage);

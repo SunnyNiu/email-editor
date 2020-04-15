@@ -1,6 +1,5 @@
 import { fetchFile } from './types';
 
-/* eslint-disable no-case-declarations */
 const initialState = {
   sections: {},
 };

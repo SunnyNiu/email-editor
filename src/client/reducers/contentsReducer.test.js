@@ -2,7 +2,7 @@ import contentsReducer from './contentsReducer';
 import { fetchSections } from './types';
 
 describe('contentsReducer tests', () => {
-  it('fetch text shows text', () => {
+  it('fetch email shows email contents', () => {
     const currentState = {
       email: [],
     };
@@ -23,12 +23,12 @@ describe('contentsReducer tests', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('fetch text failed that should show error message', () => {
+  it('fetch email failed that should show error message', () => {
     const currentState = {
       email: '',
     };
 
-    const error = 'Fetch text failed';
+    const error = 'Fetch email failed';
 
     const action = {
       type: fetchSections.FETCH_EMAIL_FAILED,

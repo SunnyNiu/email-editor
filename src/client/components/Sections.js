@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import PropTypes from 'prop-types';
+import Row from './Row';
 
 const Section = styled(Cell)`
   justify-content: center;
@@ -14,7 +15,8 @@ const Sections = ({ section }) => (
     {JSON.parse(section).rows.map((row, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <Grid columns={row.width} key={index}>
-        {row.columns.map((column, i) => (
+        <Row row={row} />
+        {/* {row.columns.map((column, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <Cell width={Number(column.width)} key={i}>
             {column.widgets.map((widget, j) =>
@@ -27,7 +29,7 @@ const Sections = ({ section }) => (
               )
             )}
           </Cell>
-        ))}
+        ))} */}
       </Grid>
     ))}
   </Section>

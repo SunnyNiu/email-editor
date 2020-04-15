@@ -6,19 +6,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case fetchSections.SAVE_TEXT_REQUESTED:
+    case fetchSections.SAVE_EMAIL_REQUESTED:
       return {
         ...state,
         isEmailSaving: true,
       };
-    case fetchSections.SAVE_TEXT_FAILED:
+    case fetchSections.SAVE_EMAIL_FAILED:
       // eslint-disable-next-line no-console
       console.error(action.error);
       return {
         ...state,
         isEmailSaving: false,
       };
-    case fetchSections.SAVE_TEXT_SUCCEEDED:
+    case fetchSections.SAVE_Email_SUCCEEDED:
       return {
         ...state,
         isEmailSaving: false,
