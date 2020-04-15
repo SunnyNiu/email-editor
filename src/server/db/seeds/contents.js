@@ -5,8 +5,11 @@ exports.seed = knex => {
     .then(() => {
       // Inserts seed entries
       return knex('contents').insert([
-        { id: 1, text: 'verify text could shown', userId: '100' },
-        { id: 2, text: 'verify db works!', userId: '101' },
+        {
+          id: 1,
+          email: JSON.stringify([]),
+          emailId: '1',
+        },
       ]);
     });
 };

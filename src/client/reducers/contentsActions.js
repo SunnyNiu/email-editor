@@ -1,36 +1,36 @@
-import { fetchText } from './types';
+import { fetchEmail } from './types';
 
-export const setTextCreator = input => ({
-  type: fetchText.ADD_TEXT,
-  input,
+export const addSectionCreator = section => ({
+  type: fetchEmail.ADD_SECTION,
+  section,
 });
 
-export const fetchTextCreator = userId => ({
-  type: fetchText.FETCH_TEXT_REQUESTED,
-  userId,
+export const fetchEmailCreator = emailId => ({
+  type: fetchEmail.FETCH_EMAIL_REQUESTED,
+  emailId,
 });
 
-export const fetchTextSuccessCreator = text => ({
-  type: fetchText.FETCH_TEXT_SUCCEEDED,
-  text,
+export const fetchEmailSuccessCreator = email => ({
+  type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
+  email,
 });
 
-export const fetchTextFailureCreator = error => ({
-  type: fetchText.FETCH_TEXT_FAILED,
+export const fetchEmailFailureCreator = error => ({
+  type: fetchEmail.FETCH_EMAIL_FAILED,
   error,
 });
 
-export const saveTextCreator = (userId, text) => ({
-  type: fetchText.SAVE_TEXT_REQUESTED,
-  userId,
-  text,
+export const saveEmailCreator = (emailId, email) => ({
+  type: fetchEmail.SAVE_EMAIL_REQUESTED,
+  emailId,
+  email,
 });
 
-export const saveTextSuccessCreator = () => ({
-  type: fetchText.SAVE_TEXT_SUCCEEDED,
+export const saveEmailSuccessCreator = () => ({
+  type: fetchEmail.SAVE_EMAIL_SUCCEEDED,
 });
 
-export const saveTextFailureCreator = error => ({
-  type: fetchText.SAVE_TEXT_FAILED,
+export const saveEmailFailureCreator = error => ({
+  type: fetchEmail.SAVE_EMAIL_FAILED,
   error,
 });

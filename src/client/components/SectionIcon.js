@@ -6,7 +6,6 @@ import { ItemTypes } from '../util';
 
 const StyledSection = styled.div`
   height: 83px;
-  display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   background-color: #4285f4;
@@ -18,7 +17,7 @@ const StyledSection = styled.div`
   }
 `;
 
-const Section = ({ section }) => {
+const SectionIcon = ({ section }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.XML,
@@ -31,9 +30,9 @@ const Section = ({ section }) => {
   return <StyledSection opacity={isDragging ? '0.5' : '1'} ref={drag} />;
 };
 
-Section.propTypes = {
+SectionIcon.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   section: PropTypes.object.isRequired,
 };
 
-export default Section;
+export default SectionIcon;

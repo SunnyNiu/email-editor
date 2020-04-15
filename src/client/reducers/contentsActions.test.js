@@ -1,56 +1,56 @@
 import {
-  setTextCreator,
-  fetchTextCreator,
-  fetchTextSuccessCreator,
-  fetchTextFailureCreator,
+  addSectionCreator,
+  fetchEmailCreator,
+  fetchEmailSuccessCreator,
+  fetchEmailFailureCreator,
 } from './contentsActions';
 
-import { fetchText } from './types';
+import { fetchEmail } from './types';
 
 describe('contents action tests', () => {
-  it('add Text', () => {
-    const input = 'type input';
+  it('add section', () => {
+    const section = [{ id: 1, image: 'xx.jpg' }];
     const expected = {
-      type: fetchText.ADD_TEXT,
-      input,
+      type: fetchEmail.ADD_SECTION,
+      section,
     };
 
-    const actual = setTextCreator(input);
+    const actual = addSectionCreator(section);
     expect(actual).toEqual(expected);
   });
 
-  it('send fetch text request', () => {
-    const userId = '100';
+  it('send fetch sections request', () => {
+    const emailId = '100';
     const expected = {
-      type: fetchText.FETCH_TEXT_REQUESTED,
-      userId,
+      type: fetchEmail.FETCH_EMAIL_REQUESTED,
+      emailId,
     };
 
-    const actual = fetchTextCreator(userId);
+    const actual = fetchEmailCreator(emailId);
     expect(actual).toEqual(expected);
   });
 
-  it('fetch text and return text', () => {
-    const text = 'verify fetch text succeeded';
+  it('fetch email content and return email', () => {
+    const email = [{ id: 1, image: 'xx.jpg' }];
 
     const expected = {
-      type: fetchText.FETCH_TEXT_SUCCEEDED,
-      text,
+      type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
+      email,
     };
 
-    const actual = fetchTextSuccessCreator(text);
+    const actual = fetchEmailSuccessCreator(email);
     expect(actual).toEqual(expected);
   });
 
-  it('return error when fetch text failed', () => {
-    const error = 'fetch text failed';
+  it('return error when fetch email failed', () => {
+    const error = 'fetch email failed';
 
     const expected = {
-      type: fetchText.FETCH_TEXT_FAILED,
+      type: fetchEmail.FETCH_EMAIL_FAILED,
       error,
     };
 
-    const actual = fetchTextFailureCreator(error);
+    const actual = fetchEmailFailureCreator(error);
     expect(actual).toEqual(expected);
   });
 });

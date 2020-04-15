@@ -1,33 +1,37 @@
 import contentsReducer from './contentsReducer';
-import { fetchText } from './types';
+import { fetchEmail } from './types';
 
 describe('contentsReducer tests', () => {
-  it('fetch text shows text', () => {
+  it('fetch email shows email contents', () => {
     const currentState = {
-      text: '',
+      email: [],
     };
 
-    const text = 'fetch text';
+    const email = [
+      { id: 'section_1', icon: 'section_1_image.jpg' },
+
+      { id: 'section_2', icon: 'section_2_image.jpg' },
+    ];
     const action = {
-      type: fetchText.FETCH_TEXT_SUCCEEDED,
-      text,
+      type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
+      email,
     };
     const expected = {
-      text,
+      email,
     };
     const actual = contentsReducer(currentState, action);
     expect(actual).toEqual(expected);
   });
 
-  it('fetch text failed that should show error message', () => {
+  it('fetch email failed that should show error message', () => {
     const currentState = {
-      text: '',
+      email: '',
     };
 
-    const error = 'Fetch text failed';
+    const error = 'Fetch email failed';
 
     const action = {
-      type: fetchText.FETCH_TEXT_FAILED,
+      type: fetchEmail.FETCH_EMAIL_FAILED,
       error,
     };
 

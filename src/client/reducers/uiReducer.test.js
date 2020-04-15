@@ -1,5 +1,5 @@
 import uiReducer from './uiReducer';
-import { fetchText } from './types';
+import { fetchEmail } from './types';
 
 describe('appReducer tests', () => {
   it('the button should be disable when sending save request', () => {
@@ -8,9 +8,9 @@ describe('appReducer tests', () => {
     };
 
     const action = {
-      type: fetchText.SAVE_TEXT_REQUESTED,
-      text: 'text',
-      userId: '100',
+      type: fetchEmail.SAVE_EMAIL_REQUESTED,
+      email: [{ id: 1, image: 'x.jpg' }],
+      emailId: '100',
     };
     const expected = {
       isEmailSaving: true,
@@ -19,13 +19,13 @@ describe('appReducer tests', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('the button should be enable when save text successfully', () => {
+  it('the button should be enable when save email successfully', () => {
     const currentState = {
       isEmailSaving: false,
     };
 
     const action = {
-      type: fetchText.SAVE_TEXT_SUCCEEDED,
+      type: fetchEmail.SAVE_EMAIL_SUCCEEDED,
     };
     const expected = {
       isEmailSaving: false,
@@ -39,10 +39,10 @@ describe('appReducer tests', () => {
       isEmailSaving: false,
     };
 
-    const error = 'save text failed';
+    const error = 'save email failed';
 
     const action = {
-      type: fetchText.SAVE_TEXT_FAILED,
+      type: fetchEmail.SAVE_EMAIL_FAILED,
       error,
     };
 

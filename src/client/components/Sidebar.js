@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchSectionCreator } from '../reducers/actions';
-import Section from './Section';
+import SectionIcon from './SectionIcon';
 
 const Sidebar = ({ fetchSections, sections }) => {
   useEffect(() => {
@@ -12,7 +12,7 @@ const Sidebar = ({ fetchSections, sections }) => {
   return (
     <div>
       {Object.entries(sections).map(([key, section]) => (
-        <Section key={key} section={section} />
+        <SectionIcon key={key} section={section} />
       ))}
     </div>
   );

@@ -1,33 +1,33 @@
-import { fetchText } from './types';
-/* eslint-disable no-case-declarations */
+import { fetchEmail } from './types';
+
 const initialState = {
-  text: 'default',
+  email: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case fetchText.ADD_TEXT:
+    case fetchEmail.ADD_SECTION:
       return {
         ...state,
-        text: action.input,
+        email: [...state.email, action.section],
       };
-    case fetchText.FETCH_TEXT_SUCCEEDED:
+    case fetchEmail.FETCH_EMAIL_SUCCEEDED:
       return {
         ...state,
-        text: action.text,
+        email: action.email !== undefined ? action.email : [],
       };
-    case fetchText.FETCH_TEXT_FAILED:
+    case fetchEmail.FETCH_EMAIL_FAILED:
       // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
-    case fetchText.SAVE_TEXT_REQUESTED:
+    case fetchEmail.SAVE_EMAIL_REQUESTED:
       return {
         ...state,
-        text: action.text,
+        email: action.email,
       };
-    case fetchText.SAVE_TEXT_SUCCEEDED:
+    case fetchEmail.SAVE_EMAIL_SUCCEEDED:
       return state;
-    case fetchText.SAVE_TEXT_FAILED:
+    case fetchEmail.SAVE_EMAIL_FAILED:
       // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
