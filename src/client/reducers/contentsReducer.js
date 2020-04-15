@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case fetchEmail.SAVE_EMAIL_REQUESTED:
       return {
         ...state,
-        email: action.dropSections,
+        email: action.email,
       };
     case fetchEmail.SAVE_EMAIL_SUCCEEDED:
       return state;

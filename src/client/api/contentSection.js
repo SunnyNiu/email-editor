@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-export function saveEmail(emailId, dropSections) {
+export function saveEmail(emailId, email) {
   return (
     axios
       .put(`/api/email/${emailId}`, {
-        email: dropSections,
+        email,
       })
       .then(response => {
         return response.data;

@@ -20,10 +20,10 @@ export const fetchEmailFailureCreator = error => ({
   error,
 });
 
-export const saveEmailCreator = (emailId, dropSections) => ({
+export const saveEmailCreator = (emailId, email) => ({
   type: fetchEmail.SAVE_EMAIL_REQUESTED,
   emailId,
-  dropSections,
+  email,
 });
 
 export const saveEmailSuccessCreator = () => ({

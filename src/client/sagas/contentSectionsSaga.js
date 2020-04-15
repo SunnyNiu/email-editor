@@ -18,9 +18,9 @@ export function* contentSectionsSaga() {
   yield takeEvery(fetchEmail.FETCH_EMAIL_REQUESTED, fetchContentSections);
 }
 
-export function* saveContentSections({ emailId, dropSections }) {
+export function* saveContentSections({ emailId, email }) {
   try {
-    yield call(saveEmail, emailId, dropSections);
+    yield call(saveEmail, emailId, email);
     yield put({ type: fetchEmail.SAVE_EMAIL_SUCCEEDED });
   } catch (error) {
     yield put({ type: fetchEmail.SAVE_EMAIL_FAILED, error });
