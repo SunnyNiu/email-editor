@@ -3,14 +3,14 @@ import {
   fetchContentSections,
   saveContentSections,
 } from './contentSectionsSaga';
-import { getSections, saveSections } from '../api/contentSection';
-import { fetchSections } from '../reducers/types';
+import { getEmail, saveEmail } from '../api/contentSection';
+import { fetchEmail } from '../reducers/types';
 
 jest.mock('../api/contentSection');
 
 describe('contentTextSaga', () => {
   it('put a SAVE_EMAIL_SUCCEEDED action when succeeded', () => {
-    saveSections.mockReturnValueOnce(Promise.resolve());
+    saveEmail.mockReturnValueOnce(Promise.resolve());
     return expectSaga(saveContentSections, {
       emailId: '100',
       email: [
@@ -18,13 +18,13 @@ describe('contentTextSaga', () => {
         { id: 2, text: 'world!' },
       ],
     })
-      .put({ type: fetchSections.SAVE_EMAIL_SUCCEEDED })
+      .put({ type: fetchEmail.SAVE_EMAIL_SUCCEEDED })
       .run();
   });
 
   it('put a SAVE_EMAIL_FAILED action on error', () => {
     const error = 'save email failed';
-    saveSections.mockReturnValueOnce(Promise.reject(error));
+    saveEmail.mockReturnValueOnce(Promise.reject(error));
 
     return expectSaga(saveContentSections, {
       emailId: '100',
@@ -33,7 +33,7 @@ describe('contentTextSaga', () => {
         { id: 2, text: 'world!' },
       ],
     })
-      .put({ type: fetchSections.SAVE_EMAIL_FAILED, error })
+      .put({ type: fetchEmail.SAVE_EMAIL_FAILED, error })
       .run();
   });
 
@@ -46,21 +46,24 @@ describe('contentTextSaga', () => {
         { id: 2, text: 'world!' },
       ],
     };
-    const { email } = getSections.mockReturnValueOnce(
+    const { email } = getEmail.mockReturnValueOnce(
       Promise.resolve({ section })
     );
 
     return expectSaga(fetchContentSections, { emailId: '100' })
-      .put({ type: fetchSections.FETCH_EMAIL_SUCCEEDED, email })
+      .put({
+        type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
+        email: email === undefined ? [] : email,
+      })
       .run();
   });
 
   it('put a FETCH_EMAIL_FAILED action on error', () => {
     const error = 'get text failed';
-    getSections.mockReturnValueOnce(Promise.reject(error));
+    getEmail.mockReturnValueOnce(Promise.reject(error));
 
     return expectSaga(fetchContentSections, { emailId: '100' })
-      .put({ type: fetchSections.FETCH_EMAIL_FAILED, error })
+      .put({ type: fetchEmail.FETCH_EMAIL_FAILED, error })
       .run();
   });
 });

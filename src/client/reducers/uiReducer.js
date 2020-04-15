@@ -1,4 +1,4 @@
-import { fetchSections } from './types';
+import { fetchEmail } from './types';
 
 const initialState = {
   isEmailSaving: false,
@@ -6,19 +6,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case fetchSections.SAVE_EMAIL_REQUESTED:
+    case fetchEmail.SAVE_EMAIL_REQUESTED:
       return {
         ...state,
         isEmailSaving: true,
       };
-    case fetchSections.SAVE_EMAIL_FAILED:
+    case fetchEmail.SAVE_EMAIL_FAILED:
       // eslint-disable-next-line no-console
       console.error(action.error);
       return {
         ...state,
         isEmailSaving: false,
       };
-    case fetchSections.SAVE_Email_SUCCEEDED:
+    case fetchEmail.SAVE_Email_SUCCEEDED:
       return {
         ...state,
         isEmailSaving: false,

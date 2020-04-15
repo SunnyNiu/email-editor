@@ -4,7 +4,7 @@ const config = require('../../../knexfile')[environment];
 
 const connection = knex(config);
 
-export function getContentSections(emailId, db = connection) {
+export function getEmail(emailId, db = connection) {
   return (
     db('contents')
       .where('emailId', emailId)
@@ -15,8 +15,8 @@ export function getContentSections(emailId, db = connection) {
   );
 }
 
-export function saveContentSections(emailId, email, db = connection) {
-  return getContentSections(emailId).then(exist => {
+export function saveEmail(emailId, email, db = connection) {
+  return getEmail(emailId).then(exist => {
     // eslint-disable-next-line no-unused-expressions
     exist === undefined
       ? db('contents')

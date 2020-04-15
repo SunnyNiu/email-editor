@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Cell } from 'styled-css-grid';
+import { Cell } from 'styled-css-grid';
 import PropTypes from 'prop-types';
 import Row from './Row';
 
@@ -12,21 +13,17 @@ const Section = styled(Cell)`
 
 const Sections = ({ section }) => (
   <Section>
-    {JSON.parse(section).rows.map((row, index) => (
+    {section.rows.map((row, index) => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       // eslint-disable-next-line react/no-array-index-key
-      <Grid columns={row.width} key={index}>
-        <Row row={row} />
-      </Grid>
+      <Row {...row} key={index} />
     ))}
   </Section>
 );
 
 Sections.propTypes = {
-  section: PropTypes.string,
-};
-
-Sections.defaultProps = {
-  section: '',
+  // eslint-disable-next-line react/forbid-prop-types
+  section: PropTypes.object.isRequired,
 };
 
 export default Sections;

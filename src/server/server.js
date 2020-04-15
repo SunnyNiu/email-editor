@@ -2,7 +2,7 @@ import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import { readdir, readFile } from './util';
-import { saveContentSections, getContentSections } from './db/db';
+import { saveEmail, getEmail } from './db/db';
 
 const server = express();
 
@@ -29,7 +29,7 @@ route.get('/sections', (req, res) => {
 route.put('/email/:emailId', (req, res) => {
   const { emailId } = req.params;
   const { email } = req.body;
-  saveContentSections(emailId, JSON.stringify(email))
+  saveEmail(emailId, JSON.stringify(email))
     .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });
@@ -37,7 +37,7 @@ route.put('/email/:emailId', (req, res) => {
 route.get('/email/:emailId', (req, res) => {
   const { emailId } = req.params;
 
-  getContentSections(emailId)
+  getEmail(emailId)
     .then(body => res.json(body))
     .catch(error => res.status(500).send(`${error.message}`));
 });

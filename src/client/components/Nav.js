@@ -66,13 +66,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Nav.propTypes = {
-  email: PropTypes.arrayOf(PropTypes.string),
+  email: PropTypes.arrayOf(PropTypes.object),
   saveEmail: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
   emailId: PropTypes.string.isRequired,
 };
 
 Nav.defaultProps = {
-  email: undefined,
+  email: [],
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

@@ -1,5 +1,5 @@
 import uiReducer from './uiReducer';
-import { fetchSections } from './types';
+import { fetchEmail } from './types';
 
 describe('appReducer tests', () => {
   it('the button should be disable when sending save request', () => {
@@ -8,7 +8,7 @@ describe('appReducer tests', () => {
     };
 
     const action = {
-      type: fetchSections.SAVE_EMAIL_REQUESTED,
+      type: fetchEmail.SAVE_EMAIL_REQUESTED,
       email: [{ id: 1, image: 'x.jpg' }],
       emailId: '100',
     };
@@ -25,7 +25,7 @@ describe('appReducer tests', () => {
     };
 
     const action = {
-      type: fetchSections.SAVE_EMAIL_SUCCEEDED,
+      type: fetchEmail.SAVE_EMAIL_SUCCEEDED,
     };
     const expected = {
       isEmailSaving: false,
@@ -42,7 +42,7 @@ describe('appReducer tests', () => {
     const error = 'save email failed';
 
     const action = {
-      type: fetchSections.SAVE_EMAIL_FAILED,
+      type: fetchEmail.SAVE_EMAIL_FAILED,
       error,
     };
 

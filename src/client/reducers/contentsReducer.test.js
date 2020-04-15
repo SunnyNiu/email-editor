@@ -1,5 +1,5 @@
 import contentsReducer from './contentsReducer';
-import { fetchSections } from './types';
+import { fetchEmail } from './types';
 
 describe('contentsReducer tests', () => {
   it('fetch email shows email contents', () => {
@@ -13,7 +13,7 @@ describe('contentsReducer tests', () => {
       { id: 'section_2', icon: 'section_2_image.jpg' },
     ];
     const action = {
-      type: fetchSections.FETCH_EMAIL_SUCCEEDED,
+      type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
       email,
     };
     const expected = {
@@ -31,7 +31,7 @@ describe('contentsReducer tests', () => {
     const error = 'Fetch email failed';
 
     const action = {
-      type: fetchSections.FETCH_EMAIL_FAILED,
+      type: fetchEmail.FETCH_EMAIL_FAILED,
       error,
     };
 

@@ -1,17 +1,17 @@
 import {
   addSectionCreator,
-  fetchSectionsCreator,
-  fetchSectionsSuccessCreator,
-  fetchSectionsFailureCreator,
+  fetchEmailCreator,
+  fetchEmailSuccessCreator,
+  fetchEmailFailureCreator,
 } from './contentsActions';
 
-import { fetchSections } from './types';
+import { fetchEmail } from './types';
 
 describe('contents action tests', () => {
   it('add section', () => {
     const section = [{ id: 1, image: 'xx.jpg' }];
     const expected = {
-      type: fetchSections.ADD_DROP_SECTION,
+      type: fetchEmail.ADD_SECTION,
       section,
     };
 
@@ -22,11 +22,11 @@ describe('contents action tests', () => {
   it('send fetch sections request', () => {
     const emailId = '100';
     const expected = {
-      type: fetchSections.FETCH_EMAIL_REQUESTED,
+      type: fetchEmail.FETCH_EMAIL_REQUESTED,
       emailId,
     };
 
-    const actual = fetchSectionsCreator(emailId);
+    const actual = fetchEmailCreator(emailId);
     expect(actual).toEqual(expected);
   });
 
@@ -34,11 +34,11 @@ describe('contents action tests', () => {
     const email = [{ id: 1, image: 'xx.jpg' }];
 
     const expected = {
-      type: fetchSections.FETCH_EMAIL_SUCCEEDED,
+      type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
       email,
     };
 
-    const actual = fetchSectionsSuccessCreator(email);
+    const actual = fetchEmailSuccessCreator(email);
     expect(actual).toEqual(expected);
   });
 
@@ -46,11 +46,11 @@ describe('contents action tests', () => {
     const error = 'fetch email failed';
 
     const expected = {
-      type: fetchSections.FETCH_EMAIL_FAILED,
+      type: fetchEmail.FETCH_EMAIL_FAILED,
       error,
     };
 
-    const actual = fetchSectionsFailureCreator(error);
+    const actual = fetchEmailFailureCreator(error);
     expect(actual).toEqual(expected);
   });
 });

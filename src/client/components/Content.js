@@ -6,7 +6,7 @@ import { useDrop } from 'react-dnd';
 import { Grid } from 'styled-css-grid';
 import {
   addSectionCreator,
-  fetchSectionsCreator,
+  fetchEmailCreator,
 } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
 import Sections from './Sections';
@@ -18,14 +18,14 @@ const Container = styled(Grid)`
   align-items: center;
 `;
 const Content = props => {
-  const { fetchSections, email, addSection, emailId } = props;
+  const { fetchEmail, email, addSection, emailId } = props;
   useEffect(() => {
-    fetchSections(emailId);
+    fetchEmail(emailId);
   }, []);
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: ({ section }) => addSection(JSON.stringify(section)),
+    drop: ({ section }) => addSection(section),
   });
 
   return (
@@ -48,13 +48,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   addSection: section => dispatch(addSectionCreator(section)),
-  fetchSections: emailId => dispatch(fetchSectionsCreator(emailId)),
+  fetchEmail: emailId => dispatch(fetchEmailCreator(emailId)),
 });
 
 Content.propTypes = {
   addSection: PropTypes.func.isRequired,
-  fetchSections: PropTypes.func.isRequired,
-  email: PropTypes.arrayOf(PropTypes.string),
+  fetchEmail: PropTypes.func.isRequired,
+  email: PropTypes.arrayOf(PropTypes.object),
   emailId: PropTypes.string,
 };
 

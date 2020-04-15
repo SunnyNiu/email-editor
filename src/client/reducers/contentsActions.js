@@ -1,36 +1,36 @@
-import { fetchSections } from './types';
+import { fetchEmail } from './types';
 
 export const addSectionCreator = section => ({
-  type: fetchSections.ADD_DROP_SECTION,
+  type: fetchEmail.ADD_SECTION,
   section,
 });
 
-export const fetchSectionsCreator = emailId => ({
-  type: fetchSections.FETCH_EMAIL_REQUESTED,
+export const fetchEmailCreator = emailId => ({
+  type: fetchEmail.FETCH_EMAIL_REQUESTED,
   emailId,
 });
 
-export const fetchSectionsSuccessCreator = email => ({
-  type: fetchSections.FETCH_EMAIL_SUCCEEDED,
+export const fetchEmailSuccessCreator = email => ({
+  type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
   email,
 });
 
-export const fetchSectionsFailureCreator = error => ({
-  type: fetchSections.FETCH_EMAIL_FAILED,
+export const fetchEmailFailureCreator = error => ({
+  type: fetchEmail.FETCH_EMAIL_FAILED,
   error,
 });
 
 export const saveEmailCreator = (emailId, dropSections) => ({
-  type: fetchSections.SAVE_EMAIL_REQUESTED,
+  type: fetchEmail.SAVE_EMAIL_REQUESTED,
   emailId,
   dropSections,
 });
 
 export const saveEmailSuccessCreator = () => ({
-  type: fetchSections.SAVE_EMAIL_SUCCEEDED,
+  type: fetchEmail.SAVE_EMAIL_SUCCEEDED,
 });
 
 export const saveEmailFailureCreator = error => ({
-  type: fetchSections.SAVE_EMAIL_FAILED,
+  type: fetchEmail.SAVE_EMAIL_FAILED,
   error,
 });

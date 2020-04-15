@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function saveSections(emailId, dropSections) {
+export function saveEmail(emailId, dropSections) {
   return (
     axios
       .put(`/api/email/${emailId}`, {
@@ -14,7 +14,7 @@ export function saveSections(emailId, dropSections) {
   );
 }
 
-export function getSections(emailId) {
+export function getEmail(emailId) {
   return (
     axios
       .get(`/api/email/${emailId}`)

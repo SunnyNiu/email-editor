@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Text = ({ value }) => <input value={value} readOnly />;
+const Text = ({ text }) => <input value={text} readOnly />;
 
 Text.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  value: PropTypes.string,
+  text: PropTypes.string,
 };
+
+Text.defaultProps = {
+  text: '',
+};
+
 export default Text;
