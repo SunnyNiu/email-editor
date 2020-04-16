@@ -54,6 +54,25 @@ describe('convert xml to json', () => {
     };
 
     const json = translateSection(xml);
+
+    // verify the json contain id
+    expect(json.id).toBeTruthy();
+
+    // verify each row contain id
+    json.rows.forEach(row => expect(row.id).toBeTruthy());
+
+    // verify each column contain id
+    json.rows.forEach(row =>
+      row.columns.forEach(column => expect(column.id).toBeTruthy())
+    );
+
+    // verify each widget contain id
+    json.rows.forEach(row =>
+      row.columns.forEach(column =>
+        column.widgets.map(widget => expect(widget.id).toBeTruthy())
+      )
+    );
+
     const jsonWithoutUuid = {
       name: json.name,
       icon: json.icon,
