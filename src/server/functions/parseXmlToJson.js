@@ -1,8 +1,10 @@
 import convert from 'xml-js';
+import { v4 as uuidv4 } from 'uuid';
 
 function translateColumnElements(elements) {
   return elements.map(({ attributes, name }) => ({
     ...attributes,
+    id: uuidv4(),
     type: name.toLowerCase(),
   }));
 }
@@ -10,6 +12,7 @@ function translateColumnElements(elements) {
 function translateColumn(columns) {
   return columns.map(({ attributes, elements }) => ({
     ...attributes,
+    id: uuidv4(),
     widgets: translateColumnElements(elements),
   }));
 }
@@ -17,6 +20,7 @@ function translateColumn(columns) {
 function translateRow(rows) {
   return rows.map(({ attributes, elements }) => ({
     ...attributes,
+    id: uuidv4(),
     columns: translateColumn(elements),
   }));
 }
@@ -29,6 +33,7 @@ export function translateSection(xml) {
   const { attributes, elements } = section;
   return {
     ...attributes,
+    id: uuidv4(),
     rows: translateRow(elements),
   };
 }

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Section id="section_2" icon="section_2_image.jpg">
+<Section name="section_2" icon="section_2_image.jpg">
    <Row width="6">
       <Column width = "3">
        <Text text="section_4_text"/>

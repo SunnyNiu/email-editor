@@ -30,9 +30,8 @@ const Content = props => {
 
   return (
     <Container columns={1} ref={drop}>
-      {email.map((section, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Sections key={index} section={section} />
+      {email.map(section => (
+        <Sections key={section.id} section={section} />
       ))}
     </Container>
   );
