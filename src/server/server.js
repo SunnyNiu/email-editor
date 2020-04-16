@@ -16,6 +16,7 @@ route.get('/sections', (req, res) => {
   readdir('./src/xml', (err, items) => {
     if (err) throw err;
     const promises = items.map(item => readFile(`./src/xml/${item}`));
+
     Promise.all(promises).then(sections => {
       const obj = sections.reduce(
         (accumulator, currentValue) => ({ ...accumulator, ...currentValue }),

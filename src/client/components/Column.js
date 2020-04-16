@@ -9,12 +9,10 @@ const Column = ({ column }) => {
     image: Image,
   };
 
-  return column.widgets.map((widget, index) => {
+  return column.widgets.map(widget => {
     const Widget = widgetComponentMap[widget.type];
-
     // eslint-disable-next-line react/jsx-props-no-spreading
-    // eslint-disable-next-line react/no-array-index-key
-    return <Widget {...widget} key={index} />;
+    return <Widget {...widget} key={widget.id} />;
   });
 };
 

@@ -1,7 +1,7 @@
 import { translateSection } from './parseXmlToJson';
 
 const xml = `<?xml version='1.0' encoding='utf-8'?>
-<Section id="32" icon="icon_1">
+<Section name="32" icon="icon_1">
    <Row width="4">
       <Column width="36">
        <Text text="button"/>
@@ -10,10 +10,32 @@ const xml = `<?xml version='1.0' encoding='utf-8'?>
    </Row>
 </Section>`;
 
+function translateColumnElements(widgets) {
+  widgets.forEach(widget => {
+    // eslint-disable-next-line no-param-reassign
+    delete widget.id;
+  });
+  return widgets;
+}
+
+function translateColumn(columns) {
+  return columns.map(({ width, widgets }) => ({
+    width,
+    widgets: translateColumnElements(widgets),
+  }));
+}
+
+function translateRow(rows) {
+  return rows.map(({ width, columns }) => ({
+    width,
+    columns: translateColumn(columns),
+  }));
+}
+
 describe('convert xml to json', () => {
   it('convert xml to json', () => {
     const expected = {
-      id: '32',
+      name: '32',
       icon: 'icon_1',
       rows: [
         {
@@ -32,6 +54,11 @@ describe('convert xml to json', () => {
     };
 
     const json = translateSection(xml);
-    expect(json).toEqual(expected);
+    const jsonWithoutUuid = {
+      name: json.name,
+      icon: json.icon,
+      rows: translateRow(json.rows),
+    };
+    expect(jsonWithoutUuid).toEqual(expected);
   });
 });
