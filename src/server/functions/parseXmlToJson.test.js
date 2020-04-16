@@ -19,17 +19,22 @@ function removeIdFromWidgets(widgets) {
 }
 
 function removeIdFromColumn(columns) {
-  return columns.map(({ width, widgets }) => ({
-    width,
-    widgets: removeIdFromWidgets(widgets),
-  }));
+  columns.forEach(column => {
+    // eslint-disable-next-line no-param-reassign
+    delete column.id;
+    removeIdFromWidgets(column.widgets);
+  });
+  return columns;
 }
 
 function removeIdFromRow(rows) {
-  return rows.map(({ width, columns }) => ({
-    width,
-    columns: removeIdFromColumn(columns),
-  }));
+  rows.forEach(row => {
+    // eslint-disable-next-line no-param-reassign
+    delete row.id;
+    removeIdFromColumn(row.columns);
+  });
+
+  return rows;
 }
 
 describe('convert xml to json', () => {
