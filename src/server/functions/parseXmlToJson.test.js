@@ -10,7 +10,7 @@ const xml = `<?xml version='1.0' encoding='utf-8'?>
    </Row>
 </Section>`;
 
-function translateColumnElements(widgets) {
+function removeIdFromWidgets(widgets) {
   widgets.forEach(widget => {
     // eslint-disable-next-line no-param-reassign
     delete widget.id;
@@ -18,17 +18,17 @@ function translateColumnElements(widgets) {
   return widgets;
 }
 
-function translateColumn(columns) {
+function removeIdFromColumn(columns) {
   return columns.map(({ width, widgets }) => ({
     width,
-    widgets: translateColumnElements(widgets),
+    widgets: removeIdFromWidgets(widgets),
   }));
 }
 
-function translateRow(rows) {
+function removeIdFromRow(rows) {
   return rows.map(({ width, columns }) => ({
     width,
-    columns: translateColumn(columns),
+    columns: removeIdFromColumn(columns),
   }));
 }
 
@@ -76,7 +76,7 @@ describe('convert xml to json', () => {
     const jsonWithoutUuid = {
       name: json.name,
       icon: json.icon,
-      rows: translateRow(json.rows),
+      rows: removeIdFromRow(json.rows),
     };
     expect(jsonWithoutUuid).toEqual(expected);
   });
