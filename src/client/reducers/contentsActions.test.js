@@ -35,7 +35,7 @@ function removeIdFromRow(rows) {
 }
 
 describe('contents action tests', () => {
-  it('add section', () => {
+  it('add section, verify add it to widget, column, row', () => {
     const section = {
       name: '32',
       icon: 'icon_1',
@@ -54,33 +54,46 @@ describe('contents action tests', () => {
         },
       ],
     };
-    const expected = {
-      type: fetchEmail.ADD_SECTION,
-      section,
-    };
 
-    const actual = addSectionCreator(section);
-    expect(actual.section.id).toBeTruthy();
+    const action = addSectionCreator(section);
+    expect(action.section.id).toBeTruthy();
     // verify each row contain id
-    actual.section.rows.forEach(row => expect(row.id).toBeTruthy());
-    actual.section.rows.forEach(row =>
-      row.columns.forEach(column => expect(column.id).toBeTruthy())
-    );
-    actual.section.rows.forEach(row =>
-      row.columns.forEach(column =>
-        column.widgets.map(widget => expect(widget.id).toBeTruthy())
-      )
-    );
+    action.section.rows.forEach(row => {
+      expect(row.id).toBeTruthy();
+      row.columns.forEach(column => {
+        expect(column.id).toBeTruthy();
+        column.widgets.map(widget => expect(widget.id).toBeTruthy());
+      });
+    });
+  });
 
-    const actualWithoutId = {
-      type: actual.type,
-      section: {
-        name: actual.section.name,
-        icon: actual.section.icon,
-        rows: removeIdFromRow(actual.section.rows),
-      },
+  it('add section, verify section content is correct', () => {
+    const section = {
+      name: '32',
+      icon: 'icon_1',
+      rows: [
+        {
+          width: '4',
+          columns: [
+            {
+              width: '36',
+              widgets: [
+                { type: 'text', text: 'button' },
+                { type: 'image', src: './abc.png' },
+              ],
+            },
+          ],
+        },
+      ],
     };
-    expect(actualWithoutId).toEqual(expected);
+
+    const action = addSectionCreator(section);
+    expect(action.type).toEqual(fetchEmail.ADD_SECTION);
+    expect({
+      name: action.section.name,
+      icon: action.section.icon,
+      rows: removeIdFromRow(action.section.rows),
+    }).toEqual(section);
   });
 
   it('send fetch sections request', () => {
