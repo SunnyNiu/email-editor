@@ -3,18 +3,18 @@
    <Row width="6">
       <Column width = "3">
        <Text text="section_4_text"/>
-       <Image src="section_4_image"/>
+       <Image src="src/server/public/wechat.jpg"/>
        <Text text="section_4_text"/>
       </Column> 
       <Column width = "3">
        <Text text="section_4_c_text"/>
-       <Image src="section_4__c_image"/>
+       <Image src="src/server/public/logo.jpg"/>
       </Column>  
    </Row>
    <Row width="6">
       <Column width = "6">
        <Text text="section_4_text"/>
-       <Image src="section_4_image"/>
+       <Image src="src/server/public/logo.jpg"/>
       </Column>  
    </Row>
 </Section>

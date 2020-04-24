@@ -1,8 +1,36 @@
+import { v4 as uuidv4 } from 'uuid';
 import { fetchEmail } from './types';
+
+function addIdToWidget(widget) {
+  return {
+    ...widget,
+    id: uuidv4(),
+  };
+}
+
+function addIdToColumn(column) {
+  return {
+    ...column,
+    id: uuidv4(),
+    widgets: column.widgets.map(widget => addIdToWidget(widget)),
+  };
+}
+
+function addIdToRow(row) {
+  return {
+    ...row,
+    id: uuidv4(),
+    columns: row.columns.map(column => addIdToColumn(column)),
+  };
+}
 
 export const addSectionCreator = section => ({
   type: fetchEmail.ADD_SECTION,
-  section,
+  section: {
+    ...section,
+    id: uuidv4(),
+    rows: section.rows.map(row => addIdToRow(row)),
+  },
 });
 
 export const fetchEmailCreator = emailId => ({

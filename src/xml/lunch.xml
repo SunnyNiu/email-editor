@@ -3,12 +3,12 @@
    <Row width="6">
       <Column width = "3">
        <Text text="section_5_text"/>
-       <Image src="section_5_image"/>
+       <Image src="src/server/public/logo.jpg"/>
        <Text text="section_5_text"/>
       </Column> 
       <Column width = "3">
        <Text text="section_5_c_text"/>
-       <Image src="section_5__c_image"/>
+       <Image src="src/server/public/wechat.jpg"/>
       </Column>  
    </Row>
 </Section>

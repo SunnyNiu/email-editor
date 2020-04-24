@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Text = ({ text }) => <input value={text} readOnly />;
+const Text = ({ text }) => {
+  const editText = () => {};
+
+  return <input value={text} onClick={() => editText()} readOnly />;
+};
 
 Text.propTypes = {
   text: PropTypes.string,
