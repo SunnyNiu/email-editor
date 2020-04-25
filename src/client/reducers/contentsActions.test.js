@@ -3,6 +3,8 @@ import {
   fetchEmailCreator,
   fetchEmailSuccessCreator,
   fetchEmailFailureCreator,
+  editSelectedIdCreator,
+  updateWidgetValueCreator,
 } from './contentsActions';
 
 import { fetchEmail } from './types';
@@ -128,6 +130,32 @@ describe('contents action tests', () => {
     };
 
     const actual = fetchEmailFailureCreator(error);
+    expect(actual).toEqual(expected);
+  });
+
+  it('return selected edited widgetId', () => {
+    const widgetId = '12345';
+
+    const expected = {
+      type: 'SELECT_WIDGET',
+      widgetId,
+    };
+
+    const actual = editSelectedIdCreator(widgetId);
+    expect(actual).toEqual(expected);
+  });
+
+  it('return updated widget value', () => {
+    const widgetId = '12345';
+    const value = 'test text';
+
+    const expected = {
+      type: 'UPDATE_WIDGET',
+      widgetId,
+      value,
+    };
+
+    const actual = updateWidgetValueCreator(widgetId, value);
     expect(actual).toEqual(expected);
   });
 });

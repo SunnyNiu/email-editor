@@ -72,6 +72,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         email: newEmail,
+        selectedId: widgetId,
       };
     }
     default:
