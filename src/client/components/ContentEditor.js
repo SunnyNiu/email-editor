@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Section = styled.div`
+const ContentEditorContainer = styled.div`
   height: 300px;
   width: 300px;
   display: flex;
@@ -16,10 +18,45 @@ const Section = styled.div`
   }
 `;
 
-const ContentEditor = () => (
-  <div>
-    <Section />
-  </div>
-);
+const ContentEditor = ({ selectedWidget }) => {
+  if (!selectedWidget) return <ContentEditorContainer />;
+  return (
+    <ContentEditorContainer>
+      {selectedWidget.type === 'text' ? (
+        <input value={selectedWidget.text} />
+      ) : (
+        <input value={selectedWidget.src} />
+      )}
+    </ContentEditorContainer>
+  );
+};
 
-export default ContentEditor;
+const mapStateToProps = state => {
+  const { email, selectedId } = state.content;
+  let selectedWidget;
+
+  email.forEach(section =>
+    section.rows.forEach(row =>
+      row.columns.forEach(column =>
+        column.widgets.forEach(widget => {
+          if (widget.id === selectedId) {
+            selectedWidget = widget;
+          }
+        })
+      )
+    )
+  );
+
+  return {
+    selectedWidget,
+  };
+};
+
+ContentEditor.propTypes = {
+  selectedWidget: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+};
+export default connect(mapStateToProps)(ContentEditor);

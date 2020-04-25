@@ -2,6 +2,7 @@ import { fetchEmail } from './types';
 
 const initialState = {
   email: [],
+  selectedId: '',
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +32,11 @@ export default (state = initialState, action) => {
       // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
+    case 'SELECT_WIDGET':
+      return {
+        ...state,
+        selectedId: action.widgetId,
+      };
     default:
       return state;
   }

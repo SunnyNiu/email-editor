@@ -62,3 +62,8 @@ export const saveEmailFailureCreator = error => ({
   type: fetchEmail.SAVE_EMAIL_FAILED,
   error,
 });
+
+export const editSelectedIdCreator = widgetId => ({
+  type: 'SELECT_WIDGET',
+  widgetId,
+});
