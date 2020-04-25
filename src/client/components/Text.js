@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Text = ({ text }) => {
-  const editText = () => {};
-
-  return <input value={text} onClick={() => editText()} readOnly />;
+const Text = ({ text, onClick }) => {
+  return <input value={text} onClick={onClick} readOnly />;
 };
 
 Text.propTypes = {
   text: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 Text.defaultProps = {
