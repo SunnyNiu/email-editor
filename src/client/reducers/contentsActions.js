@@ -67,3 +67,9 @@ export const editSelectedIdCreator = widgetId => ({
   type: 'SELECT_WIDGET',
   widgetId,
 });
+
+export const updateWidgetValueCreator = (widgetId, value) => ({
+  type: 'UPDATE_WIDGET',
+  widgetId,
+  value,
+});

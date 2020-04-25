@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { updateWidgetValueCreator } from '../reducers/contentsActions';
 
 const ContentEditorContainer = styled.div`
   height: 300px;
@@ -18,14 +19,22 @@ const ContentEditorContainer = styled.div`
   }
 `;
 
-const ContentEditor = ({ selectedWidget }) => {
+const ContentEditor = ({ selectedId, selectedWidget, updateWidgetValue }) => {
   if (!selectedWidget) return <ContentEditorContainer />;
   return (
     <ContentEditorContainer>
       {selectedWidget.type === 'text' ? (
-        <input value={selectedWidget.text} />
+        <input
+          type="text"
+          value={selectedWidget.text}
+          onChange={e => updateWidgetValue(selectedId, e.target.value)}
+          contentEditable="true"
+        />
       ) : (
-        <input value={selectedWidget.src} />
+        <input
+          value={selectedWidget.src}
+          onChange={e => updateWidgetValue(selectedId, e.target.value)}
+        />
       )}
     </ContentEditorContainer>
   );
@@ -49,14 +58,31 @@ const mapStateToProps = state => {
 
   return {
     selectedWidget,
+    selectedId,
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  updateWidgetValue: (selectedId, value) =>
+    dispatch(updateWidgetValueCreator(selectedId, value)),
+});
+
 ContentEditor.propTypes = {
   selectedWidget: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
+    src: PropTypes.string,
+    text: PropTypes.string,
+    type: PropTypes.string,
+  }),
+  selectedId: PropTypes.string,
+  updateWidgetValue: PropTypes.func.isRequired,
 };
-export default connect(mapStateToProps)(ContentEditor);
+
+ContentEditor.defaultProps = {
+  selectedWidget: {
+    src: '',
+    text: '',
+    type: '',
+  },
+  selectedId: undefined,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ContentEditor);
