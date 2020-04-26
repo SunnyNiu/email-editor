@@ -9,33 +9,6 @@ import {
 
 import { fetchEmail } from './types';
 
-function removeIdFromWidgets(widgets) {
-  widgets.forEach(widget => {
-    // eslint-disable-next-line no-param-reassign
-    delete widget.id;
-  });
-  return widgets;
-}
-
-function removeIdFromColumn(columns) {
-  columns.forEach(column => {
-    // eslint-disable-next-line no-param-reassign
-    delete column.id;
-    removeIdFromWidgets(column.widgets);
-  });
-  return columns;
-}
-
-function removeIdFromRow(rows) {
-  rows.forEach(row => {
-    // eslint-disable-next-line no-param-reassign
-    delete row.id;
-    removeIdFromColumn(row.columns);
-  });
-
-  return rows;
-}
-
 describe('contents action tests', () => {
   it('add section, verify section content is correct which widgetMap contains widgetId and its widget', () => {
     const section = {
@@ -58,11 +31,12 @@ describe('contents action tests', () => {
     };
 
     const action = addSectionCreator(section);
+    // console.log('action', JSON.stringify(action, null, 2));
 
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(action.section.widgetMap)) {
       expect(key).toEqual(value.id);
-      value.children.forEach(id => expect(typeof id).toEqual('string'));
+      value.children.forEach(id => expect(typeof id).toEqual('array'));
     }
   });
 

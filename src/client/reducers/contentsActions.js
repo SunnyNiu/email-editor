@@ -1,50 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchEmail } from './types';
 
-function addIdToWidget(widget) {
-  return {
-    ...widget,
-    id: uuidv4(),
-    children: [],
-    type: widget.type,
-  };
-}
-
-function addIdToColumn(column) {
-  return {
-    ...column,
-    id: uuidv4(),
-    children: column.children.map(widget => addIdToWidget(widget)),
-    type: column.type,
-  };
-}
-
-function addIdToRow(row) {
-  return {
-    ...row,
-    id: uuidv4(),
-    children: row.children.map(column => addIdToColumn(column)),
-    type: row.type,
-  };
-}
-
 export const addSectionCreator = section => {
-  const sectionWithIds = {
-    ...section,
-    id: uuidv4(),
-    children: section.children.map(row => addIdToRow(row)),
-    type: section.type,
-  };
-
-  const widgetMap = {};
-  const rowIds = [];
-
-  function f(root) {
-    widgetMap[root.id] = root;
-    root.children.forEach(x => f(x));
+  // recursively adding id to each widget
+  function addIds(root) {
+    // eslint-disable-next-line no-param-reassign
+    root.id = uuidv4();
+    root.children.forEach(x => addIds(x));
   }
+  addIds(section);
 
-  f(sectionWithIds);
+  // recursively build widgetMap
+  const widgetMap = {};
+  function buildWidgetMap(root) {
+    widgetMap[root.id] = root;
+    root.children.forEach(x => buildWidgetMap(x));
+  }
+  buildWidgetMap(section);
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [, value] of Object.entries(widgetMap)) {
@@ -53,7 +25,6 @@ export const addSectionCreator = section => {
 
   const sectionWithWidgetMap = {
     ...section,
-    children: rowIds,
     widgetMap,
   };
 

@@ -9,18 +9,18 @@ function translateColumnElements(elements) {
 }
 
 function translateColumn(columns) {
-  return columns.map(({ attributes, elements }) => ({
+  return columns.map(({ attributes, elements, name }) => ({
     ...attributes,
     children: translateColumnElements(elements),
-    type: 'widget',
+    type: name.toLowerCase(),
   }));
 }
 
 function translateRow(rows) {
-  return rows.map(({ attributes, elements }) => ({
+  return rows.map(({ attributes, elements, name }) => ({
     ...attributes,
     children: translateColumn(elements),
-    type: 'column',
+    type: name.toLowerCase(),
   }));
 }
 
@@ -29,10 +29,10 @@ export function translateSection(xml) {
     compact: false,
     spaces: 4,
   }).elements[0];
-  const { attributes, elements } = section;
+  const { attributes, elements, name } = section;
   return {
     ...attributes,
     children: translateRow(elements),
-    type: 'row',
+    type: name.toLowerCase(),
   };
 }
