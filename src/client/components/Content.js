@@ -25,7 +25,9 @@ const Content = props => {
 
   const [, drop] = useDrop({
     accept: ItemTypes.XML,
-    drop: ({ section }) => addSection(section),
+    drop: ({ section }) => {
+      addSection(section);
+    },
   });
 
   return (

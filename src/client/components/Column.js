@@ -11,7 +11,7 @@ const Column = ({ column, editSelectedId }) => {
     image: Image,
   };
 
-  return column.widgets.map(widget => {
+  return column.children.map(widget => {
     const Widget = widgetComponentMap[widget.type];
     // eslint-disable-next-line react/jsx-props-no-spreading
     return (
@@ -24,8 +24,12 @@ const Column = ({ column, editSelectedId }) => {
   });
 };
 
+const mapStateToProps = state => ({
+  sectionWithWidgetMap: state.content.sectionWithWidgetMap,
+});
+
 const mapDispatchToProps = dispatch => ({
   editSelectedId: widgetId => dispatch(editSelectedIdCreator(widgetId)),
 });
 
-export default connect(null, mapDispatchToProps)(Column);
+export default connect(mapStateToProps, mapDispatchToProps)(Column);

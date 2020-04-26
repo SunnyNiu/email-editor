@@ -45,9 +45,9 @@ const mapStateToProps = state => {
   let selectedWidget;
 
   email.forEach(section =>
-    section.rows.forEach(row =>
-      row.columns.forEach(column =>
-        column.widgets.forEach(widget => {
+    section.children.forEach(row =>
+      row.children.forEach(column =>
+        column.children.forEach(widget => {
           if (widget.id === selectedId) {
             selectedWidget = widget;
           }

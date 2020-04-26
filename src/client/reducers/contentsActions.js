@@ -1,37 +1,38 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchEmail } from './types';
 
-function addIdToWidget(widget) {
-  return {
-    ...widget,
-    id: uuidv4(),
-  };
-}
+export const addSectionCreator = section => {
+  // recursively adding id to each widget
+  function addIds(root) {
+    // eslint-disable-next-line no-param-reassign
+    root.id = uuidv4();
+    root.children.forEach(x => addIds(x));
+  }
+  addIds(section);
 
-function addIdToColumn(column) {
-  return {
-    ...column,
-    id: uuidv4(),
-    widgets: column.widgets.map(widget => addIdToWidget(widget)),
-  };
-}
+  // recursively build widgetMap
+  const widgetMap = {};
+  function buildWidgetMap(root) {
+    widgetMap[root.id] = root;
+    root.children.forEach(x => buildWidgetMap(x));
+  }
+  buildWidgetMap(section);
 
-function addIdToRow(row) {
-  return {
-    ...row,
-    id: uuidv4(),
-    columns: row.columns.map(column => addIdToColumn(column)),
-  };
-}
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [, value] of Object.entries(widgetMap)) {
+    value.children = value.children.map(x => x.id);
+  }
 
-export const addSectionCreator = section => ({
-  type: fetchEmail.ADD_SECTION,
-  section: {
+  const sectionWithWidgetMap = {
     ...section,
-    id: uuidv4(),
-    rows: section.rows.map(row => addIdToRow(row)),
-  },
-});
+    widgetMap,
+  };
+
+  return {
+    type: fetchEmail.ADD_SECTION,
+    section: sectionWithWidgetMap,
+  };
+};
 
 export const fetchEmailCreator = emailId => ({
   type: fetchEmail.FETCH_EMAIL_REQUESTED,

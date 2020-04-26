@@ -9,47 +9,20 @@ import {
 
 import { fetchEmail } from './types';
 
-function removeIdFromWidgets(widgets) {
-  widgets.forEach(widget => {
-    // eslint-disable-next-line no-param-reassign
-    delete widget.id;
-  });
-  return widgets;
-}
-
-function removeIdFromColumn(columns) {
-  columns.forEach(column => {
-    // eslint-disable-next-line no-param-reassign
-    delete column.id;
-    removeIdFromWidgets(column.widgets);
-  });
-  return columns;
-}
-
-function removeIdFromRow(rows) {
-  rows.forEach(row => {
-    // eslint-disable-next-line no-param-reassign
-    delete row.id;
-    removeIdFromColumn(row.columns);
-  });
-
-  return rows;
-}
-
 describe('contents action tests', () => {
-  it('add section, verify add it to widget, column, row', () => {
+  it('add section, verify section content is correct which widgetMap contains widgetId and its widget', () => {
     const section = {
       name: '32',
       icon: 'icon_1',
-      rows: [
+      children: [
         {
           width: '4',
-          columns: [
+          children: [
             {
               width: '36',
-              widgets: [
-                { type: 'text', text: 'button' },
-                { type: 'image', src: './abc.png' },
+              children: [
+                { type: 'text', text: 'button', children: [] },
+                { type: 'image', src: './abc.png', children: [] },
               ],
             },
           ],
@@ -58,44 +31,13 @@ describe('contents action tests', () => {
     };
 
     const action = addSectionCreator(section);
-    expect(action.section.id).toBeTruthy();
-    // verify each row contain id
-    action.section.rows.forEach(row => {
-      expect(row.id).toBeTruthy();
-      row.columns.forEach(column => {
-        expect(column.id).toBeTruthy();
-        column.widgets.map(widget => expect(widget.id).toBeTruthy());
-      });
-    });
-  });
+    // console.log('action', JSON.stringify(action, null, 2));
 
-  it('add section, verify section content is correct', () => {
-    const section = {
-      name: '32',
-      icon: 'icon_1',
-      rows: [
-        {
-          width: '4',
-          columns: [
-            {
-              width: '36',
-              widgets: [
-                { type: 'text', text: 'button' },
-                { type: 'image', src: './abc.png' },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-
-    const action = addSectionCreator(section);
-    expect(action.type).toEqual(fetchEmail.ADD_SECTION);
-    expect({
-      name: action.section.name,
-      icon: action.section.icon,
-      rows: removeIdFromRow(action.section.rows),
-    }).toEqual(section);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(action.section.widgetMap)) {
+      expect(key).toEqual(value.id);
+      value.children.forEach(id => expect(typeof id).toEqual('array'));
+    }
   });
 
   it('send fetch sections request', () => {

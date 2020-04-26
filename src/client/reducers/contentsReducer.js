@@ -8,9 +8,9 @@ const initialState = {
 function updateWidget(widget, widgetId, value) {
   if (widget.id === widgetId) {
     if (widget.type === 'text') {
-      return { ...widget, text: value };
+      return { ...widget, text: value, children: [], type: widget.type };
     }
-    return { ...widget, src: value };
+    return { ...widget, src: value, children: [], type: widget.type };
   }
   return widget;
 }
@@ -18,26 +18,29 @@ function updateWidget(widget, widgetId, value) {
 function updateColumn(column, widgetId, value) {
   return {
     ...column,
-    widgets: column.widgets.map(widget =>
+    children: column.children.map(widget =>
       updateWidget(widget, widgetId, value)
     ),
+    type: column.type,
   };
 }
 
 function updateRow(row, widgetId, value) {
   return {
     ...row,
-    columns: row.columns.map(column => updateColumn(column, widgetId, value)),
+    children: row.children.map(column => updateColumn(column, widgetId, value)),
+    type: row.type,
   };
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case fetchEmail.ADD_SECTION:
+    case fetchEmail.ADD_SECTION: {
       return {
         ...state,
-        email: [...state.email, action.section],
+        email: [...state.email, action.sectionWithWidgetMap],
       };
+    }
     case fetchEmail.FETCH_EMAIL_SUCCEEDED:
       return {
         ...state,
@@ -67,7 +70,8 @@ export default (state = initialState, action) => {
       const { widgetId, value } = action;
       const newEmail = state.email.map(section => ({
         ...section,
-        rows: section.rows.map(row => updateRow(row, widgetId, value)),
+        children: section.children.map(row => updateRow(row, widgetId, value)),
+        type: section.type,
       }));
       return {
         ...state,

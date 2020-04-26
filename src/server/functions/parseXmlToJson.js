@@ -3,21 +3,24 @@ import convert from 'xml-js';
 function translateColumnElements(elements) {
   return elements.map(({ attributes, name }) => ({
     ...attributes,
+    children: [],
     type: name.toLowerCase(),
   }));
 }
 
 function translateColumn(columns) {
-  return columns.map(({ attributes, elements }) => ({
+  return columns.map(({ attributes, elements, name }) => ({
     ...attributes,
-    widgets: translateColumnElements(elements),
+    children: translateColumnElements(elements),
+    type: name.toLowerCase(),
   }));
 }
 
 function translateRow(rows) {
-  return rows.map(({ attributes, elements }) => ({
+  return rows.map(({ attributes, elements, name }) => ({
     ...attributes,
-    columns: translateColumn(elements),
+    children: translateColumn(elements),
+    type: name.toLowerCase(),
   }));
 }
 
@@ -26,9 +29,10 @@ export function translateSection(xml) {
     compact: false,
     spaces: 4,
   }).elements[0];
-  const { attributes, elements } = section;
+  const { attributes, elements, name } = section;
   return {
     ...attributes,
-    rows: translateRow(elements),
+    children: translateRow(elements),
+    type: name.toLowerCase(),
   };
 }
