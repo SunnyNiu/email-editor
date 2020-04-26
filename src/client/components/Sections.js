@@ -13,7 +13,7 @@ const Section = styled(Cell)`
 
 const Sections = ({ section }) => (
   <Section>
-    {section.rows.map(row => (
+    {section.children.map(row => (
       // eslint-disable-next-line react/jsx-props-no-spreading
       <Row {...row} key={row.id} />
     ))}

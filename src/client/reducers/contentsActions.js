@@ -5,6 +5,8 @@ function addIdToWidget(widget) {
   return {
     ...widget,
     id: uuidv4(),
+    children: [],
+    type: widget.type,
   };
 }
 
@@ -12,7 +14,8 @@ function addIdToColumn(column) {
   return {
     ...column,
     id: uuidv4(),
-    widgets: column.widgets.map(widget => addIdToWidget(widget)),
+    children: column.children.map(widget => addIdToWidget(widget)),
+    type: column.type,
   };
 }
 
@@ -20,18 +23,43 @@ function addIdToRow(row) {
   return {
     ...row,
     id: uuidv4(),
-    columns: row.columns.map(column => addIdToColumn(column)),
+    children: row.children.map(column => addIdToColumn(column)),
+    type: row.type,
   };
 }
 
-export const addSectionCreator = section => ({
-  type: fetchEmail.ADD_SECTION,
-  section: {
+export const addSectionCreator = section => {
+  const sectionWithIds = {
     ...section,
     id: uuidv4(),
-    rows: section.rows.map(row => addIdToRow(row)),
-  },
-});
+    children: section.children.map(row => addIdToRow(row)),
+    type: section.type,
+  };
+
+  const widgetMap = {};
+  const rowIds = [];
+  sectionWithIds.children.map(row => {
+    rowIds.push(row.id);
+    widgetMap[row.id] = row;
+    row.children.map(column => {
+      widgetMap[column.id] = column;
+      column.children.map(widget => {
+        widgetMap[widget.id] = widget;
+      });
+    });
+  });
+
+  const sectionWithWidgetMap = {
+    ...section,
+    children: rowIds,
+    widgetMap,
+  };
+
+  return {
+    type: fetchEmail.ADD_SECTION,
+    section: sectionWithWidgetMap,
+  };
+};
 
 export const fetchEmailCreator = emailId => ({
   type: fetchEmail.FETCH_EMAIL_REQUESTED,

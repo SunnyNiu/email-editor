@@ -3,6 +3,7 @@ import convert from 'xml-js';
 function translateColumnElements(elements) {
   return elements.map(({ attributes, name }) => ({
     ...attributes,
+    children: [],
     type: name.toLowerCase(),
   }));
 }
@@ -10,14 +11,16 @@ function translateColumnElements(elements) {
 function translateColumn(columns) {
   return columns.map(({ attributes, elements }) => ({
     ...attributes,
-    widgets: translateColumnElements(elements),
+    children: translateColumnElements(elements),
+    type: 'widget',
   }));
 }
 
 function translateRow(rows) {
   return rows.map(({ attributes, elements }) => ({
     ...attributes,
-    columns: translateColumn(elements),
+    children: translateColumn(elements),
+    type: 'column',
   }));
 }
 
@@ -29,6 +32,7 @@ export function translateSection(xml) {
   const { attributes, elements } = section;
   return {
     ...attributes,
-    rows: translateRow(elements),
+    children: translateRow(elements),
+    type: 'row',
   };
 }

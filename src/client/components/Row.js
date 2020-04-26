@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Grid, Cell } from 'styled-css-grid';
 import Column from './Column';
 
-const Row = ({ width, columns }) => {
+const Row = ({ width, children }) => {
   return (
     <Grid columns={width}>
-      {columns.map(column => (
+      {children.map(column => (
         <Cell width={Number(column.width)} key={column.id}>
           <Column column={column} key={column.id} />
         </Cell>
@@ -16,7 +16,7 @@ const Row = ({ width, columns }) => {
 };
 
 Row.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
   width: PropTypes.string.isRequired,
 };
 export default Row;
