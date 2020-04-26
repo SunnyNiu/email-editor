@@ -38,16 +38,18 @@ export const addSectionCreator = section => {
 
   const widgetMap = {};
   const rowIds = [];
-  sectionWithIds.children.map(row => {
-    rowIds.push(row.id);
-    widgetMap[row.id] = row;
-    row.children.map(column => {
-      widgetMap[column.id] = column;
-      column.children.map(widget => {
-        widgetMap[widget.id] = widget;
-      });
-    });
-  });
+
+  function f(root) {
+    widgetMap[root.id] = root;
+    root.children.forEach(x => f(x));
+  }
+
+  f(sectionWithIds);
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [, value] of Object.entries(widgetMap)) {
+    value.children = value.children.map(x => x.id);
+  }
 
   const sectionWithWidgetMap = {
     ...section,

@@ -62,7 +62,7 @@ describe('contents action tests', () => {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(action.section.widgetMap)) {
       expect(key).toEqual(value.id);
-      expect(typeof value.id).toEqual('string');
+      value.children.forEach(id => expect(typeof id).toEqual('string'));
     }
   });
 
