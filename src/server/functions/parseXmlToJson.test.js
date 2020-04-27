@@ -15,20 +15,23 @@ describe('convert xml to json', () => {
     const expected = {
       name: '32',
       icon: 'icon_1',
-      rows: [
+      children: [
         {
           width: '4',
-          columns: [
+          children: [
             {
               width: '36',
-              widgets: [
-                { type: 'text', text: 'button' },
-                { type: 'image', src: './abc.png' },
+              children: [
+                { type: 'text', text: 'button', children: [] },
+                { type: 'image', src: './abc.png', children: [] },
               ],
+              type: 'column',
             },
           ],
+          type: 'row',
         },
       ],
+      type: 'section',
     };
 
     const json = translateSection(xml);

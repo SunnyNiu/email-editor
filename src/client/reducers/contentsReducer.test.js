@@ -71,54 +71,59 @@ describe('contentsReducer tests', () => {
       {
         name: 'section_1',
         icon: 'section_1_image.jpg',
-        rows: [
-          {
-            width: '6',
-            columns: [
-              {
-                width: '3',
-                widgets: [{ text: 'section_1', type: 'text', id: '12345' }],
-              },
-            ],
+        children: ['12345'],
+        widgetMap: {
+          '12345': {
+            name: 'section',
+            type: 'section',
+            id: '12345',
+            children: [23456],
           },
-        ],
+          '23456': {
+            id: '23456',
+            type: 'image',
+            children: [],
+            src: 'src/server/public/logo1.jpg',
+          },
+        },
       },
     ];
+
     const currentState = {
       email,
       selectedId: '',
     };
 
-    const widgetId = '12345';
-    const value = 'text value';
+    const widgetId = '23456';
+    const value = 'src/server/public/logo2.jpg';
     const action = {
       type: 'UPDATE_WIDGET',
       widgetId,
       value,
     };
 
-    const newEmail = [
+    const expected = [
       {
         name: 'section_1',
         icon: 'section_1_image.jpg',
-        rows: [
-          {
-            width: '6',
-            columns: [
-              {
-                width: '3',
-                widgets: [{ text: value, type: 'text', id: '12345' }],
-              },
-            ],
+        children: ['12345'],
+        widgetMap: {
+          '12345': {
+            name: 'section',
+            type: 'section',
+            id: '12345',
+            children: [23456],
           },
-        ],
+          '23456': {
+            id: '23456',
+            type: 'image',
+            children: [],
+            src: value,
+          },
+        },
       },
     ];
-    const expected = {
-      email: newEmail,
-      selectedId: widgetId,
-    };
     const actual = contentsReducer(currentState, action);
-    expect(actual).toEqual(expected);
+    expect(actual.email).toEqual(expected);
   });
 });

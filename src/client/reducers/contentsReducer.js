@@ -5,40 +5,12 @@ const initialState = {
   selectedId: '',
 };
 
-function updateWidget(widget, widgetId, value) {
-  if (widget.id === widgetId) {
-    if (widget.type === 'text') {
-      return { ...widget, text: value, children: [], type: widget.type };
-    }
-    return { ...widget, src: value, children: [], type: widget.type };
-  }
-  return widget;
-}
-
-function updateColumn(column, widgetId, value) {
-  return {
-    ...column,
-    children: column.children.map(widget =>
-      updateWidget(widget, widgetId, value)
-    ),
-    type: column.type,
-  };
-}
-
-function updateRow(row, widgetId, value) {
-  return {
-    ...row,
-    children: row.children.map(column => updateColumn(column, widgetId, value)),
-    type: row.type,
-  };
-}
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case fetchEmail.ADD_SECTION: {
       return {
         ...state,
-        email: [...state.email, action.sectionWithWidgetMap],
+        email: [...state.email, action.section],
       };
     }
     case fetchEmail.FETCH_EMAIL_SUCCEEDED:
@@ -68,11 +40,26 @@ export default (state = initialState, action) => {
       };
     case 'UPDATE_WIDGET': {
       const { widgetId, value } = action;
-      const newEmail = state.email.map(section => ({
-        ...section,
-        children: section.children.map(row => updateRow(row, widgetId, value)),
-        type: section.type,
-      }));
+
+      const newEmail = state.email.map(section => {
+        const widget = section.widgetMap[widgetId];
+        if (widget) {
+          let newWidget;
+          // eslint-disable-next-line no-param-reassign
+          if (widget.type === 'text') {
+            newWidget = { ...widget, text: value };
+          } else {
+            newWidget = { ...widget, src: value };
+          }
+          // eslint-disable-next-line no-param-reassign
+          section.widgetMap[widgetId] = newWidget;
+        }
+
+        return {
+          ...section,
+          widgetMap: { ...section.widgetMap },
+        };
+      });
       return {
         ...state,
         email: newEmail,

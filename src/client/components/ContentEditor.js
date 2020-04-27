@@ -42,19 +42,14 @@ const ContentEditor = ({ selectedId, selectedWidget, updateWidgetValue }) => {
 
 const mapStateToProps = state => {
   const { email, selectedId } = state.content;
-  let selectedWidget;
 
-  email.forEach(section =>
-    section.children.forEach(row =>
-      row.children.forEach(column =>
-        column.children.forEach(widget => {
-          if (widget.id === selectedId) {
-            selectedWidget = widget;
-          }
-        })
-      )
-    )
-  );
+  let selectedWidget = '';
+
+  if (email.length > 0) {
+    email.forEach(x => {
+      selectedWidget = x.widgetMap[selectedId];
+    });
+  }
 
   return {
     selectedWidget,
