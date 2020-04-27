@@ -31,7 +31,6 @@ describe('contents action tests', () => {
     };
 
     const action = addSectionCreator(section);
-    // console.log('action', JSON.stringify(action, null, 2));
 
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(action.section.widgetMap)) {
