@@ -13,10 +13,13 @@ const Section = styled(Cell)`
 
 const Sections = ({ section }) => (
   <Section>
-    {section.children.map(row => (
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      <Row {...row} key={row.id} />
-    ))}
+    {section.children.map(rowId => {
+      const row = section.widgetMap[rowId];
+      return (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Row {...row} key={rowId} widgetMap={section.widgetMap} />
+      );
+    })}
   </Section>
 );
 

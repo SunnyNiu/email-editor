@@ -14,7 +14,7 @@ exports[`Container component tests Create snapshot 1`] = `
     <Connect(Content) />
   </Cell__Cell>
   <Cell__Cell>
-    <ContentEditor />
+    <Connect(ContentEditor) />
   </Cell__Cell>
 </Grid__Grid>
 `;

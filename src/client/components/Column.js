@@ -5,13 +5,14 @@ import Image from './Image';
 import Text from './Text';
 import { editSelectedIdCreator } from '../reducers/contentsActions';
 
-const Column = ({ column, editSelectedId }) => {
+const Column = ({ column, editSelectedId, widgetMap }) => {
   const widgetComponentMap = {
     text: Text,
     image: Image,
   };
 
-  return column.children.map(widget => {
+  return column.children.map(widgetId => {
+    const widget = widgetMap[widgetId];
     const Widget = widgetComponentMap[widget.type];
     // eslint-disable-next-line react/jsx-props-no-spreading
     return (

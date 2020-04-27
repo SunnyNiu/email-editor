@@ -32,9 +32,9 @@ const Content = props => {
 
   return (
     <Container columns={1} ref={drop}>
-      {email.map(section => (
-        <Sections key={section.id} section={section} />
-      ))}
+      {email.map(section => {
+        return <Sections key={section.id} section={section} />;
+      })}
     </Container>
   );
 };
