@@ -1,8 +1,7 @@
 import { fetchEmail } from './types';
 
 const initialState = {
-  email: [],
-  selectedId: '',
+  email: {},
 };
 
 export default (state = initialState, action) => {
@@ -10,13 +9,20 @@ export default (state = initialState, action) => {
     case fetchEmail.ADD_SECTION: {
       return {
         ...state,
-        email: [...state.email, action.section],
+        email: {
+          ...state.email,
+          children: [...state.email.children, ...action.section.children],
+          widgetMap: {
+            ...state.email.widgetMap,
+            ...action.section.widgetMap,
+          },
+        },
       };
     }
     case fetchEmail.FETCH_EMAIL_SUCCEEDED:
       return {
         ...state,
-        email: action.email !== undefined ? action.email : [],
+        email: action.email !== undefined ? action.email : {},
       };
     case fetchEmail.FETCH_EMAIL_FAILED:
       // eslint-disable-next-line no-console
@@ -41,29 +47,26 @@ export default (state = initialState, action) => {
     case 'UPDATE_WIDGET': {
       const { widgetId, value } = action;
 
-      const newEmail = state.email.map(section => {
-        const widget = section.widgetMap[widgetId];
-        if (widget) {
-          let newWidget;
-          // eslint-disable-next-line no-param-reassign
-          if (widget.type === 'text') {
-            newWidget = { ...widget, text: value };
-          } else {
-            newWidget = { ...widget, src: value };
-          }
-          // eslint-disable-next-line no-param-reassign
-          section.widgetMap[widgetId] = newWidget;
-        }
+      const widget = state.email.widgetMap[widgetId];
 
-        return {
-          ...section,
-          widgetMap: { ...section.widgetMap },
-        };
-      });
+      if (widget) {
+        let newWidget;
+        // eslint-disable-next-line no-param-reassign
+        if (widget.type === 'text') {
+          newWidget = { ...widget, text: value };
+        } else {
+          newWidget = { ...widget, src: value };
+        }
+        // eslint-disable-next-line no-param-reassign
+        state.email.widgetMap[widgetId] = newWidget;
+      }
+
       return {
         ...state,
-        email: newEmail,
-        selectedId: widgetId,
+        email: {
+          children: [...state.email.children],
+          widgetMap: { ...state.email.widgetMap },
+        },
       };
     }
     default:
