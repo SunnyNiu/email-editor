@@ -11,13 +11,13 @@ const Section = styled(Cell)`
   align-items: center;
 `;
 
-const Sections = ({ section }) => (
+const Sections = ({ section, widgetMap }) => (
   <Section>
     {section.children.map(rowId => {
-      const row = section.widgetMap[rowId];
+      const row = widgetMap[rowId];
       return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-        <Row {...row} key={rowId} widgetMap={section.widgetMap} />
+        <Row {...row} key={rowId} widgetMap={widgetMap} />
       );
     })}
   </Section>
@@ -26,6 +26,8 @@ const Sections = ({ section }) => (
 Sections.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   section: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  widgetMap: PropTypes.object.isRequired,
 };
 
 export default Sections;

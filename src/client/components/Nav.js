@@ -66,13 +66,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Nav.propTypes = {
-  email: PropTypes.arrayOf(PropTypes.object),
+  // eslint-disable-next-line react/forbid-prop-types
+  email: PropTypes.object,
   saveEmail: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
   emailId: PropTypes.string.isRequired,
 };
 
 Nav.defaultProps = {
-  email: [],
+  email: {},
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

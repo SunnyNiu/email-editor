@@ -32,9 +32,18 @@ const Content = props => {
 
   return (
     <Container columns={1} ref={drop}>
-      {email.map(section => {
-        return <Sections key={section.id} section={section} />;
-      })}
+      {email.children === undefined
+        ? null
+        : email.children.map(sectionId => {
+            const section = email.widgetMap[sectionId];
+            return (
+              <Sections
+                key={section.id}
+                section={section}
+                widgetMap={email.widgetMap}
+              />
+            );
+          })}
     </Container>
   );
 };
@@ -55,12 +64,13 @@ const mapDispatchToProps = dispatch => ({
 Content.propTypes = {
   addSection: PropTypes.func.isRequired,
   fetchEmail: PropTypes.func.isRequired,
-  email: PropTypes.arrayOf(PropTypes.object),
+  // eslint-disable-next-line react/forbid-prop-types
+  email: PropTypes.object,
   emailId: PropTypes.string,
 };
 
 Content.defaultProps = {
-  email: [],
+  email: {},
   emailId: undefined,
 };
 

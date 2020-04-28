@@ -7,7 +7,7 @@ export function* fetchContentSections({ emailId }) {
     const { email } = yield call(getEmail, emailId);
     yield put({
       type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
-      email: email === undefined ? [] : email,
+      email: email === undefined ? { children: [] } : email,
     });
   } catch (error) {
     yield put({ type: fetchEmail.FETCH_EMAIL_FAILED, error });
