@@ -19,7 +19,7 @@ const Row = ({ width, children, widgetMap }) => {
 };
 
 Row.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.arrayOf(PropTypes.string).isRequired,
   width: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   widgetMap: PropTypes.object.isRequired,

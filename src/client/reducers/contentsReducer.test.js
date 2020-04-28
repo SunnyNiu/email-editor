@@ -182,7 +182,9 @@ describe('contentsReducer tests', () => {
     const action = {
       type: fetchEmail.ADD_SECTION,
       section: {
-        children: ['22345'],
+        id: '22345',
+        type: 'section',
+        children: ['22345a'],
         widgetMap: {
           '22345': {
             id: '22345',

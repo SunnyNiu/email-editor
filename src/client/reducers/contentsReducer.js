@@ -1,7 +1,10 @@
 import { fetchEmail } from './types';
 
 const initialState = {
-  email: {},
+  email: {
+    children: [],
+    selectedId: '',
+  },
 };
 
 export default (state = initialState, action) => {
@@ -11,7 +14,7 @@ export default (state = initialState, action) => {
         ...state,
         email: {
           ...state.email,
-          children: [...state.email.children, ...action.section.children],
+          children: [...state.email.children, action.section.id],
           widgetMap: {
             ...state.email.widgetMap,
             ...action.section.widgetMap,

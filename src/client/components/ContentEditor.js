@@ -26,13 +26,13 @@ const ContentEditor = ({ selectedId, selectedWidget, updateWidgetValue }) => {
       {selectedWidget.type === 'text' ? (
         <input
           type="text"
-          value={selectedWidget.text}
+          value={selectedWidget.text || ''}
           onChange={e => updateWidgetValue(selectedId, e.target.value)}
           contentEditable="true"
         />
       ) : (
         <input
-          value={selectedWidget.src}
+          value={selectedWidget.src || ''}
           onChange={e => updateWidgetValue(selectedId, e.target.value)}
         />
       )}
@@ -43,12 +43,10 @@ const ContentEditor = ({ selectedId, selectedWidget, updateWidgetValue }) => {
 const mapStateToProps = state => {
   const { email, selectedId } = state.content;
 
-  let selectedWidget = '';
+  let selectedWidget = {};
 
-  if (email.length > 0) {
-    email.forEach(x => {
-      selectedWidget = x.widgetMap[selectedId];
-    });
+  if (email.children.length > 0) {
+    selectedWidget = email.widgetMap[selectedId];
   }
 
   return {
@@ -78,6 +76,6 @@ ContentEditor.defaultProps = {
     text: '',
     type: '',
   },
-  selectedId: undefined,
+  selectedId: '',
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContentEditor);
