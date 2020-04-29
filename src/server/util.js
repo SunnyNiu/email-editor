@@ -10,6 +10,7 @@ export function readFile(filePath) {
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) throw err;
       const section = translateSection(data);
+
       resolve({ [filePath]: section });
     });
   });

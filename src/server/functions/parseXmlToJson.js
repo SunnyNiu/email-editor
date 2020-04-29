@@ -1,27 +1,11 @@
 import convert from 'xml-js';
 
-function translateColumnElements(elements) {
-  return elements.map(({ attributes, name }) => ({
+function translateToJson({ attributes, elements, name }) {
+  return {
     ...attributes,
-    children: [],
+    children: (elements || []).map(e => translateToJson(e)),
     type: name.toLowerCase(),
-  }));
-}
-
-function translateColumn(columns) {
-  return columns.map(({ attributes, elements, name }) => ({
-    ...attributes,
-    children: translateColumnElements(elements),
-    type: name.toLowerCase(),
-  }));
-}
-
-function translateRow(rows) {
-  return rows.map(({ attributes, elements, name }) => ({
-    ...attributes,
-    children: translateColumn(elements),
-    type: name.toLowerCase(),
-  }));
+  };
 }
 
 export function translateSection(xml) {
@@ -29,10 +13,5 @@ export function translateSection(xml) {
     compact: false,
     spaces: 4,
   }).elements[0];
-  const { attributes, elements, name } = section;
-  return {
-    ...attributes,
-    children: translateRow(elements),
-    type: name.toLowerCase(),
-  };
+  return translateToJson(section);
 }
