@@ -5,10 +5,13 @@ export const addSectionCreator = section => {
   // recursively adding id to each widget
   function addIds(root) {
     // eslint-disable-next-line no-param-reassign
-    root.id = uuidv4();
-    root.children.forEach(x => addIds(x));
+    return {
+      ...root,
+      id: uuidv4(),
+      children: root.children.map(x => addIds(x)),
+    };
   }
-  addIds(section);
+  const newSection = addIds(section);
 
   // recursively build widgetMap
   const widgetMap = {};
@@ -16,7 +19,7 @@ export const addSectionCreator = section => {
     widgetMap[root.id] = root;
     root.children.forEach(x => buildWidgetMap(x));
   }
-  buildWidgetMap(section);
+  buildWidgetMap(newSection);
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [, value] of Object.entries(widgetMap)) {
@@ -24,7 +27,7 @@ export const addSectionCreator = section => {
   }
 
   const sectionWithWidgetMap = {
-    ...section,
+    ...newSection,
     widgetMap,
   };
 
