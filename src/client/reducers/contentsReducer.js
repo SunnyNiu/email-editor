@@ -1,8 +1,10 @@
+import produce from 'immer';
 import { fetchEmail } from './types';
 
 const initialState = {
   email: {
     children: [],
+    widgetMap: {},
     selectedId: '',
   },
 };
@@ -10,32 +12,31 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case fetchEmail.ADD_SECTION: {
-      return {
-        ...state,
-        email: {
-          ...state.email,
-          children: [...state.email.children, action.section.id],
-          widgetMap: {
-            ...state.email.widgetMap,
-            ...action.section.widgetMap,
-          },
-        },
-      };
+      return produce(state, draftState => {
+        draftState.email.children.push(action.section.id);
+        Object.entries(action.section.widgetMap).forEach(([key, value]) => {
+          // eslint-disable-next-line no-param-reassign
+          draftState.email.widgetMap[key] = value;
+        });
+      });
     }
     case fetchEmail.FETCH_EMAIL_SUCCEEDED:
-      return {
-        ...state,
-        email: action.email !== undefined ? action.email : {},
-      };
+      return produce(state, draftState => {
+        if (action.email) {
+          // eslint-disable-next-line no-param-reassign
+          draftState.email = action.email;
+        }
+      });
+
     case fetchEmail.FETCH_EMAIL_FAILED:
       // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
     case fetchEmail.SAVE_EMAIL_REQUESTED:
-      return {
-        ...state,
-        email: action.email,
-      };
+      return produce(state, draftState => {
+        // eslint-disable-next-line no-param-reassign
+        draftState.email = action.email;
+      });
     case fetchEmail.SAVE_EMAIL_SUCCEEDED:
       return state;
     case fetchEmail.SAVE_EMAIL_FAILED:
@@ -43,34 +44,23 @@ export default (state = initialState, action) => {
       console.error(action.error);
       return state;
     case 'SELECT_WIDGET':
-      return {
-        ...state,
-        selectedId: action.widgetId,
-      };
+      return produce(state, draftState => {
+        // eslint-disable-next-line no-param-reassign
+        draftState.selectedId = action.widgetId;
+      });
     case 'UPDATE_WIDGET': {
-      const { widgetId, value } = action;
-
-      const widget = state.email.widgetMap[widgetId];
-
-      if (widget) {
-        let newWidget;
-        // eslint-disable-next-line no-param-reassign
-        if (widget.type === 'text') {
-          newWidget = { ...widget, text: value };
-        } else {
-          newWidget = { ...widget, src: value };
+      return produce(state, draftState => {
+        const { widgetId, value } = action;
+        const widget = draftState.email.widgetMap[widgetId];
+        if (widget) {
+          // eslint-disable-next-line no-param-reassign
+          if (widget.type === 'text') {
+            widget.text = value;
+          } else {
+            widget.src = value;
+          }
         }
-        // eslint-disable-next-line no-param-reassign
-        state.email.widgetMap[widgetId] = newWidget;
-      }
-
-      return {
-        ...state,
-        email: {
-          children: [...state.email.children],
-          widgetMap: { ...state.email.widgetMap },
-        },
-      };
+      });
     }
     default:
       return state;

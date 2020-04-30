@@ -53,7 +53,7 @@ describe('contentTextSaga', () => {
     return expectSaga(fetchContentSections, { emailId: '100' })
       .put({
         type: fetchEmail.FETCH_EMAIL_SUCCEEDED,
-        email: email === undefined ? { children: [] } : email,
+        email,
       })
       .run();
   });
