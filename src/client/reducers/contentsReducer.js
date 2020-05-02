@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case fetchEmail.ADD_SECTION: {
       return produce(state, draftState => {
-        draftState.email.children.push(action.section.id);
+        draftState.email.children.splice(action.index, 0, action.section.id);
         Object.entries(action.section.widgetMap).forEach(([key, value]) => {
           // eslint-disable-next-line no-param-reassign
           draftState.email.widgetMap[key] = value;

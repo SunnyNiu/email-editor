@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 import Row from './Row';
 
 const Section = styled(Cell)`
-  justify-content: center;
   background-color: #bad1c0;
-  align-items: center;
+  height: fit-content;
 `;
 
 const Sections = ({ section, widgetMap }) => (
