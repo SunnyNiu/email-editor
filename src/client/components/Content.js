@@ -37,6 +37,7 @@ const Content = props => {
 
         const dropBoundaries = [];
         dropBoundaries.push(offsets[0]);
+        // eslint-disable-next-line no-plusplus
         for (let i = 1; i < offsets.length; i++) {
           dropBoundaries.push(
             (offsets[i] - offsets[i - 1]) / 2 + offsets[i - 1]
@@ -49,6 +50,7 @@ const Content = props => {
         } else if (y >= dropBoundaries[dropBoundaries.length - 2]) {
           index = divs.length;
         } else {
+          // eslint-disable-next-line no-plusplus
           for (let i = 1; i < dropBoundaries.length - 1; i++) {
             if (y >= dropBoundaries[i] && y < dropBoundaries[i + 1]) {
               index = i;

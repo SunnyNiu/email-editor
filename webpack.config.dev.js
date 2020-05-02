@@ -28,6 +28,9 @@ module.exports = () => ({
         target: 'http://localhost:3000',
         secure: false
       },
+      '/public/*': {
+        target: 'http://localhost:3000',
+      }
     }
   },
   devtool: 'eval-source-map',

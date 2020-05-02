@@ -44,7 +44,7 @@ const SaveButton = styled.button`
 const Nav = ({ email, saveEmail, emailId, disable }) => {
   return (
     <HeaderContainer>
-      <Icon src="/assets/movie-icon.png" alt="logo" />
+      <Icon src="/public/movie-icon.png" alt="logo" />
       <SaveButton onClick={() => saveEmail(emailId, email)} disabled={disable}>
         save
       </SaveButton>

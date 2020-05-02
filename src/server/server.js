@@ -6,7 +6,8 @@ import { saveEmail, getEmail } from './db/db';
 
 const server = express();
 
-server.use(express.static(path.join(__dirname, '../assets')));
+server.use('/public', express.static(path.join(__dirname, 'public')));
+
 server.use(express.json());
 server.use(cors());
 

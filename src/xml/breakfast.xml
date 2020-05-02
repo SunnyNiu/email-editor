@@ -3,7 +3,7 @@
    <Row width="6">
       <Column width = "3">
        <Text text="section_1_text"/>
-       <Image src="src/server/public/logo1.jpg"/>
+       <Image src="public/logo.jpg"/>
        <Text text="section_2_text"/>
       </Column> 
       <Column width = "3">
