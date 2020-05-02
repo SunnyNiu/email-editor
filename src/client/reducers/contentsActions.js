@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchEmail } from './types';
 
-export const addSectionCreator = section => {
+export const addSectionCreator = (section, index) => {
   // recursively adding id to each widget
   function addIds(root) {
     // eslint-disable-next-line no-param-reassign
@@ -34,6 +34,7 @@ export const addSectionCreator = section => {
   return {
     type: fetchEmail.ADD_SECTION,
     section: sectionWithWidgetMap,
+    index,
   };
 };
 
