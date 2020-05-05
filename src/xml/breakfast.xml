@@ -8,13 +8,13 @@
       </Column> 
       <Column width = "3">
        <Text text="section_1_c_text"/>
-       <Image src="src/server/public/logo2.jpg"/>
+       <Image src="public/wechat.jpg"/>
       </Column>  
    </Row>
    <Row width="6">
       <Column width = "6">
        <Text text="section_2_text"/>
-       <Image src="src/server/public/logo3.jpg"/>
+       <Image src="public/wechat.jpg"/>
       </Column>  
    </Row>
 </Section>

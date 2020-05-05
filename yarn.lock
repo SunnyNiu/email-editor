@@ -5973,6 +5973,11 @@ node-int64@^0.4.0:
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
 
+node-json2html@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/node-json2html/-/node-json2html-1.4.0.tgz#4240ec6294cdaba1c3bc0016125b3114110fd649"
+  integrity sha512-JqAMz0AFN6ceyR2rM6rjrPnfdxxoxcp5plHyw2geG6LD8XoeBLlvAIyV9Xw3gJqN3yFHgfbF4ggTzKGpTs37ZQ==
+
 "node-libs-browser@^1.0.0 || ^2.0.0", node-libs-browser@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/node-libs-browser/-/node-libs-browser-2.2.1.tgz#b64f513d18338625f90346d27b0d235e631f6425"

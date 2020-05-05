@@ -7,6 +7,7 @@ import { Grid } from 'styled-css-grid';
 import {
   addSectionCreator,
   fetchEmailCreator,
+  jsonToHtmlCreator,
 } from '../reducers/contentsActions';
 import { ItemTypes } from '../util';
 import Sections from './Sections';
@@ -19,7 +20,7 @@ const DropTarget = styled.div`
 `;
 
 const Content = props => {
-  const { fetchEmail, email, addSection, emailId } = props;
+  const { fetchEmail, email, addSection, emailId, jsonToHtml } = props;
   const ref = useRef(null);
 
   const [, drop] = useDrop({
@@ -59,6 +60,7 @@ const Content = props => {
         }
       }
       addSection(section, index);
+      jsonToHtml(email);
     },
   });
 
@@ -97,6 +99,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   addSection: (section, index) => dispatch(addSectionCreator(section, index)),
   fetchEmail: emailId => dispatch(fetchEmailCreator(emailId)),
+  jsonToHtml: email => dispatch(jsonToHtmlCreator(email)),
 });
 
 Content.propTypes = {

@@ -78,3 +78,8 @@ export const updateWidgetValueCreator = (widgetId, value) => ({
   widgetId,
   value,
 });
+
+export const jsonToHtmlCreator = email => ({
+  type: 'JSON_TO_XML',
+  email,
+});

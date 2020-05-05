@@ -9,6 +9,53 @@ const initialState = {
   },
 };
 
+function getWidget(root, widgetMap) {
+  if (root.children === undefined) return;
+  let s = '';
+  if (root.type === undefined) {
+    s += `<!DOCTYPE html>
+    <html lang="en"> 
+    <head>
+      <meta charset="UTF-8">
+      <title>Email Editor</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <meta name="viewport" content="width=500, initial-scale=1">
+      <style>
+          * {
+              font-family: 'Quicksand', sans-serif;
+          }
+      </style>
+    </head>
+    <body> `;
+  } else if (
+    root.type === 'section' ||
+    root.type === 'row' ||
+    root.type === 'column'
+  ) {
+    s += `<div id='${root.id}' class='${root.type}'>`;
+  } else if (root.type === 'image') {
+    s += `<img src='${root.src}' id='${root.id}' class='${root.type}' />`;
+  } else if (root.type === 'text') {
+    s += `<p id='${root.id}' class='${root.type}'> ${root.text} </p>`;
+  }
+
+  for (let i = 0; i < root.children.length; i++) {
+    s += getWidget(widgetMap[root.children[i]], widgetMap);
+  }
+
+  if (root.type === undefined) {
+    s += ` </body>
+    </html>`;
+  } else if (
+    root.type === 'section' ||
+    root.type === 'row' ||
+    root.type === 'column'
+  ) {
+    s += `</div>`;
+  }
+  return s;
+}
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case fetchEmail.ADD_SECTION: {
@@ -61,6 +108,12 @@ export default (state = initialState, action) => {
           }
         }
       });
+    }
+    case 'JSON_TO_XML': {
+      const { email } = action;
+      const sections = getWidget(email, email.widgetMap);
+      console.log(sections);
+      return state;
     }
     default:
       return state;
