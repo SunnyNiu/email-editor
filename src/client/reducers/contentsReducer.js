@@ -6,6 +6,7 @@ const initialState = {
     children: [],
     widgetMap: {},
     selectedId: '',
+    emailHtml: '',
   },
 };
 
@@ -110,10 +111,12 @@ export default (state = initialState, action) => {
       });
     }
     case conversion.JSON_TO_XML: {
-      const { email } = action;
-      const sections = getWidget(email, email.widgetMap);
-      console.log(sections);
-      return state;
+      return produce(state, draftState => {
+        const { email } = action;
+        const sections = getWidget(email, email.widgetMap);
+        // eslint-disable-next-line no-param-reassign
+        draftState.emailHtml = sections;
+      });
     }
     default:
       return state;

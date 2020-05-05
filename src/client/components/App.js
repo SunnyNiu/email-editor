@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
 import Container from './Container';
+import Preview from './Preview';
 
 const AppContainer = styled.div`
   width: fit-content;
@@ -19,6 +20,7 @@ const App = () => (
   <AppContainer>
     <Nav />
     <Container />
+    <Preview />
   </AppContainer>
 );
 
