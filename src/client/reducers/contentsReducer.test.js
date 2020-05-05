@@ -1,5 +1,5 @@
 import contentsReducer from './contentsReducer';
-import { fetchEmail } from './types';
+import { fetchEmail, editContent } from './types';
 
 function generateEmail() {
   return {
@@ -95,7 +95,7 @@ describe('contentsReducer tests', () => {
 
     const selectedId = '12347b';
     const action = {
-      type: 'SELECT_WIDGET',
+      type: editContent.SELECT_WIDGET,
       widgetId: selectedId,
     };
     const expected = {
@@ -115,7 +115,7 @@ describe('contentsReducer tests', () => {
     const value = 'text value';
 
     const action = {
-      type: 'UPDATE_WIDGET',
+      type: editContent.UPDATE_WIDGET,
       widgetId,
       value,
     };

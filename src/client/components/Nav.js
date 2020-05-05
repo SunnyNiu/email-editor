@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { saveEmailCreator } from '../reducers/contentsActions';
+import {
+  saveEmailCreator,
+  jsonToHtmlCreator,
+} from '../reducers/contentsActions';
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -23,7 +26,7 @@ const Icon = styled.img`
   height: 48px;
 `;
 
-const SaveButton = styled.button`
+const Button = styled.button`
   min-width: 100px;
   width: auto;
   height: 50px;
@@ -41,13 +44,18 @@ const SaveButton = styled.button`
   color: white;
 `;
 
-const Nav = ({ email, saveEmail, emailId, disable }) => {
+const SaveButton = Button;
+
+const PreviewButton = Button;
+
+const Nav = ({ email, saveEmail, emailId, disable, jsonToHtml }) => {
   return (
     <HeaderContainer>
       <Icon src="/public/movie-icon.png" alt="logo" />
       <SaveButton onClick={() => saveEmail(emailId, email)} disabled={disable}>
-        save
+        Save
       </SaveButton>
+      <PreviewButton onClick={() => jsonToHtml(email)}>Preview</PreviewButton>
     </HeaderContainer>
   );
 };
@@ -63,6 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   saveEmail: (emailId, email) => dispatch(saveEmailCreator(emailId, email)),
+  jsonToHtml: email => dispatch(jsonToHtmlCreator(email)),
 });
 
 Nav.propTypes = {
@@ -71,6 +80,7 @@ Nav.propTypes = {
   saveEmail: PropTypes.func.isRequired,
   disable: PropTypes.bool.isRequired,
   emailId: PropTypes.string.isRequired,
+  jsonToHtml: PropTypes.func.isRequired,
 };
 
 Nav.defaultProps = {

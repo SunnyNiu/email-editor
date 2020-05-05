@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchEmail } from './types';
+import { fetchEmail, editContent, conversion } from './types';
 
 export const addSectionCreator = (section, index) => {
   // recursively adding id to each widget
@@ -69,17 +69,17 @@ export const saveEmailFailureCreator = error => ({
 });
 
 export const editSelectedIdCreator = widgetId => ({
-  type: 'SELECT_WIDGET',
+  type: editContent.SELECT_WIDGET,
   widgetId,
 });
 
 export const updateWidgetValueCreator = (widgetId, value) => ({
-  type: 'UPDATE_WIDGET',
+  type: editContent.UPDATE_WIDGET,
   widgetId,
   value,
 });
 
 export const jsonToHtmlCreator = email => ({
-  type: 'JSON_TO_XML',
+  type: conversion.JSON_TO_XML,
   email,
 });

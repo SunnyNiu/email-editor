@@ -19,3 +19,12 @@ export const ui = {
   GET_USER_ID_FAILED: 'GET_USER_ID_FAILED',
   GET_USER_ID_SUCCEEDED: 'GET_USER_ID_SUCCEEDED',
 };
+
+export const editContent = {
+  SELECT_WIDGET: 'SELECT_WIDGET',
+  UPDATE_WIDGET: 'UPDATE_WIDGET',
+};
+
+export const conversion = {
+  JSON_TO_XML: 'JSON_TO_XML',
+};

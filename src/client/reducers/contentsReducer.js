@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { fetchEmail } from './types';
+import { fetchEmail, editContent, conversion } from './types';
 
 const initialState = {
   email: {
@@ -90,12 +90,12 @@ export default (state = initialState, action) => {
       // eslint-disable-next-line no-console
       console.error(action.error);
       return state;
-    case 'SELECT_WIDGET':
+    case editContent.SELECT_WIDGET:
       return produce(state, draftState => {
         // eslint-disable-next-line no-param-reassign
         draftState.selectedId = action.widgetId;
       });
-    case 'UPDATE_WIDGET': {
+    case editContent.UPDATE_WIDGET: {
       return produce(state, draftState => {
         const { widgetId, value } = action;
         const widget = draftState.email.widgetMap[widgetId];
@@ -109,7 +109,7 @@ export default (state = initialState, action) => {
         }
       });
     }
-    case 'JSON_TO_XML': {
+    case conversion.JSON_TO_XML: {
       const { email } = action;
       const sections = getWidget(email, email.widgetMap);
       console.log(sections);
