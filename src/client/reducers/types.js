@@ -26,5 +26,5 @@ export const editContent = {
 };
 
 export const conversion = {
-  JSON_TO_XML: 'JSON_TO_XML',
+  JSON_TO_HTML: 'JSON_TO_HTML',
 };

@@ -64,6 +64,8 @@ export default (state = initialState, action) => {
         draftState.email.children.splice(action.index, 0, action.section.id);
         Object.entries(action.section.widgetMap).forEach(([key, value]) => {
           // eslint-disable-next-line no-param-reassign
+
+          // ?
           draftState.email.widgetMap[key] = value;
         });
       });
@@ -110,7 +112,7 @@ export default (state = initialState, action) => {
         }
       });
     }
-    case conversion.JSON_TO_XML: {
+    case conversion.JSON_TO_HTML: {
       return produce(state, draftState => {
         const { email } = action;
         const sections = getWidget(email, email.widgetMap);

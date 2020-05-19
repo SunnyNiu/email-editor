@@ -80,6 +80,6 @@ export const updateWidgetValueCreator = (widgetId, value) => ({
 });
 
 export const jsonToHtmlCreator = email => ({
-  type: conversion.JSON_TO_XML,
+  type: conversion.JSON_TO_HTML,
   email,
 });
